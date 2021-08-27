@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dots_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dots_margin_bottom"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".5"
+        android:layout_above="@id/layoutDots"
+        android:background="@android:color/white" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_above="@+id/frame_next">
+
+        <FrameLayout
+            android:id="@+id/btnSignInGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_round"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_google"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/continue_with_google"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/Black"
+                    android:textStyle="bold"
+                    android:textSize="13sp"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/btnSignInEmail"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_round_green"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/continue_with_email"
+                    android:textColor="@color/White"
+                    android:textStyle="bold"
+                    android:textSize="13sp"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_next"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:background="@drawable/ellipse_3"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true">
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab_next"-->
+<!--            android:layout_width="46dp"-->
+<!--            android:layout_height="46dp"-->
+<!--            android:layout_gravity="end|bottom"-->
+<!--            android:src="@drawable/ic_baseline_chevron_right_24"-->
+<!--            app:rippleColor="@color/green_primary"-->
+<!--            android:layout_margin="16dp" />-->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_right_24"
+                />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_back"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:background="@drawable/ellipse_2"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab_back"-->
+<!--            android:layout_width="46dp"-->
+<!--            android:layout_height="46dp"-->
+<!--            android:layout_gravity="end|bottom"-->
+<!--            android:src="@drawable/ic_baseline_chevron_left_24"-->
+<!--            app:rippleColor="@color/green_primary"-->
+<!--            android:layout_margin="16dp" />-->
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_chevron_left_24"
+            />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/frame_back"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="702dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/daftar_sekarang"
+            android:textAppearance="@style/button"
+            android:lineSpacingExtra="1sp"
+            android:gravity="center"
+            />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        tools:ignore="RelativeOverlap">
+
+        <TextView
+            android:id="@+id/btn_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:text="@string/skip"
+            android:textSize="18sp"
+            android:textColor="@color/Black"
+            android:layout_marginEnd="34dp"
+            android:layout_marginTop="28dp"/>
+
+    </FrameLayout>
+
+</RelativeLayout>

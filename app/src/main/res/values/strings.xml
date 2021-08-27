@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">InvesProperti</string>
+    <string name="next">Next</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Cari</string>
+    <string name="slide_1_desc">Temukan jenis atau proyek properti yang diinginkan dari daftar properti yang telah terseleksi. Analisis, pahami resiko dan return dari tiap pilihan projek properti yang ada.</string>
+
+    <string name="slide_2_title">Inves</string>
+    <string name="slide_2_desc">Investasi pada projek properti secara online. Anda juga dapat menginvestasikan kembali hasil return dari portfolio investasi Anda sebelumnya di InvesProperti.</string>
+
+    <string name="slide_3_title">Bagi Hasil</string>
+    <string name="slide_3_desc">Dapatkan potensi passive income secara periodik dari harga sewa properti dan capital gain ketika properti dijual kembali atau diakhir masa proyek pembangunan.</string>
+
+
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_email">Continue with Email</string>
+    <string name="desc_logout">Are you sure? You\'ll need to be logged in to get your invite token</string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="daftar_sekarang">Daftar Sekarang</string>
+</resources>
