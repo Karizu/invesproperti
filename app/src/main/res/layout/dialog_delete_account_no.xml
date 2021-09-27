@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="158dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:fontFamily="@font/titilliumweb_regular"
+                    android:text="Yakin ingin menghapus rekening ini?"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    tools:ignore="SmallSp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="26dp"
+                    android:alpha="20"
+                    android:src="@drawable/line_profile"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_ya"
+                        android:layout_width="140dp"
+                        android:layout_height="46dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginBottom="18dp"
+                        android:background="@drawable/bg_round_field_green"
+                        android:gravity="center"
+                        android:textColor="@color/green_primary"
+                        android:text="Ya"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/titilliumweb_bold"
+                        android:enabled="false"/>
+
+                    <Button
+                        android:id="@+id/btn_tidak"
+                        android:layout_width="140dp"
+                        android:layout_height="46dp"
+                        android:layout_marginBottom="18dp"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/bg_round_green"
+                        android:gravity="center"
+                        android:textColor="#FAFAFA"
+                        android:text="Tidak"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/titilliumweb_bold"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

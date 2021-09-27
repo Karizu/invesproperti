@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F3F3"
+    tools:context=".presentation.profile.detail.DetailProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="#F3F3F3"
+        android:paddingStart="24dp"
+        android:paddingEnd="25.89dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:background="?attr/selectableItemBackground"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Detail Profile"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            android:fontFamily="@font/titilliumweb_bold"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:text="Informasi Pribadi"
+        android:textColor="@color/Black"
+        android:textSize="16sp"
+        android:fontFamily="@font/titilliumweb_regular"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginTop="@dimen/padding_10"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:id="@+id/btn_bantuan"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Nama Lengkap"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="M Rizki Dharmaan"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Email"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="rizkidharmaan20@gmail.com"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Password"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="***********"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:id="@+id/btn_ubah_pass"
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:text="Ubah"
+                android:textSize="12sp"
+                android:textColor="@color/green_primary"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_round_outline_button_green"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="No Telpon"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="+621234567890"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:id="@+id/btn_ubah_no"
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:text="Ubah"
+                android:textSize="12sp"
+                android:textColor="@color/green_primary"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_round_outline_button_green"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="No KTP"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="1234 5678 9012 3456"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Pendapatan Tahunan"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="Rp. 123.456.789"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:id="@+id/btn_ubah_pendapatan"
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:text="Ubah"
+                android:textSize="12sp"
+                android:textColor="@color/green_primary"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_round_outline_button_green"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Tahun Pembuatan Rekening Efek"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="2021"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+
+            <Button
+                android:id="@+id/btn_ubah_tahun"
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:text="Ubah"
+                android:textSize="12sp"
+                android:textColor="@color/green_primary"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_round_outline_button_green"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/line_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Alamat"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="-3dp"
+                android:text="Jalan Ngamprah Landeuh no. 2"
+                android:textColor="@color/Black"
+                android:textSize="16sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

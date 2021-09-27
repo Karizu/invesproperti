@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    tools:context=".presentation.home.DetailProductActivity">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/app_bar"
+        android:layout_above="@+id/btn_beli">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/imageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="174dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="false"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="@color/green_primary"
+                app:sliderIndicatorUnselectedColor="#C4C4C4"
+                app:sliderScrollTimeInSec="1"
+                app:sliderStartAutoCycle="true">
+
+                <LinearLayout
+                    android:id="@+id/layoutDots"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dots_height"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" />
+
+            </com.smarteist.autoimageslider.SliderView>
+
+            <TextView
+                android:id="@+id/tv_start_price"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="@string/rp_3_244_050_000"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
+
+            <TextView
+                android:id="@+id/tv_count_day"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="@string/_44_hari_lagi"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBarItem" />
+
+            <TextView
+                android:id="@+id/tv_end_price"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="@string/rp_3_244_050_000"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
+
+            <com.white.progressview.HorizontalProgressView
+                android:id="@+id/progressBarItem"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:progress="20"
+                app:progressNormalSize="4dp"
+                app:progressReachSize="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_start_price"
+                app:progressReachColor="#428828"
+                app:progressTextVisible="false" />
+
+            <TextView
+                android:id="@+id/tv_company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/titilliumweb_semibold"
+                android:text="PT Yukarista Lokal"
+                android:textColor="@color/black_primary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBarItem" />
+
+            <TextView
+                android:id="@+id/tv_count_day2"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="Harga per lot"
+                android:textColor="@color/black_primary"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_company_name" />
+
+            <TextView
+                android:id="@+id/tv_count_day4"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="Provide deviden"
+                android:textColor="@color/black_primary"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_price_tag" />
+
+            <TextView
+                android:id="@+id/tv_count_day5"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="98dp"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="Estimasi deviden"
+                android:textColor="@color/black_primary"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_count_day4"
+                app:layout_constraintTop_toBottomOf="@+id/img_price_tag2" />
+
+            <TextView
+                android:id="@+id/tv_count_day3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="113dp"
+                android:layout_marginTop="14dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="Jumlah lot"
+                android:textColor="@color/black_primary"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_count_day2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_company_name" />
+
+            <ImageView
+                android:id="@+id/img_price_tag"
+                android:layout_width="16dp"
+                android:layout_height="20dp"
+                android:paddingTop="6dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/ic_price_tag_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day2" />
+
+            <ImageView
+                android:id="@+id/img_price_tag3"
+                android:layout_width="16dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="3dp"
+                android:paddingTop="3dp"
+                android:src="@drawable/ic_event_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day4" />
+
+            <ImageView
+                android:id="@+id/img_price_tag4"
+                android:layout_width="16dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="109dp"
+                android:layout_marginTop="3dp"
+                android:paddingTop="3dp"
+                android:src="@drawable/ic_baseline_insert_chart_outlined_black_24"
+                app:layout_constraintStart_toEndOf="@+id/rp_1_350_000_lot3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day5" />
+
+            <ImageView
+                android:id="@+id/img_price_tag2"
+                android:layout_width="12.98dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="53dp"
+                android:layout_marginTop="3dp"
+                android:paddingTop="3dp"
+                android:src="@drawable/ic_layers_black"
+                app:layout_constraintStart_toEndOf="@+id/rp_1_350_000_lot"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day3" />
+
+            <TextView
+                android:id="@+id/rp_1_350_000_lot"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/rp_1_350_000_lot"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/img_price_tag"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day2" />
+
+            <TextView
+                android:id="@+id/rp_1_350_000_lot3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="/4 bulan"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/img_price_tag3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day4" />
+
+            <TextView
+                android:id="@+id/rp_1_350_000_lot5"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="/4 bulan"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/img_price_tag3"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day4" />
+
+            <TextView
+                android:id="@+id/rp_1_350_000_lot6"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="33dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="Deskripsi Usaha"
+                android:textColor="@color/black_primary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_price_tag3" />
+
+            <TextView
+                android:id="@+id/rp_1_350_000_lot7"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="Alamat Usaha"
+                android:textColor="@color/black_primary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/rp_1_350_000_lot4"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="10-18% /tahun"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/img_price_tag4"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day5" />
+
+            <TextView
+                android:id="@+id/_7000_lot"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/_7000_lot"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/img_price_tag2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_count_day3" />
+
+            <FrameLayout
+                android:id="@+id/frame_unduh"
+                android:layout_width="114dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="26dp"
+                android:background="@drawable/bg_round_isi_saldo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rp_1_350_000_lot4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/titilliumweb_regular"
+                    android:text="@string/unduh_prospektus"
+                    android:textColor="#FAFAFA"
+                    android:textSize="12sp" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="26dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="@string/detail_product_content"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frame_unduh" />
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="26dp"
+                android:layout_marginBottom="27dp"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:text="Jl. Arteri Galuh Mas blok X RT/RW. 7/8 Kecamatan Teluk Jambe Timur, Karawang, Jaba Barat 41361"
+                android:textColor="@color/black_primary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rp_1_350_000_lot7" />
+
+            <FrameLayout
+                android:id="@+id/frame_open_maps"
+                android:layout_width="114dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="26dp"
+                android:background="@drawable/bg_round_isi_saldo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/titilliumweb_regular"
+                    android:text="@string/open_maps"
+                    android:textColor="#FAFAFA"
+                    android:textSize="12sp" />
+
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_beli"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="27dp"
+        android:layout_marginStart="26dp"
+        android:background="@drawable/bg_round_green"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="#FAFAFA"
+        android:text="@string/beli"
+        android:textSize="18sp"
+        android:fontFamily="@font/titilliumweb_bold"
+        android:enabled="true"/>
+
+</RelativeLayout>

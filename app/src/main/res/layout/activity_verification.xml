@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F3F3"
+    tools:context=".presentation.verification.VerificationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="#F3F3F3"
+        android:paddingStart="25.89dp"
+        android:paddingEnd="25.89dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_baseline_arrow_back_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Verifikasi Akun"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            android:fontFamily="@font/titilliumweb_bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_siapkan_ktp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/content_verifikasi"
+            android:textColor="#1D1D1B"
+            android:textSize="16sp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+        
+        <ImageView
+            android:layout_width="211.5dp"
+            android:layout_height="211.5dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/bg_ilustration_2"
+            android:layout_marginBottom="88dp"
+            android:layout_above="@id/tv_pilih_peranan"/>
+
+        <TextView
+            android:id="@+id/tv_pilih_peranan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/silahkan_pilih"
+            android:textColor="#1D1D1B"
+            android:textSize="16sp"
+            android:layout_above="@id/frame_investor"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+        <FrameLayout
+            android:id="@+id/frame_investor"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/bg_round_black_prim"
+            android:layout_marginBottom="14dp"
+            android:layout_above="@+id/frame_product">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="17.25dp"
+                android:paddingEnd="15.31dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_checked_1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/bg_circle_unchecked"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:paddingBottom="3dp"
+                    android:text="@string/investor"
+                    android:textColor="#FAFAFA"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/titilliumweb_regular"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_product"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/bg_round_orange"
+            android:layout_above="@+id/progressBarItem">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="17.25dp"
+                android:paddingEnd="15.31dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_checked_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/bg_circle_unchecked"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:paddingBottom="3dp"
+                    android:text="@string/product_owner"
+                    android:textColor="#FAFAFA"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/titilliumweb_regular"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <com.white.progressview.HorizontalProgressView
+            android:id="@+id/progressBarItem"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="28dp"
+            android:progress="15"
+            android:layout_above="@+id/btn_lanjut"
+            app:progressNormalSize="4dp"
+            app:progressReachSize="4dp"
+            app:progressReachColor="@color/green_primary"
+            app:progressTextVisible="false" />
+
+        <Button
+            android:id="@+id/btn_lanjut"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/bg_round_disable"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textColor="#FAFAFA"
+            android:text="@string/lanjut"
+            android:textSize="18sp"
+            android:fontFamily="@font/titilliumweb_bold"
+            android:enabled="false"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvItem"
+    android:layout_width="match_parent"
+    android:layout_height="137dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="#FAFAFA"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_aset"
+            android:layout_width="15dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_yl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_type_aset"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/titilliumweb_bold"
+            android:gravity="center_vertical"
+            android:text="YLW1"
+            android:textColor="@color/green_primary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/img_aset"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginEnd="19dp"
+            android:fontFamily="@font/titilliumweb_bold"
+            android:gravity="top"
+            android:text="+0.0%"
+            android:textColor="@color/green_primary"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_aset3" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/ic_baseline_chevron_right_48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_asset_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="@string/yellow_carwash_galuhmas_pt_yukari"
+            android:textColor="@color/black_primary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_type_aset" />
+
+        <TextView
+            android:id="@+id/tv_aset"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="@string/last_price"
+            android:textColor="@color/black_primary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_asset_name" />
+
+        <TextView
+            android:id="@+id/tv_aset3"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="166dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="Lot"
+            android:textColor="@color/black_primary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_asset_name" />
+
+        <ImageView
+            android:id="@+id/img_price_tag"
+            android:layout_width="12.98dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/ic_aset"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_aset" />
+
+        <ImageView
+            android:id="@+id/img_price_tag5"
+            android:layout_width="12.98dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="2dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/ic_layers_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_aset3" />
+
+        <TextView
+            android:id="@+id/tv_last_price"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="@string/rp_1_350_000"
+            android:textColor="@color/black_primary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/img_price_tag"
+            app:layout_constraintTop_toBottomOf="@+id/tv_aset" />
+
+        <TextView
+            android:id="@+id/tv_lot"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="1000 lot"
+            android:textColor="@color/black_primary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/img_price_tag5"
+            app:layout_constraintTop_toBottomOf="@+id/tv_aset3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

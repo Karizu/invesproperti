@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_round_bottom_dialog">
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="34dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/line_10"/>
+
+    <TextView
+        android:id="@+id/status_investasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="24dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="0sp"
+        android:text="@string/status_investasi"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        android:fontFamily="@font/titilliumweb_regular"/>
+
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_below="@+id/status_investasi"
+        android:checkedButton="@id/rb_1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp">
+
+                <RadioButton
+                    android:id="@+id/rb_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:buttonTint="@color/green_primary"
+                    android:textColor="@color/black_primary"
+                    android:fontFamily="@font/titilliumweb_regular"
+                    android:text="Semua"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp">
+
+                <RadioButton
+                    android:id="@+id/rb_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:buttonTint="@color/grey_text"
+                    android:textColor="@color/black_primary"
+                    android:text="Baru"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp">
+
+                <RadioButton
+                    android:id="@+id/rb_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black_primary"
+                    android:buttonTint="@color/grey_text"
+                    android:fontFamily="@font/titilliumweb_regular"
+                    android:text="Sedang Berjalan"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp">
+
+                <RadioButton
+                    android:id="@+id/rb_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black_primary"
+                    android:buttonTint="@color/grey_text"
+                    android:fontFamily="@font/titilliumweb_regular"
+                    android:text="Terdanai"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </RadioGroup>
+
+</RelativeLayout>

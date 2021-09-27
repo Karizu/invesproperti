@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_primary">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
@@ -11,6 +12,7 @@
         android:layout_height="match_parent" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/layoutDots"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dots_height"
@@ -105,20 +107,22 @@
         android:id="@+id/frame_next"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:background="@drawable/ellipse_3"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/bg_circle_slide">
 
 <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--            android:id="@+id/fab_next"-->
-<!--            android:layout_width="46dp"-->
-<!--            android:layout_height="46dp"-->
-<!--            android:layout_gravity="end|bottom"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom|right"-->
 <!--            android:src="@drawable/ic_baseline_chevron_right_24"-->
-<!--            app:rippleColor="@color/green_primary"-->
-<!--            android:layout_margin="16dp" />-->
+<!--            app:rippleColor="@color/background"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:layout_marginRight="8dp"-->
+<!--            app:elevation="3dp" />-->
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -130,10 +134,48 @@
     </FrameLayout>
 
     <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/indicator_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_4"/>
+
+            <ImageView
+                android:id="@+id/indicator_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/ellipse_4"/>
+
+            <ImageView
+                android:id="@+id/indicator_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ellipse_4"/>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/frame_back"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:background="@drawable/ellipse_2"
+        android:background="@drawable/bg_circle_slide_outside"
         android:layout_marginStart="26dp"
         android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
@@ -157,31 +199,24 @@
 
     </FrameLayout>
 
-    <RelativeLayout
+    <Button
         android:visibility="gone"
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/frame_back"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="26dp"
         android:layout_marginTop="702dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/button"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/daftar_sekarang"
-            android:textAppearance="@style/button"
-            android:lineSpacingExtra="1sp"
-            android:gravity="center"
-            />
-
-    </RelativeLayout>
+        android:paddingBottom="4dp"
+        android:background="@drawable/bg_round_green"
+        android:gravity="center"
+        android:textColor="#FAFAFA"
+        android:text="@string/daftar_sekarang"
+        android:textSize="18sp"
+        android:fontFamily="@font/titilliumweb_bold"/>
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -198,7 +233,8 @@
             android:textSize="18sp"
             android:textColor="@color/Black"
             android:layout_marginEnd="34dp"
-            android:layout_marginTop="28dp"/>
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/titilliumweb_regular"/>
 
     </FrameLayout>
 

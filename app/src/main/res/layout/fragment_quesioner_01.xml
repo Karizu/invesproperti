@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_close"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="26dp"/>
+
+    <ImageView
+        android:id="@+id/img_portofolio"
+        android:layout_width="211.5dp"
+        android:layout_height="211.5dp"
+        android:src="@drawable/bg_ilustration_2"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_portofolio"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hallo, "
+            android:textColor="@color/black_primary"
+            android:textSize="18sp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rizki!"
+            android:textColor="@color/green_primary"
+            android:textSize="18sp"
+            android:fontFamily="@font/titilliumweb_semibold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_name"
+        android:gravity="center"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:text="@string/string_quesioner"
+        android:textColor="@color/black_primary"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:fontFamily="@font/titilliumweb_regular"
+        tools:ignore="RtlCompat" />
+
+</RelativeLayout>

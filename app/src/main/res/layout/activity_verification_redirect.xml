@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    tools:context=".presentation.verification.VerificationCompleteActivity">
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_close"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="26dp"/>
+
+    <ImageView
+        android:id="@+id/img_portofolio"
+        android:layout_width="211.5dp"
+        android:layout_height="211.5dp"
+        android:src="@drawable/bg_ilustration_2"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/content_verification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_portofolio"
+        android:gravity="center"
+        android:layout_marginTop="14dp"
+        android:text="Silahkan verifikasi akun anda untuk\nmelakukan pembelian"
+        android:textColor="@color/black_primary"
+        android:textSize="16sp"
+        android:fontFamily="@font/titilliumweb_regular"/>
+
+    <RelativeLayout
+        android:id="@+id/btn_verifikasi"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_below="@+id/content_verification"
+        android:background="@drawable/bg_round_green"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/verifikasi_akun"
+            android:textAppearance="@style/button"
+            android:lineSpacingExtra="1sp"
+            android:gravity="center"
+            android:fontFamily="@font/titilliumweb_regular"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F3F3">
+
+    <RelativeLayout
+        android:id="@+id/app_bar"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:background="#F3F3F3"
+        android:paddingStart="24dp"
+        android:paddingEnd="25.89dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:background="?attr/selectableItemBackground"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Ubah Password"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            android:fontFamily="@font/titilliumweb_bold"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_above="@+id/btn_tambah"
+        android:layout_below="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:layout_marginTop="12dp"
+            android:text="Masukan Password Lama"
+            android:textColor="@color/grey_text"
+            android:textSize="14sp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+        <FrameLayout
+            android:id="@+id/frame_bank"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_round_field_solid_border">
+
+            <in.anshul.libray.PasswordEditText
+                android:id="@+id/et_pass_lama"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="13dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:layoutDirection="ltr"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"
+                app:password_visible="false"
+                app:hide_drawable="@drawable/hide_password"
+                app:show_drawable="@drawable/show_password" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:layout_marginTop="12dp"
+            android:text="Masukan Password Baru"
+            android:textColor="@color/grey_text"
+            android:textSize="14sp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_round_field_solid_border">
+
+            <in.anshul.libray.PasswordEditText
+                android:id="@+id/et_pass_baru"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="13dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:layoutDirection="ltr"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"
+                app:password_visible="false"
+                app:hide_drawable="@drawable/hide_password"
+                app:show_drawable="@drawable/show_password" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:layout_marginTop="12dp"
+            android:text="Ketik Ulang Password Baru"
+            android:textColor="@color/grey_text"
+            android:textSize="14sp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_round_field_solid_border">
+
+            <in.anshul.libray.PasswordEditText
+                android:id="@+id/et_konfirm_pass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="13dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:layoutDirection="ltr"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"
+                app:password_visible="false"
+                app:hide_drawable="@drawable/hide_password"
+                app:show_drawable="@drawable/show_password" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_ganti"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="28dp"
+        android:text="Ganti Password"
+        android:textSize="18sp"
+        android:textColor="#FAFAFA"
+        android:fontFamily="@font/titilliumweb_semibold"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_round_green"/>
+
+</RelativeLayout>

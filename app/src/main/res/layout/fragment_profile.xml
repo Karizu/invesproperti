@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3">
+
+    <TextView
+        android:id="@+id/tvTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/user_profile"
+        android:textColor="#1D1D1B"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:fontFamily="@font/titilliumweb_bold"/>
+
+    <ImageView
+        android:id="@+id/img_cs"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:src="@drawable/ic_cs_black"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="21dp"/>
+    
+    <FrameLayout
+        android:id="@+id/frame_profile_pic"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_below="@+id/tvTitleBar"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="26dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/ellipse_4">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/img_profile"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@+id/tvTitleBar"
+        android:layout_toEndOf="@+id/frame_profile_pic"
+        android:gravity="top"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/name"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="14dp"
+        android:textColor="#1D1D1B"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/titilliumweb_bold"/>
+
+    <ImageView
+        android:id="@+id/img_verified"
+        android:layout_width="20dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/tvTitleBar"
+        android:layout_toEndOf="@+id/tv_profile_name"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:paddingTop="3dp"
+        android:src="@drawable/ic_verified"/>
+
+    <TextView
+        android:id="@+id/tv_profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@+id/frame_profile_pic"
+        android:layout_below="@+id/tv_profile_name"
+        android:layout_marginTop="-5dp"
+        android:layout_marginStart="14dp"
+        android:gravity="top"
+        android:lineSpacingExtra="0sp"
+        android:text="@string/rizkyazhari_gmail_com"
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        android:fontFamily="@font/titilliumweb_regular"/>
+    
+    <FrameLayout
+        android:id="@+id/frame_profile_type"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="28dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvTitleBar"
+        android:background="@drawable/bg_round_profile_type">
+
+        <TextView
+            android:id="@+id/tv_profile_type"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/guest"
+            android:textColor="@color/black_primary"
+            android:textSize="14sp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutGuest"
+        android:layout_below="@+id/tv_profile_email"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/frameVerifikasi"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_round_verifikasi">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="11.83dp"
+                android:paddingEnd="15.31dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_baseline_error_outline_24"/>
+
+                <TextView
+                    android:id="@+id/tv_title_verification_notif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:layout_marginStart="5.83dp"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="0sp"
+                    android:text="@string/verifikasi_akun_anda_sekarang"
+                    android:textColor="@color/Black"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/titilliumweb_regular"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/btn_profile"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/profile"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/line_profile"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+        <LinearLayout
+            android:id="@+id/btn_akun_bank"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/akun_bank"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/line_akun_bank"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+        <LinearLayout
+            android:id="@+id/btn_syarat_ketentuan"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/syarat_ketentuan"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+        <LinearLayout
+            android:id="@+id/btn_bantuan"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/bantuan"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+        <LinearLayout
+            android:id="@+id/btn_mitigasi"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="Mitigasi Resiko"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+        <LinearLayout
+            android:id="@+id/btn_kebijakan"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/kebijakan_privasi"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+        <LinearLayout
+            android:id="@+id/btn_disclaimer"
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/disclaimer"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+        <LinearLayout
+            android:id="@+id/btn_signout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="11.83dp"
+            android:paddingEnd="15.31dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_circle_profile"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:text="@string/keluar"
+                android:textColor="@color/Black"
+                android:textSize="14sp"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@drawable/line_profile"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.orhanobut.hawk.Hawk;
 
 
@@ -22,6 +23,7 @@ public class PreferenceManager {
     private static final String SESSION_TOKEN = "sessionToken";
     private static final String SESSION_TOKEN_ARDI = "sessionTokenArdi";
     private static final String IS_LOGIN = "isLogin";
+    private static final String USER_STATUS = "userStatus";
     private static final String IS_ARDI = "isARDI";
     private static final String USER_LOGIN = "userLogin";
     private static final String AGENT = "agent";
@@ -48,6 +50,12 @@ public class PreferenceManager {
     private static final String IS_FIREBASE_USER = "isFirebaseUser";
     private static final String BASE_URL_SLIDER = "baseUrlSlider";
     private static final String GOOGLE_SIGN_IN_OBJECT = "googleSignInObject";
+    private static final String FACEBOOK_SIGN_IN_OBJECT = "facebookSignInObject";
+    private static final String LOGIN_FROM = "loginFrom";
+    private static final String FULLNAME = "fullname";
+    private static final String EMAIL = "email";
+    private static final String IS_FINGER_ACTIVE = "isFingerActive";
+    private static final String IS_ALREADY_QUESIONER = "isAlreadyQuesioner";
 
     private static final String PREF_NAME = "welcome";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
@@ -70,20 +78,6 @@ public class PreferenceManager {
         return mInstance;
     }
 
-
-
-    public static void setNamaCabang(String namaCabang){
-        Hawk.put(NAMA_CABANG, namaCabang);
-    }
-
-    public static String getNamaCabang() {
-        return Hawk.get(NAMA_CABANG, "KOTA BANDUNG");
-    }
-
-    public static void setBaseUrl(String baseUrl){
-        Hawk.put(BASE_URL, baseUrl);
-    }
-
     public static String getSessionToken() {
         return Hawk.get(SESSION_TOKEN, "");
     }
@@ -91,27 +85,29 @@ public class PreferenceManager {
     public static void logOut() {
         //Hawk.put(USER_LOGIN, null);
         Hawk.put(IS_LOGIN, false);
-        Hawk.deleteAll();
+//        Hawk.delete(FULLNAME);
+//        Hawk.delete(EMAIL);
+//        Hawk.delete(IS_FIRST_TIME_LAUNCH);
+//        Hawk.delete(GOOGLE_SIGN_IN_OBJECT);
+//        Hawk.delete(LOGIN_FROM);
+//        Hawk.delete(FACEBOOK_SIGN_IN_OBJECT);
+//        Hawk.delete(SESSION_TOKEN);
     }
 
-    public static void clearHomeData() {
-        Hawk.delete(MENU_CATEGORY);
-        Hawk.delete(HOME_FEED_ONE);
-        Hawk.delete(HOME_FEED_TWO);
-        Hawk.delete(HOME_FEED_THREE);
+    public static void setIsAlreadyQuesioner(boolean isAlreadyQuesioner){
+        Hawk.put(IS_ALREADY_QUESIONER, isAlreadyQuesioner);
     }
 
-    public static void setLoginData(GoogleSignInClient loginData) {
-        Hawk.put(IS_LOGIN, true);
-        Hawk.put(USER_LOGIN, loginData);
+    public static boolean isAlreadyQuesioner() {
+        return Hawk.get(IS_ALREADY_QUESIONER, false);
     }
 
-    public static GoogleSignInClient getLoginData(){
-        return Hawk.get(USER_LOGIN, null);
+    public static void setUserStatus(String userStatus){
+        Hawk.put(USER_STATUS, userStatus);
     }
 
-    public static boolean getIsLogin() {
-        return Hawk.get(IS_LOGIN, false);
+    public static String getUserStatus() {
+        return Hawk.get(USER_STATUS, Constant.GUEST);
     }
 
     public static boolean setFirstTimeLaunch(boolean isFirstTime) {
@@ -122,35 +118,49 @@ public class PreferenceManager {
         return Hawk.get(IS_FIRST_TIME_LAUNCH, true);
     }
 
-    public static boolean getFirstOpen() {
-        return Hawk.get(IS_FIRST_OPEN, true);
-    }
-
-
-    public static boolean setFirstOpenFalse() {
-        return Hawk.put(IS_FIRST_OPEN, false);
-    }
-
-    public static boolean isFirebaseUser() {
-        return Hawk.get(IS_FIREBASE_USER, false);
-    }
-
-
-    public static boolean setFirebaseUser(boolean isFirebase) {
-        return Hawk.put(IS_FIREBASE_USER, isFirebase);
-    }
-
-    public static String getPhoneSeladaSegar() {
-        return Hawk.get(PHONE_SELADA_SEGAR, Constant.PHONE_SELADA_SEGAR_BANDUNG);
-    }
-
-    public static void setGoogleSignInAccount(GoogleSignInAccount getGoogleSignInObject){
+    public static void setGoogleSignInAccount(GoogleSignInAccount getGoogleSignInObject, String loginFrom){
         Hawk.put(IS_LOGIN, true);
         Hawk.put(GOOGLE_SIGN_IN_OBJECT, getGoogleSignInObject);
+        Hawk.put(LOGIN_FROM, loginFrom);
     }
 
     public static GoogleSignInAccount getGoogleSignInObject() {
         return Hawk.get(GOOGLE_SIGN_IN_OBJECT, null);
+    }
+
+    public static void setFacebookSignInAccount(FirebaseUser firebaseUser, String loginFrom){
+        Hawk.put(IS_LOGIN, true);
+        Hawk.put(FACEBOOK_SIGN_IN_OBJECT, firebaseUser);
+        Hawk.put(LOGIN_FROM, loginFrom);
+    }
+
+    public static FirebaseUser getFacebookSignInObject() {
+        return Hawk.get(FACEBOOK_SIGN_IN_OBJECT, null);
+    }
+
+    public static String getLoginFrom(){
+        return Hawk.get(LOGIN_FROM, "");
+    }
+
+    public static void setLoginData(String fullname, String email){
+        Hawk.put(FULLNAME, fullname);
+        Hawk.put(EMAIL,email);
+    }
+
+    public static String getFullname(){
+        return Hawk.get(FULLNAME, "");
+    }
+
+    public static String getEmail(){
+        return Hawk.get(EMAIL, "");
+    }
+
+    public static void setIsFingerActive(boolean isActive){
+        Hawk.put(IS_FINGER_ACTIVE, isActive);
+    }
+
+    public static boolean getFingerActive(){
+        return Hawk.get(IS_FINGER_ACTIVE, false);
     }
 
 }

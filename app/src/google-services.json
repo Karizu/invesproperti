@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "359177123836",
+    "project_id": "inves-properti-1629361761617",
+    "storage_bucket": "inves-properti-1629361761617.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359177123836:android:dd85eb8da69b280157e479",
+        "android_client_info": {
+          "package_name": "com.selada.invesproperti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359177123836-qq3je3qvjb44dj5uf1j0tmegdp1e7tik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.selada.invesproperti",
+            "certificate_hash": "6d1a3db39b1a5f78e147674e97ea2e491ef5f7c6"
+          }
+        },
+        {
+          "client_id": "359177123836-epcaq5jq9ot43fd71fr0imctbh11dl9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyyMRKmqwtJlcsN8MP2CZ99T9oCFgdmpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359177123836-epcaq5jq9ot43fd71fr0imctbh11dl9v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

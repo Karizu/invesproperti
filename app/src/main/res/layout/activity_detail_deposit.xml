@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F3F3"
+    tools:context=".presentation.portofolio.deposit.DetailDepositActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#F3F3F3"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="20dp"
+            android:paddingEnd="4dp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <ImageView
+            android:id="@+id/btn_cs"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="4dp"
+            android:paddingEnd="20dp"
+            android:src="@drawable/ic_cs_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/titilliumweb_bold"
+            android:gravity="center"
+            android:text="BCA - ATM"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="333dp"
+        android:src="@drawable/line_dot_green"
+        android:layout_marginTop="-10dp"
+        android:layout_marginStart="-59dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circle_1" />
+
+    <Button
+        android:id="@+id/circle_1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/bg_circle_step"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center"
+        android:text="@string/_1"
+        android:textColor="#FAFAFA"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="39dp"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center"
+        android:text="Masukan kartu AM BCA dan isi PIN anda"
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/circle_1"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        tools:ignore="SmallSp" />
+
+    <Button
+        android:id="@+id/circle_2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="43dp"
+        android:background="@drawable/bg_circle_step"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center"
+        android:text="@string/_2"
+        android:textColor="#FAFAFA"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circle_1" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="31dp"
+        android:lines="2"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center_vertical"
+        android:text="Pilih Transaksi Lainnya > Transfer > Virtual \nAccount"
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/circle_2"
+        app:layout_constraintTop_toBottomOf="@+id/circle_1"
+        tools:ignore="SmallSp" />
+
+    <Button
+        android:id="@+id/circle_3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_circle_step"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="#FAFAFA"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circle_2" />
+
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="38dp"
+        android:lines="2"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center_vertical"
+        android:text="Isi 12345 diikuti dengan nomor telpon anda\n(contoh: 12345 081x xxxx xxxx)"
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/circle_3"
+        app:layout_constraintTop_toBottomOf="@+id/circle_2"
+        tools:ignore="SmallSp" />
+
+    <Button
+        android:id="@+id/circle_4"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/bg_circle_step"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="#FAFAFA"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circle_3" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="38dp"
+        android:lines="1"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center_vertical"
+        android:text="Isi jumlah saldo yang akan diisi."
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/circle_4"
+        app:layout_constraintTop_toBottomOf="@+id/circle_3"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:lines="3"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center_vertical"
+        android:text="Minimum pengisian adalah Rp. 20.000. Bank\nakan membebankan biaya fee perpindahan\ndana."
+        android:textColor="@color/grey_text"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/circle_4"
+        app:layout_constraintTop_toBottomOf="@+id/tv4"
+        tools:ignore="SmallSp" />
+
+    <Button
+        android:id="@+id/circle_5"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/bg_circle_step"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="#FAFAFA"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circle_4" />
+
+    <TextView
+        android:id="@+id/tv7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="59dp"
+        android:lines="2"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:gravity="center_vertical"
+        android:text="Kemudian ikuti petunjuk pengisian untuk\nmenyelesaikan transaksi"
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/circle_5"
+        app:layout_constraintTop_toBottomOf="@+id/circle_4"
+        tools:ignore="SmallSp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

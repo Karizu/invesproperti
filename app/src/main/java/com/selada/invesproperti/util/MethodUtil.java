@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StrikethroughSpan;
+import android.transition.ChangeTransform;
 import android.transition.Explode;
 import android.transition.Transition;
 import android.transition.TransitionManager;
@@ -113,8 +114,8 @@ public class MethodUtil extends Application {
     }
 
     public static void toggleTransitionExplode(ViewGroup parent, View layout, boolean isShow) {
-        Transition transition = new Explode();
-        transition.setDuration(300);
+        Transition transition = new ChangeTransform();
+        transition.setDuration(100);
         transition.addTarget(layout);
 
         TransitionManager.beginDelayedTransition(parent, transition);

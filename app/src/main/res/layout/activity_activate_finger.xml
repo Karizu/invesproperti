@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    tools:context=".presentation.auth.ActivateFingerActivity">
+
+    <ImageView
+        android:id="@+id/img_finger_print"
+        android:layout_width="80.5dp"
+        android:layout_height="93dp"
+        android:src="@drawable/fingerprint"
+        android:layout_above="@+id/tv_content"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:text="@string/login_lebih_cepat_dan_aman_dengan_sidik_jari"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/titilliumweb_regular"/>
+
+    <Button
+        android:id="@+id/btn_activate"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@+id/tv_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:paddingBottom="4dp"
+        android:background="@drawable/bg_round_green"
+        android:gravity="center"
+        android:textColor="#FAFAFA"
+        android:text="@string/aktifkan"
+        android:textSize="18sp"
+        android:fontFamily="@font/titilliumweb_regular"/>
+
+    <TextView
+        android:id="@+id/tv_lewati"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_activate"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:text="@string/lewati"
+        android:textAlignment="center"
+        android:textColor="@color/green_primary"
+        android:textSize="18sp"
+        android:fontFamily="@font/titilliumweb_regular"/>
+
+</RelativeLayout>

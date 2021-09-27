@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.ImageView;
 
+import com.selada.invesproperti.presentation.auth.LoginActivity;
 import com.selada.invesproperti.util.PreferenceManager;
 
 import java.util.concurrent.TimeUnit;
@@ -49,13 +50,26 @@ public class SplashScreen extends Activity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(SplashScreen.this, IntroSliderActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                SplashScreen.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+                if (!PreferenceManager.getFullname().equals("")){
+                    directToLogin();
+                } else {
+                    Intent intent = new Intent(SplashScreen.this, IntroSliderActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    SplashScreen.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                }
             }
         }.start();
+    }
+
+    private void directToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("isLogin", true);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        SplashScreen.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

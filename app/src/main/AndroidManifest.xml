@@ -12,8 +12,54 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".presentation.RegisterActivity"></activity>
-        <activity android:name=".IntroSliderActivity" />
+        <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalPassActivity"></activity>
+        <activity android:name=".presentation.portofolio.withdrawal.CompleteWithdrawalActivity" />
+        <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalActivity" />
+        <activity android:name=".presentation.portofolio.withdrawal.WithdrawalActivity" />
+        <activity android:name=".presentation.portofolio.deposit.DetailDepositActivity" />
+        <activity android:name=".presentation.portofolio.deposit.DepositActivity" />
+        <activity android:name=".presentation.profile.bantuan.BantuanActivity" />
+        <activity android:name=".presentation.profile.bank.DetailBankActivity" />
+        <activity android:name=".presentation.profile.detail.efek.ChangeEfekActivity" />
+        <activity android:name=".presentation.profile.detail.income.ChangeIncomeYearActivity" />
+        <activity android:name=".presentation.profile.detail.phone.ChangePhoneActivity" />
+        <activity android:name=".presentation.profile.detail.pass.ChangePassActivity" />
+        <activity android:name=".presentation.profile.bank.AddBankActivity" />
+        <activity android:name=".presentation.profile.bank.AkunBankActivity" />
+        <activity android:name=".presentation.profile.detail.DetailProfileActivity" />
+        <activity android:name=".presentation.profile.ketentuan.SyaratKetentuanActivity" />
+        <activity android:name=".presentation.profile.mitigasi.MitigasiResikoActivity" />
+        <activity android:name=".presentation.profile.kebijakan.KebijakanPrivasiActivity" />
+        <activity android:name=".presentation.profile.disclaimer.DisclaimerActivity" />
+        <activity android:name=".presentation.portofolio.DetailProductDidanaiActivity" />
+        <activity android:name=".presentation.questioner.QuesionerCompleteActivity" />
+        <activity android:name=".presentation.questioner.QuestionerActivity" />
+        <activity android:name=".presentation.payment.PaymentCompleteActivity" />
+        <activity android:name=".presentation.payment.InquiryPaymentActivity" />
+        <activity android:name=".presentation.payment.InputPaymentActivity" />
+        <activity android:name=".presentation.portofolio.ExploreBisnisPropertiActivity" />
+        <activity android:name=".presentation.auth.ActivateFingerActivity" />
+        <activity android:name=".presentation.verification.VerificationRedirectActivity" />
+        <activity android:name=".presentation.home.DetailProductActivity" />
+        <activity android:name=".presentation.verification.VerificationCompleteActivity" />
+        <activity android:name=".presentation.verification.VerificationBankActivity" />
+        <activity android:name=".presentation.verification.VerificationData3Activity" />
+        <activity android:name=".presentation.verification.VerificationData2Activity" />
+        <activity android:name=".presentation.verification.VerificationData1Activity" />
+        <activity android:name=".presentation.verification.VerificationKtpActivity" />
+        <activity android:name=".presentation.verification.VerificationActivity" />
+        <activity
+            android:name=".presentation.auth.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".presentation.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".IntroSliderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".SplashScreen"
             android:configChanges="orientation"
@@ -26,7 +72,29 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission

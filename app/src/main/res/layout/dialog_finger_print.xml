@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="436dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:cardBackgroundColor="#F3F3F3"
+        app:cardCornerRadius="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_finger_print"
+                android:layout_width="80.5dp"
+                android:layout_height="93dp"
+                android:src="@drawable/fingerprint"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/btn_text_register"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginTop="33dp"
+                android:gravity="center"
+                android:text="@string/pindai_sidik_jari"
+                android:textSize="20sp"
+                android:textColor="@color/Black"
+                android:layout_below="@+id/img_finger_print"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <TextView
+                android:id="@+id/tv_batal"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginBottom="33dp"
+                android:gravity="center"
+                android:text="@string/batal"
+                android:textSize="18sp"
+                android:textColor="@color/green_primary"
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

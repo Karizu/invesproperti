@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    tools:context=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalPassActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#F3F3F3"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="20dp"
+            android:paddingEnd="4dp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <ImageView
+            android:id="@+id/btn_cs"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="4dp"
+            android:paddingEnd="20dp"
+            android:src="@drawable/ic_cs_black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/titilliumweb_bold"
+            android:gravity="center"
+            android:text="Tarik Saldo"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/titilliumweb_regular"
+        android:text="Masukan password"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <FrameLayout
+        android:id="@+id/frame_pass"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/rectangle_1"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        >
+
+        <in.anshul.libray.PasswordEditText
+            android:id="@+id/etKataSandi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="13dp"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:hint="@string/pass"
+            android:layoutDirection="ltr"
+            android:textColor="@color/Black"
+            android:textSize="14sp"
+            android:fontFamily="@font/titilliumweb_regular"
+            app:password_visible="false"
+            app:hide_drawable="@drawable/hide_password"
+            app:show_drawable="@drawable/show_password" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_tarik"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/bg_round_green"
+        android:enabled="true"
+        android:fontFamily="@font/titilliumweb_bold"
+        android:gravity="center"
+        android:text="TARIK SALDO"
+        android:textColor="#FAFAFA"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

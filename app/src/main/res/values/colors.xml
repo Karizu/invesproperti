@@ -16,8 +16,10 @@
     <color name="light_white">#FDFDFD</color>
     <color name="light_green">#83BB58</color>
     <color name="green">#47C756</color>
-    <color name="green_primary">#70A423</color>
+    <color name="green_primary">#3DB991</color>
     <color name="black_primary">#1D1D1B</color>
+    <color name="grey_disabled">#EAEAEA</color>
+    <color name="grey_text">#787878</color>
 
     <color name="grey_control_highlight">#C4C4C4</color>
 
@@ -26,6 +28,7 @@
     <color name="starDust_opacity_90">#E69D9E9F</color>
 
     <color name="red_alert">#F44336</color>
+    <color name="red_alert_text">#C70000</color>
 
     <color name="gray_text">#AAA8A8</color>
     <color name="shado">#11111111</color>
@@ -46,16 +49,32 @@
         <item>@color/green_primary</item>
         <item>@color/green_primary</item>
         <item>@color/green_primary</item>
-<!--        <item>@color/green</item>-->
-<!--        <item>@color/green</item>-->
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/green_primary</item>
     </array>
 
     <array name="array_dot_inactive">
         <item>@color/grey_control_highlight</item>
         <item>@color/grey_control_highlight</item>
         <item>@color/grey_control_highlight</item>
-<!--        <item>@color/light_green</item>-->
-<!--        <item>@color/light_green</item>-->
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
+        <item>@color/grey_control_highlight</item>
     </array>
 
     // Old : #f4f4f4
@@ -73,6 +92,8 @@
     <color name="black_transparent">#40000000</color>
 
     <!--list color-->
+    <color name="background_primary">#FAFAFA</color>
+    <color name="text_color">#CDCDCD</color>
     <color name="White">#FFFFFF</color>
     <color name="Orange">#FFA500</color>
     <color name="DarkOrange">#FF8C00</color>
