@@ -22,6 +22,7 @@ import com.selada.invesproperti.presentation.adapter.HomeFeedAdapter;
 import com.selada.invesproperti.presentation.adapter.PortofolioFeedAdapter;
 import com.selada.invesproperti.presentation.home.DetailProductActivity;
 import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
+import com.selada.invesproperti.presentation.portofolio.history.HistoryActivity;
 import com.selada.invesproperti.presentation.portofolio.withdrawal.WithdrawalActivity;
 import com.selada.invesproperti.presentation.profile.detail.DetailProfileActivity;
 import com.selada.invesproperti.presentation.profile.detail.income.ChangeIncomeYearActivity;
@@ -79,7 +80,9 @@ public class PortofolioFragment extends Fragment {
 
     @OnClick(R.id.btn_riwayat)
     void onClickRiwayat(){
-
+        Intent intent = new Intent(requireActivity(), HistoryActivity.class);
+        startActivity(intent);
+        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @OnClick(R.id.btnFilterHome)

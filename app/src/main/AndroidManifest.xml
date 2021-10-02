@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalPassActivity"></activity>
+        <activity android:name=".presentation.portofolio.history.HistoryActivity"></activity>
+        <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalPassActivity" />
         <activity android:name=".presentation.portofolio.withdrawal.CompleteWithdrawalActivity" />
         <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalActivity" />
         <activity android:name=".presentation.portofolio.withdrawal.WithdrawalActivity" />
