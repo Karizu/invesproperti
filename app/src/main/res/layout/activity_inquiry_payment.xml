@@ -459,7 +459,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="114dp"
                     android:background="#FAFAFA"
-                    android:paddingBottom="20dp"
                     android:layout_marginTop="28dp"
                     android:orientation="vertical">
 
@@ -563,12 +562,13 @@
                                     <TextView
                                         android:id="@+id/isi_saldo"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:fontFamily="@font/titilliumweb_regular"
-                                        android:gravity="center"
+                                        android:gravity="top"
+                                        android:lineSpacingExtra="0sp"
                                         android:text="Isi saldo"
                                         android:textColor="#FAFAFA"
-                                        android:textSize="14sp" />
+                                        android:textSize="12sp" />
 
 
                                 </LinearLayout>

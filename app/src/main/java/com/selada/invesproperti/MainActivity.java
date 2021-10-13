@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigation;
-//    @BindView(R.id.bottom_navigation)
-//    MeowBottomNavigation bottomNavigation;
     @BindView(R.id.view_pager)
     MyViewPager viewPager;
 
@@ -80,28 +78,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case 0:
                         bottomNavigation.getMenu().findItem(R.id.item0).setChecked(true);
                         bottomNavigation.getMenu().findItem(R.id.item0).setIcon(R.drawable.ic_baseline_home_24);
-                        bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_outline_featured_play_list_24);
+                        if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)){
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_product);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Produk");
+                        } else {
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_outline_featured_play_list_24);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Portofolio");
+                        }
                         bottomNavigation.getMenu().findItem(R.id.item2).setIcon(R.drawable.ic_outline_mail_outline_24);
                         bottomNavigation.getMenu().findItem(R.id.item3).setIcon(R.drawable.ic_outline_account_box_24);
                         break;
                     case 1:
                         bottomNavigation.getMenu().findItem(R.id.item1).setChecked(true);
                         bottomNavigation.getMenu().findItem(R.id.item0).setIcon(R.drawable.ic_outline_home_24);
-                        bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_baseline_featured_play_list_24);
+                        if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)){
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_baseline_product);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Produk");
+                        } else {
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_baseline_featured_play_list_24);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Portofolio");
+                        }
                         bottomNavigation.getMenu().findItem(R.id.item2).setIcon(R.drawable.ic_outline_mail_outline_24);
                         bottomNavigation.getMenu().findItem(R.id.item3).setIcon(R.drawable.ic_outline_account_box_24);
                         break;
                     case 2:
                         bottomNavigation.getMenu().findItem(R.id.item2).setChecked(true);
                         bottomNavigation.getMenu().findItem(R.id.item0).setIcon(R.drawable.ic_outline_home_24);
-                        bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_outline_featured_play_list_24);
+                        if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)){
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_product);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Produk");
+                        } else {
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_outline_featured_play_list_24);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Portofolio");
+                        }
                         bottomNavigation.getMenu().findItem(R.id.item2).setIcon(R.drawable.ic_baseline_drafts_24);
                         bottomNavigation.getMenu().findItem(R.id.item3).setIcon(R.drawable.ic_outline_account_box_24);
                         break;
                     case 3:
                         bottomNavigation.getMenu().findItem(R.id.item3).setChecked(true);
                         bottomNavigation.getMenu().findItem(R.id.item0).setIcon(R.drawable.ic_outline_home_24);
-                        bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_outline_featured_play_list_24);
+                        if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)){
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_product);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Produk");
+                        } else {
+                            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_outline_featured_play_list_24);
+                            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Portofolio");
+                        }
                         bottomNavigation.getMenu().findItem(R.id.item2).setIcon(R.drawable.ic_outline_mail_outline_24);
                         bottomNavigation.getMenu().findItem(R.id.item3).setIcon(R.drawable.ic_baseline_account_box_24);
                         break;

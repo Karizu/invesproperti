@@ -16,14 +16,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.model.SliderItem;
 import com.selada.invesproperti.presentation.adapter.HomeFeedAdapter;
 import com.selada.invesproperti.presentation.adapter.SliderAdapterExample;
 import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
+import com.selada.invesproperti.presentation.portofolio.withdrawal.WithdrawalActivity;
+import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
 import com.selada.invesproperti.presentation.questioner.QuestionerActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
+import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.PreferenceManager;
 import com.selada.invesproperti.util.ShareBottomDialog;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -54,6 +58,12 @@ public class HomeFragment extends Fragment {
     TextView tv_title_verification_notif;
     @BindView(R.id.frameVerifikasi)
     FrameLayout frameVerifikasi;
+    @BindView(R.id.refreshLayout)
+    LiquidRefreshLayout refreshLayout;
+    @BindView(R.id.btn_tarik_saldo)
+    FrameLayout btn_tarik_saldo;
+    @BindView(R.id.btn_isi_saldo)
+    FrameLayout btn_isi_saldo;
 
     private List<SliderItem> mSliderItems;
     private ViewGroup viewGroup;
@@ -67,12 +77,21 @@ public class HomeFragment extends Fragment {
     void onClickBtnIsiSaldo(){
         Intent intent = new Intent(requireActivity(), DepositActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.pull_up_from_bottom, R.anim.push_out_to_bottom);
     }
 
-    @OnClick(R.id.img_cs)
-    void onClickImgCs(){
+    @OnClick(R.id.btn_tarik_saldo)
+    void onClickBtnTarikSaldo(){
+        Intent intent = new Intent(requireActivity(), WithdrawalActivity.class);
+        startActivity(intent);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
 
+    @OnClick(R.id.btn_cs)
+    void onClickCs(){
+        Intent intent = new Intent(requireActivity(), BantuanActivity.class);
+        startActivity(intent);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.frameVerifikasi)
@@ -105,18 +124,34 @@ public class HomeFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     private void setContentHome() {
         tv_fullname.setText(PreferenceManager.getFullname());
+        refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
+            @Override
+            public void completeRefresh() {
+                refreshLayout.finishRefreshing();
+            }
+
+            @Override
+            public void refreshing() {
+
+            }
+        });
+
         switch (PreferenceManager.getUserStatus()){
             case Constant.GUEST:
                 tv_user_status.setText("Guest");
                 tv_balance.setText("-");
                 tv_title_verification_notif.setText("Verifikasi akun anda sekarang!");
                 frameVerifikasi.setVisibility(View.VISIBLE);
+                btn_isi_saldo.setVisibility(View.VISIBLE);
+                btn_tarik_saldo.setVisibility(View.GONE);
                 break;
             case Constant.ON_VERIFICATION:
                 tv_user_status.setText("Guest");
                 tv_balance.setText("-");
                 tv_title_verification_notif.setText("Akun sedang dalam proses verifikasi data");
                 frameVerifikasi.setVisibility(View.VISIBLE);
+                btn_isi_saldo.setVisibility(View.VISIBLE);
+                btn_tarik_saldo.setVisibility(View.GONE);
                 break;
             case Constant.INVESTOR:
                 tv_user_status.setText("Investor");
@@ -127,11 +162,15 @@ public class HomeFragment extends Fragment {
                     tv_title_verification_notif.setText("Akun anda terverifikasi. Isi quesioner.");
                     frameVerifikasi.setVisibility(View.VISIBLE);
                 }
+                btn_isi_saldo.setVisibility(View.VISIBLE);
+                btn_tarik_saldo.setVisibility(View.GONE);
                 break;
             case Constant.PRODUCT_OWNER:
                 tv_user_status.setText("Product Owner");
                 tv_balance.setText("0");
                 frameVerifikasi.setVisibility(View.GONE);
+                btn_isi_saldo.setVisibility(View.GONE);
+                btn_tarik_saldo.setVisibility(View.VISIBLE);
                 break;
         }
 

@@ -47,7 +47,7 @@ public class PortofolioFeedAdapter extends RecyclerView.Adapter<PortofolioFeedAd
         holder.cvItem.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailProductDidanaiActivity.class);
             activity.startActivity(intent);
-            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         });
     }
 

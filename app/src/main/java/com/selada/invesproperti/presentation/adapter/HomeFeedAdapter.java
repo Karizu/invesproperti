@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.presentation.home.DetailProductActivity;
 import com.selada.invesproperti.presentation.verification.VerificationData2Activity;
+import com.selada.invesproperti.util.Constant;
+import com.selada.invesproperti.util.PreferenceManager;
 import com.white.progressview.HorizontalProgressView;
 
 import java.util.List;
@@ -48,8 +50,10 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.progressBar.setProgressInTime(20,2500);
         holder.cvItem.setOnClickListener(view -> {
+
             Intent intent = new Intent(context, DetailProductActivity.class);
             activity.startActivity(intent);
+            activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         });
     }
 

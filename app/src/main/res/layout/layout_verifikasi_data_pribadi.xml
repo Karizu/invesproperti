@@ -9,27 +9,31 @@
     tools:context=".presentation.verification.VerificationActivity">
 
     <RelativeLayout
+        android:id="@+id/app_bar"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#F3F3F3"
         android:orientation="horizontal"
-        android:paddingStart="25.89dp"
+        android:background="#F3F3F3"
         android:paddingEnd="25.89dp"
         android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="24dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:paddingStart="20dp"
+            android:paddingEnd="4dp"
             android:layout_alignParentStart="true"
-            android:src="@drawable/ic_baseline_arrow_back_24"/>
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:background="?attr/selectableItemBackground"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="@string/data_pribadi"
+            android:text="Data Pribadi"
             android:textColor="@color/Black"
             android:textSize="18sp"
             android:fontFamily="@font/titilliumweb_bold"/>
@@ -243,7 +247,8 @@
                         <EditText
                             android:id="@+id/et_nama_lengkap"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:background="@color/transparent"
                             android:gravity="center_vertical"
                             android:textSize="16sp"
@@ -275,6 +280,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:layout_marginEnd="34dp"
+                            android:buttonTint="@color/green_primary"
                             android:fontFamily="@font/titilliumweb_regular"
                             android:text="@string/laki_laki"/>
 
@@ -282,6 +288,7 @@
                             android:id="@+id/rb_perempuan"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:buttonTint="@color/green_primary"
                             android:fontFamily="@font/titilliumweb_regular"
                             android:gravity="center"
                             android:text="@string/perempuan"/>
@@ -307,7 +314,8 @@
                         <EditText
                             android:id="@+id/et_tempat_lahir"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:background="@color/transparent"
                             android:inputType="text"
                             android:gravity="center_vertical"
@@ -336,7 +344,8 @@
                         <TextView
                             android:id="@+id/tv_tgl_lahir"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:background="@color/transparent"
                             android:gravity="center_vertical"
                             android:textSize="16sp"
@@ -364,7 +373,8 @@
                         <Spinner
                             android:id="@+id/spinner_pendidikan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:gravity="center_vertical"
                             android:textSize="16sp"
                             android:text="@string/pendidikan_terakhir"
@@ -391,7 +401,8 @@
                         <Spinner
                             android:id="@+id/spinner_pekerjaan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:gravity="center_vertical"
                             android:textSize="16sp"
                             android:text="@string/pekerjaan"
@@ -448,7 +459,8 @@
                         <Spinner
                             android:id="@+id/spinner_status"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:gravity="center_vertical"
                             android:textSize="16sp"
                             android:text="Status"
@@ -476,7 +488,8 @@
                         <EditText
                             android:id="@+id/et_nama_pasangan"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:gravity="center_vertical"
                             android:textSize="16sp"
                             android:fontFamily="@font/titilliumweb_regular"

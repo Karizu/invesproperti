@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.presentation.adapter.DepositBankAdapter;
 import com.selada.invesproperti.presentation.adapter.ListBankAdapter;
+import com.selada.invesproperti.presentation.portofolio.withdrawal.KonfirmasiWithdrawalActivity;
+import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,13 @@ public class DepositActivity extends AppCompatActivity {
     @OnClick(R.id.btn_back)
     void onClickBack(){
         onBackPressed();
+    }
+
+    @OnClick(R.id.btn_cs)
+    void onClickCs(){
+        Intent intent = new Intent(this, BantuanActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -54,7 +64,6 @@ public class DepositActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        this.overridePendingTransition(R.anim.pull_up_from_bottom, R.anim.push_out_to_bottom);
     }
 }

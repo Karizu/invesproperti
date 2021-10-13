@@ -8,24 +8,41 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.selada.invesproperti.MainActivity;
 import com.selada.invesproperti.R;
-import com.selada.invesproperti.presentation.RegisterActivity;
+import com.selada.invesproperti.api.ApiCore;
+import com.selada.invesproperti.model.request.RequestLogin;
+import com.selada.invesproperti.model.request.RequestRegister;
+import com.selada.invesproperti.model.response.ApiResponse;
+import com.selada.invesproperti.model.response.ResponseLogin;
+import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.FingerPrintAuthCallback;
 import com.selada.invesproperti.util.FingerPrintAuthHelper;
+import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 
+import java.util.Objects;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import in.anshul.libray.PasswordEditText;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements FingerPrintAuthCallback {
+
+    @BindView(R.id.etEmail)
+    EditText etEmail;
+    @BindView(R.id.etKataSandi)
+    PasswordEditText etKataSandi;
 
     private FingerPrintAuthHelper printAuthHelper;
     private boolean isLogin = false;
@@ -77,6 +94,17 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
         }
     }
 
+    @OnClick(R.id.btn_login)
+    void onClickLogin(){
+        if (etEmail.getText().toString().equals("") || etKataSandi.getText().toString().equals("")) {
+            Toast.makeText(this, "Silahkan lengkapi data", Toast.LENGTH_SHORT).show();
+        } else if (!etEmail.getText().toString().contains("@")) {
+            etEmail.setError("Format email salah");
+        } else {
+            doLogin();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +123,45 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
     @Override
     public void onAuthSuccess(FingerprintManager.AuthenticationResult result) {
         directToMainActivity();
+    }
+
+    private void doLogin(){
+        String email = etEmail.getText().toString();
+        String pass = etKataSandi.getText().toString();
+
+        RequestLogin requestLogin = new RequestLogin();
+        requestLogin.setEmail(email);
+        requestLogin.setPassword(pass);
+
+        Loading.show(LoginActivity.this);
+        ApiCore.apiInterface().doSignIn(requestLogin).enqueue(new Callback<ResponseLogin>() {
+            @Override
+            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                Loading.hide(LoginActivity.this);
+                try {
+                    if (response.isSuccessful()){
+                        PreferenceManager.setLoginResponse(response.body(), Constant.LOGIN_FROM_EMAIL);
+                        PreferenceManager.setLoginData(Objects.requireNonNull(response.body()).getFullName(), response.body().getEmail());
+                        PreferenceManager.setSessionToken("Bearer " + response.body().getAccessToken());
+
+                        directToMainActivity();
+                    } else {
+                        View view = findViewById(android.R.id.content);
+                        MethodUtil.getErrorMessage(response.errorBody(), view);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    View view = findViewById(android.R.id.content);
+                    MethodUtil.showOnCatch(view);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                t.printStackTrace();
+                Loading.hide(LoginActivity.this);
+            }
+        });
     }
 
     @Override

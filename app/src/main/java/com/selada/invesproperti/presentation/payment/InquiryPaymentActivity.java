@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +32,13 @@ public class InquiryPaymentActivity extends AppCompatActivity {
         Intent intent = new Intent(InquiryPaymentActivity.this, PaymentCompleteActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_isi_saldo)
+    void onClickSaldo(){
+        Intent intent = new Intent(this, DepositActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.pull_up_from_bottom, R.anim.push_out_to_bottom);
     }
 
     @OnClick(R.id.btn_back)
@@ -72,5 +80,11 @@ public class InquiryPaymentActivity extends AppCompatActivity {
                 btn_bayar.setBackground(getResources().getDrawable(R.drawable.bg_round_disable));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

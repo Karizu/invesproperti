@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,9 +27,17 @@ public class KonfirmasiWithdrawalPassActivity extends AppCompatActivity {
         if (!etKataSandi.getText().toString().equals("")){
             Intent intent = new Intent(this, CompleteWithdrawalActivity.class);
             startActivity(intent);
+            this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         } else {
             etKataSandi.setError("Silahkan masukan kata sandi");
         }
+    }
+
+    @OnClick(R.id.btn_cs)
+    void onClickBtnCs(){
+        Intent intent = new Intent(this, BantuanActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -42,7 +51,6 @@ public class KonfirmasiWithdrawalPassActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

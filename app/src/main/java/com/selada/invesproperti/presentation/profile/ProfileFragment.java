@@ -105,58 +105,60 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.img_cs)
-    void onClickImgCs(){
-
+    @OnClick(R.id.btn_cs)
+    void onClickCs(){
+        Intent intent = new Intent(requireActivity(), BantuanActivity.class);
+        startActivity(intent);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_profile)
     void onClickbtn_profile(){
         Intent intent = new Intent(requireActivity(), DetailProfileActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_disclaimer)
     void onClickbtn_disclaimer(){
         Intent intent = new Intent(requireActivity(), DisclaimerActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_kebijakan)
     void onClickbtn_kebijakan(){
         Intent intent = new Intent(requireActivity(), KebijakanPrivasiActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_syarat_ketentuan)
     void onClickbtn_syarat_ketentuan(){
         Intent intent = new Intent(requireActivity(), SyaratKetentuanActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_mitigasi)
     void onClickbtn_mitigasi(){
         Intent intent = new Intent(requireActivity(), MitigasiResikoActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_bantuan)
     void onClickBtnBantuan(){
         Intent intent = new Intent(requireActivity(), BantuanActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_akun_bank)
     void onClickBtnBank(){
         Intent intent = new Intent(requireActivity(), AkunBankActivity.class);
         startActivity(intent);
-        requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.frame_profile_pic)
@@ -226,7 +228,15 @@ public class ProfileFragment extends Fragment {
                 }
                 break;
             case Constant.PRODUCT_OWNER:
-
+                btn_profile.setVisibility(View.VISIBLE);
+                btn_akun_bank.setVisibility(View.VISIBLE);
+                line_profile.setVisibility(View.VISIBLE);
+                line_akun_bank.setVisibility(View.VISIBLE);
+                img_verified.setVisibility(View.VISIBLE);
+                frame_profile_type.setBackground(getResources().getDrawable(R.drawable.bg_round_profile_type_green));
+                tv_profile_type.setText("Product Owner");
+                tv_profile_type.setTextColor(getResources().getColor(R.color.white));
+                frameVerifikasi.setVisibility(View.GONE);
                 break;
         }
     }
@@ -252,6 +262,9 @@ public class ProfileFragment extends Fragment {
                     requireActivity().finish();
                     break;
                 case Constant.LOGIN_FROM_EMAIL:
+                    PreferenceManager.logOut();
+                    startActivity(new Intent(requireContext(), SplashScreen.class));
+                    requireActivity().finish();
                     break;
             }
 

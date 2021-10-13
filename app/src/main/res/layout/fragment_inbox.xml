@@ -18,9 +18,10 @@
         android:fontFamily="@font/titilliumweb_bold"/>
 
     <ImageView
-        android:id="@+id/img_cs"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
+        android:id="@+id/btn_cs"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="10dp"
         android:src="@drawable/ic_cs_black"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="39dp"

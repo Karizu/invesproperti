@@ -26,28 +26,28 @@ public class DetailProfileActivity extends AppCompatActivity {
     void onClickUbahPass(){
         Intent intent = new Intent(DetailProfileActivity.this, ChangePassActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_ubah_no)
     void onClickUbahNo(){
         Intent intent = new Intent(DetailProfileActivity.this, ChangePhoneActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_ubah_pendapatan)
     void onClickUbahPendapatan(){
         Intent intent = new Intent(DetailProfileActivity.this, ChangeIncomeYearActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_ubah_tahun)
     void onClickUbahTahun(){
         Intent intent = new Intent(DetailProfileActivity.this, ChangeEfekActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -55,5 +55,11 @@ public class DetailProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_profile);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

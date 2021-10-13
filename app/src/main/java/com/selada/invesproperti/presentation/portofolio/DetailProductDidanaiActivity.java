@@ -81,7 +81,6 @@ public class DetailProductDidanaiActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        DetailProductDidanaiActivity.this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        DetailProductDidanaiActivity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

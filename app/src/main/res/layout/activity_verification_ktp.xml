@@ -9,25 +9,29 @@
     tools:context=".presentation.verification.VerificationActivity">
 
     <RelativeLayout
+        android:id="@+id/app_bar"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#F3F3F3"
         android:orientation="horizontal"
-        android:paddingStart="25.89dp"
+        android:background="#F3F3F3"
         android:paddingEnd="25.89dp"
         android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="24dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:paddingStart="20dp"
+            android:paddingEnd="4dp"
             android:layout_alignParentStart="true"
-            android:src="@drawable/ic_baseline_arrow_back_24"/>
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:background="?attr/selectableItemBackground"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:text="@string/ktp_selfie"
             android:textColor="@color/Black"
@@ -235,6 +239,7 @@
             android:background="@drawable/rectangle_dots">
 
             <LinearLayout
+                android:id="@+id/layout_text_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -256,6 +261,12 @@
                     android:fontFamily="@font/titilliumweb_regular"/>
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_ktp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                />
 
         </FrameLayout>
 
@@ -282,6 +293,7 @@
             android:background="@drawable/rectangle_dots">
 
             <LinearLayout
+                android:id="@+id/layout_text_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -303,6 +315,13 @@
                     android:fontFamily="@font/titilliumweb_regular"/>
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_selfie"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                />
+
 
         </FrameLayout>
 
@@ -333,7 +352,7 @@
             android:text="@string/lanjut"
             android:textSize="18sp"
             android:fontFamily="@font/titilliumweb_bold"
-            android:enabled="true"/>
+            android:enabled="false"/>
 
     </RelativeLayout>
 

@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:screenOrientation="portrait"
         tools:targetApi="n">
         <activity android:name=".presentation.portofolio.history.HistoryActivity"></activity>
         <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalPassActivity" />
@@ -54,7 +55,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".presentation.RegisterActivity"
+            android:name=".presentation.auth.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity

@@ -20,9 +20,10 @@
         android:fontFamily="@font/titilliumweb_bold"/>
 
     <ImageView
-        android:id="@+id/img_cs"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
+        android:id="@+id/btn_cs"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="10dp"
         android:src="@drawable/ic_cs_black"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="39dp"
@@ -82,442 +83,637 @@
 
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:visibility="visible"
-        android:id="@+id/layout_verified"
+    <com.madapps.liquid.LiquidRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tvTitleBar">
+        app:AniBackColor="#F3F3F3"
+        app:AniForeColor="@color/green_primary"
+        app:CircleSmaller="6"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tvTitleBar"
+        >
 
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
+            android:visibility="visible"
+            android:id="@+id/layout_verified"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_saldo"
-                android:layout_width="match_parent"
-                android:layout_height="123dp"
-                android:layout_marginStart="16sp"
-                android:layout_marginEnd="16sp"
-                android:layout_marginTop="22dp"
-                app:cardCornerRadius="@dimen/padding_10"
-                app:cardBackgroundColor="#FAFAFA">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/saldo_anda"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/titilliumweb_regular"
-                        android:gravity="center_vertical"
-                        android:text="Saldo Anda"
-                        android:textColor="@color/Black"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/saldo_anda2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="28dp"
-                        android:fontFamily="@font/titilliumweb_bold"
-                        android:gravity="center_vertical"
-                        android:text="Rp. 0"
-                        android:textColor="@color/Black"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <FrameLayout
-                        android:id="@+id/btn_isi_saldo"
-                        android:layout_width="88dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="18dp"
-                        android:layout_marginTop="77dp"
-                        android:background="@drawable/bg_round_isi_saldo"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_marginEnd="5.75dp"
-                                android:src="@drawable/ic_baseline_add_24" />
-
-                            <TextView
-                                android:id="@+id/isi_saldo"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/titilliumweb_regular"
-                                android:gravity="top"
-                                android:lineSpacingExtra="0sp"
-                                android:text="Isi saldo"
-                                android:textColor="#FAFAFA"
-                                android:textSize="12sp" />
-
-
-                        </LinearLayout>
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/btn_tarik_saldo"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginEnd="14dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@drawable/bg_round_isi_saldo"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_riwayat"
-                        app:layout_constraintStart_toEndOf="@+id/btn_isi_saldo">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_marginEnd="5.75dp"
-                                android:layout_marginTop="2dp"
-                                android:src="@drawable/withdrawal" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/titilliumweb_regular"
-                                android:gravity="top"
-                                android:lineSpacingExtra="0sp"
-                                android:text="@string/tarik_saldo"
-                                android:textColor="#FAFAFA"
-                                android:textSize="12sp" />
-
-
-                        </LinearLayout>
-
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/btn_riwayat"
-                        android:layout_width="88dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="77dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/bg_round_isi_saldo"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_marginEnd="5.75dp"
-                                android:src="@drawable/ic_baseline_history_24" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/titilliumweb_regular"
-                                android:gravity="top"
-                                android:lineSpacingExtra="0sp"
-                                android:text="Riwayat"
-                                android:textColor="#FAFAFA"
-                                android:textSize="12sp" />
-
-
-                        </LinearLayout>
-
-                    </FrameLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_aset"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_marginStart="16sp"
-                android:layout_marginEnd="16sp"
-                android:layout_marginTop="6dp"
-                app:cardCornerRadius="@dimen/padding_10"
-                app:cardBackgroundColor="#FAFAFA"
-                android:layout_below="@+id/cv_saldo">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_aset"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="14dp"
-                        android:fontFamily="@font/titilliumweb_regular"
-                        android:gravity="center_vertical"
-                        android:text="@string/jumlah_aset"
-                        android:textColor="@color/black_primary"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_aset2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="185dp"
-                        android:layout_marginTop="14dp"
-                        android:fontFamily="@font/titilliumweb_regular"
-                        android:gravity="center_vertical"
-                        android:text="Total Lot"
-                        android:textColor="@color/black_primary"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/img_aset"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_marginStart="21dp"
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_aset"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_aset" />
-
-                    <ImageView
-                        android:id="@+id/img_aset2"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_marginStart="185dp"
-                        android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_layers_black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_aset2" />
-
-                    <TextView
-                        android:id="@+id/tv_jumlah_aset"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="11dp"
-                        android:layout_marginTop="30dp"
-                        android:fontFamily="@font/titilliumweb_bold"
-                        android:gravity="center_vertical"
-                        android:text="0"
-                        android:textColor="@color/Black"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toEndOf="@+id/img_aset"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_jumlah_aset2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="11dp"
-                        android:layout_marginTop="29dp"
-                        android:fontFamily="@font/titilliumweb_bold"
-                        android:gravity="center_vertical"
-                        android:text="0"
-                        android:textColor="@color/Black"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toEndOf="@+id/img_aset2"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/pendanaan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/titilliumweb_regular"
-                        android:gravity="center_vertical"
-                        android:text="@string/total_pendanaan"
-                        android:textColor="@color/black_primary"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_jumlah_aset" />
-
-                    <TextView
-                        android:id="@+id/tv_total_pendanaan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-2dp"
-                        android:layout_marginStart="20dp"
-                        android:fontFamily="@font/titilliumweb_bold"
-                        android:gravity="center_vertical"
-                        android:text="Rp. 0"
-                        android:textColor="@color/Black"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/pendanaan" />
-
-                    <TextView
-                        android:id="@+id/hasil_deviden"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="185dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/titilliumweb_regular"
-                        android:gravity="center_vertical"
-                        android:text="@string/total_hasil_deviden"
-                        android:textColor="@color/black_primary"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_jumlah_aset2" />
-
-                    <TextView
-                        android:id="@+id/tv_total_hasil_deviden"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="185dp"
-                        android:layout_marginTop="-2dp"
-                        android:fontFamily="@font/titilliumweb_bold"
-                        android:gravity="center_vertical"
-                        android:text="Rp. 0"
-                        android:textColor="@color/Black"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/hasil_deviden" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/titilliumweb_regular"
-                android:gravity="center_vertical"
-                android:text="@string/investasi"
-                android:textColor="@color/Black"
-                android:textSize="16sp"
-                android:layout_below="@id/cv_aset"/>
-
             <RelativeLayout
-                android:id="@+id/btnFilterHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center|right"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/cv_aset"
-                tools:ignore="RtlHardcoded">
-
-                <TextView
-                    android:id="@+id/tvFilterHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:gravity="top"
-                    android:lineSpacingExtra="0sp"
-                    android:text="Semua"
-                    android:textColor="@color/Black"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/titilliumweb_regular"
-                    tools:ignore="HardcodedText" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_toEndOf="@+id/tvFilterHome"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    />
-
-                <View
-                    android:id="@+id/line_9"
-                    android:layout_width="48dp"
-                    android:layout_height="1dp"
-                    android:background="@drawable/line_9"
-                    android:layout_below="@+id/tvFilterHome"
-                    />
-
-            </RelativeLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:visibility="visible"
-                android:id="@+id/rv_portofolio"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnFilterHome"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="4dp"/>
+                android:layout_height="match_parent">
 
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layout_no_investasi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnFilterHome"
-                android:layout_marginTop="48dp"
-                android:gravity="center"
-                android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_saldo"
+                    android:layout_width="match_parent"
+                    android:layout_height="123dp"
+                    android:layout_marginStart="16sp"
+                    android:layout_marginEnd="16sp"
+                    android:layout_marginTop="2dp"
+                    app:cardCornerRadius="@dimen/padding_10"
+                    app:cardBackgroundColor="#FAFAFA">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/saldo_anda"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="15dp"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            android:gravity="center_vertical"
+                            android:text="Saldo Anda"
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/saldo_anda2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/titilliumweb_bold"
+                            android:gravity="center_vertical"
+                            android:text="Rp. 0"
+                            android:textColor="@color/Black"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <FrameLayout
+                            android:id="@+id/btn_isi_saldo"
+                            android:layout_width="88dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="77dp"
+                            android:background="@drawable/bg_round_isi_saldo"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:layout_marginEnd="5.75dp"
+                                    android:src="@drawable/ic_baseline_add_24" />
+
+                                <TextView
+                                    android:id="@+id/isi_saldo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/titilliumweb_regular"
+                                    android:gravity="top"
+                                    android:lineSpacingExtra="0sp"
+                                    android:text="Isi saldo"
+                                    android:textColor="#FAFAFA"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/btn_tarik_saldo"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="16dp"
+                            android:background="@drawable/bg_round_isi_saldo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_riwayat"
+                            app:layout_constraintStart_toEndOf="@+id/btn_isi_saldo">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:layout_marginEnd="5.75dp"
+                                    android:layout_marginTop="2dp"
+                                    android:src="@drawable/withdrawal" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/titilliumweb_regular"
+                                    android:gravity="top"
+                                    android:lineSpacingExtra="0sp"
+                                    android:text="@string/tarik_saldo"
+                                    android:textColor="#FAFAFA"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/btn_riwayat"
+                            android:layout_width="88dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="77dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/bg_round_isi_saldo"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:layout_marginEnd="5.75dp"
+                                    android:src="@drawable/ic_baseline_history_24" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/titilliumweb_regular"
+                                    android:gravity="top"
+                                    android:lineSpacingExtra="0sp"
+                                    android:text="Riwayat"
+                                    android:textColor="#FAFAFA"
+                                    android:textSize="12sp" />
+
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:id="@+id/layout_cv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/cv_saldo">
+
+                    <androidx.cardview.widget.CardView
+                        android:visibility="visible"
+                        android:id="@+id/cv_aset"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_marginStart="16sp"
+                        android:layout_marginEnd="16sp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="2dp"
+                        app:cardCornerRadius="@dimen/padding_10"
+                        app:cardBackgroundColor="#FAFAFA"
+                        android:layout_alignParentTop="true">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_aset"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="14dp"
+                                android:fontFamily="@font/titilliumweb_regular"
+                                android:gravity="center_vertical"
+                                android:text="@string/jumlah_aset"
+                                android:textColor="@color/black_primary"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_aset2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="185dp"
+                                android:layout_marginTop="14dp"
+                                android:fontFamily="@font/titilliumweb_regular"
+                                android:gravity="center_vertical"
+                                android:text="Total Lot"
+                                android:textColor="@color/black_primary"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/img_aset"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginStart="21dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_aset"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_aset" />
+
+                            <ImageView
+                                android:id="@+id/img_aset2"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginStart="185dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_layers_black"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_aset2" />
+
+                            <TextView
+                                android:id="@+id/tv_jumlah_aset"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="11dp"
+                                android:layout_marginTop="30dp"
+                                android:fontFamily="@font/titilliumweb_bold"
+                                android:gravity="center_vertical"
+                                android:text="0"
+                                android:textColor="@color/Black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toEndOf="@+id/img_aset"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_jumlah_aset2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="11dp"
+                                android:layout_marginTop="29dp"
+                                android:fontFamily="@font/titilliumweb_bold"
+                                android:gravity="center_vertical"
+                                android:text="0"
+                                android:textColor="@color/Black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toEndOf="@+id/img_aset2"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/pendanaan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/titilliumweb_regular"
+                                android:gravity="center_vertical"
+                                android:text="@string/total_pendanaan"
+                                android:textColor="@color/black_primary"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_jumlah_aset" />
+
+                            <TextView
+                                android:id="@+id/tv_total_pendanaan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-2dp"
+                                android:layout_marginStart="20dp"
+                                android:fontFamily="@font/titilliumweb_bold"
+                                android:gravity="center_vertical"
+                                android:text="Rp. 0"
+                                android:textColor="@color/Black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/pendanaan" />
+
+                            <TextView
+                                android:id="@+id/hasil_deviden"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="185dp"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/titilliumweb_regular"
+                                android:gravity="center_vertical"
+                                android:text="@string/total_hasil_deviden"
+                                android:textColor="@color/black_primary"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_jumlah_aset2" />
+
+                            <TextView
+                                android:id="@+id/tv_total_hasil_deviden"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="185dp"
+                                android:layout_marginTop="-2dp"
+                                android:fontFamily="@font/titilliumweb_bold"
+                                android:gravity="center_vertical"
+                                android:text="Rp. 0"
+                                android:textColor="@color/Black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/hasil_deviden" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:visibility="gone"
+                        android:id="@+id/cv_aset_po"
+                        android:layout_width="match_parent"
+                        android:layout_height="79dp"
+                        android:layout_marginStart="16sp"
+                        android:layout_marginEnd="16sp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="2dp"
+                        app:cardCornerRadius="@dimen/padding_10"
+                        app:cardBackgroundColor="#FAFAFA">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="14dp"
+                                android:fontFamily="@font/titilliumweb_regular"
+                                android:gravity="center_vertical"
+                                android:text="Jumlah Produk Dimiliki"
+                                android:textColor="@color/black_primary"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_marginStart="185dp"
+                                android:layout_marginTop="14dp"
+                                android:fontFamily="@font/titilliumweb_regular"
+                                android:gravity="center_vertical"
+                                android:text="Total Lot Terjual"
+                                android:textColor="@color/black_primary"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/img1"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginStart="21dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_aset"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_1" />
+
+                            <ImageView
+                                android:id="@+id/img2"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginStart="185dp"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_layers_black"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_2" />
+
+                            <TextView
+                                android:id="@+id/tv_jumlah_produk_dimiliki"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="11dp"
+                                android:layout_marginTop="30dp"
+                                android:fontFamily="@font/titilliumweb_bold"
+                                android:gravity="center_vertical"
+                                android:text="2"
+                                android:textColor="@color/Black"
+                                android:textSize="20sp"
+                                app:layout_constraintStart_toEndOf="@+id/img1"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_total_lot_terjual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="11dp"
+                                android:layout_marginTop="29dp"
+                                android:fontFamily="@font/titilliumweb_bold"
+                                android:gravity="center_vertical"
+                                android:text="2.000"
+                                android:textColor="@color/Black"
+                                android:textSize="20sp"
+                                app:layout_constraintStart_toEndOf="@+id/img2"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="26dp"
                     android:fontFamily="@font/titilliumweb_regular"
                     android:gravity="center_vertical"
-                    android:text="@string/anda_belum_memiliki_investasi"
+                    android:text="@string/investasi"
                     android:textColor="@color/Black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:layout_below="@+id/layout_cv"/>
 
-                <FrameLayout
-                    android:id="@+id/frame_explore_bisnis"
+                <RelativeLayout
+                    android:id="@+id/btnFilterHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center|right"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/layout_cv"
+                    tools:ignore="RtlHardcoded">
+
+                    <TextView
+                        android:id="@+id/tvFilterHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="0sp"
+                        android:text="Semua"
+                        android:textColor="@color/Black"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/titilliumweb_regular"
+                        tools:ignore="HardcodedText" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_toEndOf="@+id/tvFilterHome"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        />
+
+                    <View
+                        android:id="@+id/line_9"
+                        android:layout_width="48dp"
+                        android:layout_height="1dp"
+                        android:background="@drawable/line_9"
+                        android:layout_below="@+id/tvFilterHome"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:background="@drawable/rectangle_outline_green"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginEnd="26dp">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnFilterHome"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="visible"
+                        android:id="@+id/rv_portofolio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="4dp"/>
+
+                    <FrameLayout
+                        android:id="@+id/btn_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:background="@drawable/rectangle_outline_green"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginEnd="26dp"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:id="@+id/text_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Tambah Investasi lain"
+                            android:textColor="@color/black_primary"
+                            android:drawablePadding="8dp"
+                            android:drawableStart="@drawable/ic_baseline_add_24_green"
+                            android:textSize="18sp"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_no_investasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnFilterHome"
+                    android:layout_marginTop="48dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/titilliumweb_regular"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Mulai Bisnis"
-                        android:textColor="@color/black_primary"
-                        android:drawablePadding="8dp"
-                        android:drawableStart="@drawable/ic_baseline_add_24_green"
-                        android:textSize="18sp"/>
+                        android:gravity="center_vertical"
+                        android:text="@string/anda_belum_memiliki_investasi"
+                        android:textColor="@color/Black"
+                        android:textSize="16sp"/>
 
-                </FrameLayout>
+                    <FrameLayout
+                        android:id="@+id/btn_mulai_investasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:background="@drawable/rectangle_outline_green"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginEnd="26dp">
 
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Mulai Investasi"
+                            android:textColor="@color/black_primary"
+                            android:drawablePadding="8dp"
+                            android:drawableStart="@drawable/ic_baseline_add_24_green"
+                            android:textSize="18sp"/>
 
-        </RelativeLayout>
+                    </FrameLayout>
 
-    </androidx.core.widget.NestedScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_no_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnFilterHome"
+                    android:layout_marginTop="48dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/titilliumweb_regular"
+                        android:gravity="center_vertical"
+                        android:text="Anda belum memiliki produk"
+                        android:textColor="@color/Black"
+                        android:textSize="16sp"/>
+
+                    <FrameLayout
+                        android:id="@+id/btn_buat_produk"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:background="@drawable/rectangle_dots_green"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="26dp"
+                        android:layout_marginEnd="26dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Buat produk"
+                            android:textColor="@color/black_primary"
+                            android:drawablePadding="8dp"
+                            android:drawableStart="@drawable/ic_baseline_add_24_green_primary"
+                            android:textSize="18sp"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.madapps.liquid.LiquidRefreshLayout>
 
 
 </RelativeLayout>

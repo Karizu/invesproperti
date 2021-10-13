@@ -42,7 +42,7 @@
     <color name="dot_dark_screen2">#14a895</color>
 
     <!-- dots active colors -->
-    <color name="dot_light_screen1">#8de7f9</color>
+    <color name="dot_light_screen1">#C8F6FF</color>
     <color name="dot_light_screen2">#8cf9eb</color>
 
     <array name="array_dot_active">

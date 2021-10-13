@@ -10,11 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiCore {
 
-    @SuppressLint("StaticFieldLeak")
-    public static Activity activity;
-
     public static <T> T builder(Class<T> endpoint) {
-        new PreferenceManager(activity);
         return new Retrofit.Builder()
                 .client(NetworkManager.client())
                 .baseUrl(ApiInterface.BASE_URL)

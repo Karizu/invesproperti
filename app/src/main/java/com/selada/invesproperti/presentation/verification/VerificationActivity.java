@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import com.selada.invesproperti.IntroSliderActivity;
 import com.selada.invesproperti.R;
-import com.selada.invesproperti.presentation.RegisterActivity;
 import com.white.progressview.HorizontalProgressView;
 
 import butterknife.BindView;
@@ -27,7 +26,8 @@ public class VerificationActivity extends AppCompatActivity {
     @BindView(R.id.progressBarItem)
     HorizontalProgressView progressBarItem;
 
-    private String type = "";
+    private boolean IsInvestor = false;
+    private boolean IsProjectOwner = false;
 
     @OnClick(R.id.frame_product)
     void onClickFrameProduct(){
@@ -35,7 +35,8 @@ public class VerificationActivity extends AppCompatActivity {
         img_checked_2.setBackground(getResources().getDrawable(R.drawable.bg_circle_cheked));
         btn_lanjut.setEnabled(true);
         btn_lanjut.setBackground(getResources().getDrawable(R.drawable.bg_round_green));
-        type = "product_owner";
+        IsInvestor = false;
+        IsProjectOwner = true;
     }
 
     @OnClick(R.id.frame_investor)
@@ -44,7 +45,8 @@ public class VerificationActivity extends AppCompatActivity {
         img_checked_2.setBackground(getResources().getDrawable(R.drawable.bg_circle_unchecked));
         btn_lanjut.setEnabled(true);
         btn_lanjut.setBackground(getResources().getDrawable(R.drawable.bg_round_green));
-        type = "investor";
+        IsInvestor = true;
+        IsProjectOwner = false;
     }
 
     @OnClick(R.id.btn_back)
@@ -55,8 +57,10 @@ public class VerificationActivity extends AppCompatActivity {
     @OnClick(R.id.btn_lanjut)
     void onClickBtnLanjut(){
         Intent intent = new Intent(this, VerificationKtpActivity.class);
+        intent.putExtra("is_investor", IsInvestor);
+        intent.putExtra("is_project_owner", IsProjectOwner);
         startActivity(intent);
-        this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -76,6 +80,6 @@ public class VerificationActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

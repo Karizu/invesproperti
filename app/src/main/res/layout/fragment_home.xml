@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F3F3F3"
+        >
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:visibility="visible"
+            android:id="@+id/collapseActionView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <View
+                        android:id="@+id/rectangle_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/bg_round_header" />
+
+                    <TextView
+                        android:id="@+id/tv_fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="top"
+                        android:lineSpacingExtra="6sp"
+                        android:text="@string/name"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginStart="21dp"
+                        android:textColor="#FAFAFA"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/titilliumweb_bold"/>
+
+                    <TextView
+                        android:id="@+id/tv_user_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="69dp"
+                        android:layout_marginStart="21dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="0sp"
+                        android:text="@string/guest"
+                        android:textColor="@color/Black"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/titilliumweb_regular"/>
+
+                    <ImageView
+                        android:id="@+id/btn_cs"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_cs"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="39dp"
+                        android:layout_marginEnd="21dp"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <View
+                android:id="@+id/rectangle_7"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/bg_round_header" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvHeader"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="9dp"
+                app:cardElevation="12dp"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="#FAFAFA">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.3"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:gravity="top"
+                            android:lineSpacingExtra="0sp"
+                            android:text="@string/saldo"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/titilliumweb_regular"/>
+
+                        <TextView
+                            android:id="@+id/tv_balance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="-4dp"
+                            android:gravity="center_vertical"
+                            android:lineSpacingExtra="6sp"
+                            android:text="Rp. -"
+                            android:fontFamily="@font/titilliumweb_bold"
+                            android:textSize="20sp"
+                            android:textColor="@color/Black"/>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.7">
+
+                        <FrameLayout
+                            android:visibility="visible"
+                            android:id="@+id/btn_isi_saldo"
+                            android:layout_width="88dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/bg_round_isi_saldo">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="5.75dp"
+                                    android:src="@drawable/ic_baseline_add_24" />
+
+                                <TextView
+                                    android:id="@+id/isi_saldo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:lineSpacingExtra="0sp"
+                                    android:text="Isi saldo"
+                                    android:textColor="#FAFAFA"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/titilliumweb_regular"/>
+
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:visibility="gone"
+                            android:id="@+id/btn_tarik_saldo"
+                            android:layout_width="103dp"
+                            android:layout_height="30dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/bg_round_isi_saldo">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="5.75dp"
+                                    android:src="@drawable/ic_tarik_saldo" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:lineSpacingExtra="0sp"
+                                    android:text="Tarik Saldo"
+                                    android:textColor="#FAFAFA"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/titilliumweb_regular"/>
+
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.madapps.liquid.LiquidRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:AniBackColor="#F3F3F3"
+        app:AniForeColor="@color/green_primary"
+        app:CircleSmaller="6"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F3F3F3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/frameVerifikasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_round_verifikasi">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="11.83dp"
+                        android:paddingEnd="15.31dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_baseline_error_outline_24"/>
+
+                        <TextView
+                            android:id="@+id/tv_title_verification_notif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:layout_marginStart="5.83dp"
+                            android:gravity="center_vertical"
+                            android:lineSpacingExtra="0sp"
+                            android:text="@string/verifikasi_akun_anda_sekarang"
+                            android:textColor="@color/Black"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/titilliumweb_regular"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_chevron_black_right_24"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="0sp"
+                    android:text="@string/article_amp_news"
+                    android:textColor="@color/Black"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/titilliumweb_regular"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="10dp"
+                    >
+
+                    <com.smarteist.autoimageslider.SliderView
+                        android:id="@+id/imageSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:sliderAnimationDuration="600"
+                        app:sliderAutoCycleDirection="back_and_forth"
+                        app:sliderAutoCycleEnabled="true"
+                        app:sliderIndicatorAnimationDuration="600"
+                        app:sliderIndicatorEnabled="false"
+                        app:sliderIndicatorGravity="center_horizontal|bottom"
+                        app:sliderIndicatorMargin="15dp"
+                        app:sliderIndicatorOrientation="horizontal"
+                        app:sliderIndicatorPadding="3dp"
+                        app:sliderIndicatorRadius="2dp"
+                        app:sliderIndicatorSelectedColor="@color/green_primary"
+                        app:sliderIndicatorUnselectedColor="#C4C4C4"
+                        app:sliderScrollTimeInSec="1"
+                        app:sliderStartAutoCycle="true" />
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/layoutDots"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dots_height"
+                    android:gravity="center"
+                    android:orientation="horizontal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/explore_bis"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:lineSpacingExtra="0sp"
+                        android:text="@string/highlight_project"
+                        android:textColor="@color/Black"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/titilliumweb_regular"/>
+
+                    <RelativeLayout
+                        android:visibility="invisible"
+                        android:id="@+id/btnFilterHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        tools:ignore="RtlHardcoded">
+
+                        <TextView
+                            android:id="@+id/tvFilterHome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="top"
+                            android:lineSpacingExtra="0sp"
+                            android:text="Semua"
+                            android:textColor="@color/Black"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            tools:ignore="HardcodedText" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_toEndOf="@+id/tvFilterHome"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            />
+
+                        <View
+                            android:id="@+id/line_9"
+                            android:layout_width="48dp"
+                            android:layout_height="1dp"
+                            android:background="@drawable/line_9"
+                            android:layout_below="@+id/tvFilterHome"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="6dp"/>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.madapps.liquid.LiquidRefreshLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

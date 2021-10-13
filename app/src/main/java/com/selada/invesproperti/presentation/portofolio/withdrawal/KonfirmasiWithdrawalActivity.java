@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.selada.invesproperti.MainActivity;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.presentation.auth.ActivateFingerActivity;
+import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
 import com.selada.invesproperti.util.FingerPrintAuthCallback;
 import com.selada.invesproperti.util.FingerPrintAuthHelper;
 import com.selada.invesproperti.util.MethodUtil;
@@ -31,14 +32,21 @@ public class KonfirmasiWithdrawalActivity extends AppCompatActivity implements F
     void onClickFramePass(){
         Intent intent = new Intent(this, KonfirmasiWithdrawalPassActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.etKataSandi)
     void onClickSandi(){
         Intent intent = new Intent(this, KonfirmasiWithdrawalPassActivity.class);
         startActivity(intent);
-        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    @OnClick(R.id.btn_cs)
+    void onClickCs(){
+        Intent intent = new Intent(this, BantuanActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -58,14 +66,14 @@ public class KonfirmasiWithdrawalActivity extends AppCompatActivity implements F
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
     public void onAuthSuccess(FingerprintManager.AuthenticationResult result) {
         Intent intent = new Intent(this, CompleteWithdrawalActivity.class);
         startActivity(intent);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override

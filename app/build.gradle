@@ -95,6 +95,7 @@ dependencies {
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
     implementation 'com.github.Drjacky:ImagePicker:2.1.12'
-
+    implementation 'com.github.mukeshsolanki:liquidrefreshlayout:1.0.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
 }

@@ -10,7 +10,6 @@ import android.os.Bundle;
 
 import com.selada.invesproperti.IntroSliderActivity;
 import com.selada.invesproperti.R;
-import com.selada.invesproperti.presentation.RegisterActivity;
 import com.selada.invesproperti.presentation.adapter.ListBankAdapter;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class AkunBankActivity extends AppCompatActivity {
     void onClickTambahRekening(){
         Intent intent = new Intent(AkunBankActivity.this, AddBankActivity.class);
         startActivity(intent);
-        AkunBankActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        AkunBankActivity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.btn_back)
@@ -66,7 +65,6 @@ public class AkunBankActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

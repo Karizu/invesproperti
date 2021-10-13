@@ -29,7 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.selada.invesproperti.presentation.RegisterActivity;
+import com.selada.invesproperti.presentation.auth.RegisterActivity;
 import com.selada.invesproperti.presentation.auth.LoginActivity;
 import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.PreferenceManager;

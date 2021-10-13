@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.model.SliderItem;
 import com.selada.invesproperti.presentation.adapter.SliderAdapterExample;
@@ -36,6 +37,8 @@ public class DetailProductActivity extends AppCompatActivity {
     TextView tv_title_bar;
     @BindView(R.id.tv_count_day)
     TextView tvCountDay;
+    @BindView(R.id.refreshLayout)
+    LiquidRefreshLayout refreshLayout;
 
     private List<SliderItem> mSliderItems;
 
@@ -53,6 +56,7 @@ public class DetailProductActivity extends AppCompatActivity {
         //status user verified
         Intent intent1 = new Intent(this, InputPaymentActivity.class);
         startActivity(intent1);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -89,6 +93,18 @@ public class DetailProductActivity extends AppCompatActivity {
         imageSlider.startAutoCycle();
 
         addBottomDots(0);
+
+        refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
+            @Override
+            public void completeRefresh() {
+                refreshLayout.finishRefreshing();
+            }
+
+            @Override
+            public void refreshing() {
+
+            }
+        });
     }
 
     private void addBottomDots(int currentPage) {
@@ -114,5 +130,11 @@ public class DetailProductActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

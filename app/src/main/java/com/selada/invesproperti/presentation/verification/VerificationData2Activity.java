@@ -21,7 +21,7 @@ public class VerificationData2Activity extends AppCompatActivity {
     void onClickBtnLanjut(){
         Intent intent = new Intent(this, VerificationData3Activity.class);
         startActivity(intent);
-        this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
     }
 
@@ -36,6 +36,6 @@ public class VerificationData2Activity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

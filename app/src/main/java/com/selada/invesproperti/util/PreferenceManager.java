@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.orhanobut.hawk.Hawk;
+import com.selada.invesproperti.model.response.ResponseLogin;
 
 
 import java.util.List;
@@ -24,31 +25,6 @@ public class PreferenceManager {
     private static final String SESSION_TOKEN_ARDI = "sessionTokenArdi";
     private static final String IS_LOGIN = "isLogin";
     private static final String USER_STATUS = "userStatus";
-    private static final String IS_ARDI = "isARDI";
-    private static final String USER_LOGIN = "userLogin";
-    private static final String AGENT = "agent";
-    private static final String MEMBER_ID = "memberId";
-    private static final String SELADA_USER_ID = "seladaUserId";
-
-    private static final String BASE_URL = "baseUrl";
-    private static final String CONSUMER_KEY = "consumerKey";
-    private static final String CONSUMER_SECRET = "consumerSecret";
-    private static final String CODE_COUPON = "codeCoupon";
-
-    private static final String BOOTH_ID = "booth_id";
-    private static final String MASTER_KEY = "master_key";
-    private static final String MENU_CATEGORY = "menu_category";
-    private static final String HOME_FEED_ONE = "home_feed_one";
-    private static final String HOME_FEED_TWO = "home_feed_two";
-    private static final String HOME_FEED_THREE = "home_feed_three";
-    private static final String NAMA_CABANG = "namaCabang";
-    private static final String LOGIN_DATA = "loginData";
-    private static final String LOGIN_EMAIL = "loginEmail";
-    private static final String PHONE_SELADA_SEGAR = "phoneSeladaSegar";
-    private static final String BASE_URL_CREATE_DEVICE = "baseUrlCreateDevice";
-    private static final String IS_FIRST_OPEN = "isFirstOpen";
-    private static final String IS_FIREBASE_USER = "isFirebaseUser";
-    private static final String BASE_URL_SLIDER = "baseUrlSlider";
     private static final String GOOGLE_SIGN_IN_OBJECT = "googleSignInObject";
     private static final String FACEBOOK_SIGN_IN_OBJECT = "facebookSignInObject";
     private static final String LOGIN_FROM = "loginFrom";
@@ -56,9 +32,8 @@ public class PreferenceManager {
     private static final String EMAIL = "email";
     private static final String IS_FINGER_ACTIVE = "isFingerActive";
     private static final String IS_ALREADY_QUESIONER = "isAlreadyQuesioner";
-
-    private static final String PREF_NAME = "welcome";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+    private static final String LOGIN_RESPONSE = "loginResponse";
 
     private static Context ctx;
     private static PreferenceManager mInstance;
@@ -76,6 +51,10 @@ public class PreferenceManager {
         if (mInstance == null)
             mInstance = new PreferenceManager(context);
         return mInstance;
+    }
+
+    public static void setSessionToken(String sessionToken){
+        Hawk.put(SESSION_TOKEN, sessionToken);
     }
 
     public static String getSessionToken() {
@@ -161,6 +140,17 @@ public class PreferenceManager {
 
     public static boolean getFingerActive(){
         return Hawk.get(IS_FINGER_ACTIVE, false);
+    }
+
+
+    public static void setLoginResponse(ResponseLogin loginResponse, String loginFrom){
+        Hawk.put(IS_LOGIN, true);
+        Hawk.put(LOGIN_RESPONSE, loginResponse);
+        Hawk.put(LOGIN_FROM, loginFrom);
+    }
+
+    public static ResponseLogin getLoginResponse(){
+        return Hawk.get(LOGIN_RESPONSE, null);
     }
 
 }

@@ -1,6 +1,7 @@
-package com.selada.invesproperti.presentation;
+package com.selada.invesproperti.presentation.auth;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,10 +22,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -34,33 +32,48 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
-import com.selada.invesproperti.IntroSliderActivity;
-import com.selada.invesproperti.MainActivity;
 import com.selada.invesproperti.R;
-import com.selada.invesproperti.presentation.auth.ActivateFingerActivity;
-import com.selada.invesproperti.presentation.auth.LoginActivity;
+import com.selada.invesproperti.api.ApiCore;
+import com.selada.invesproperti.model.request.RequestLogin;
+import com.selada.invesproperti.model.request.RequestRegister;
+import com.selada.invesproperti.model.response.ApiResponse;
+import com.selada.invesproperti.model.response.ResponseError;
+import com.selada.invesproperti.model.response.ResponseLogin;
+import com.selada.invesproperti.model.response.ResponseRegister;
 import com.selada.invesproperti.util.Constant;
+import com.selada.invesproperti.util.Loading;
+import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Objects;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import in.anshul.libray.PasswordEditText;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    @BindView(R.id.etNamaLengkap)
+    EditText etNamaLengkap;
+    @BindView(R.id.etEmail)
+    EditText etEmail;
+    @BindView(R.id.etKataSandi)
+    PasswordEditText etKataSandi;
+
+    private Context context;
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 0;
     private String TAG = "GoogleSignIn";
@@ -89,12 +102,26 @@ public class RegisterActivity extends AppCompatActivity {
         loginButton.performClick();
     }
 
+    @OnClick(R.id.btn_register)
+    void onClickRegister(){
+        if (etNamaLengkap.getText().toString().equals("") || etEmail.getText().toString().equals("") || etKataSandi.getText().toString().equals("")){
+            Toast.makeText(this, "Silahkan lengkapi data", Toast.LENGTH_SHORT).show();
+        } else {
+            if (!etEmail.getText().toString().contains("@")){
+                etEmail.setError("Format email salah");
+            } else {
+                doRegister();
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
 
+        context = this;
         configureGoogleSignIn();
         printHashKey();
         FacebookSdk.sdkInitialize(RegisterActivity.this);
@@ -144,6 +171,79 @@ public class RegisterActivity extends AppCompatActivity {
         }
         // Pass the activity result back to the Facebook SDK
 
+    }
+
+    private void doRegister() {
+        String name = etNamaLengkap.getText().toString();
+        String email = etEmail.getText().toString();
+        String pass = etKataSandi.getText().toString();
+
+        RequestRegister requestRegister = new RequestRegister();
+        requestRegister.setName(name);
+        requestRegister.setEmail(email);
+        requestRegister.setPassword(pass);
+        requestRegister.setRepassword(pass);
+
+        Loading.show(this);
+        ApiCore.apiInterface().doRegister(requestRegister).enqueue(new Callback<ApiResponse<ResponseRegister>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<ResponseRegister>> call, Response<ApiResponse<ResponseRegister>> response) {
+                Loading.hide(context);
+                try {
+                    if (response.isSuccessful()) {
+                        doLogin(email, pass);
+                    } else {
+                        View parentLayout = findViewById(android.R.id.content);
+                        MethodUtil.getErrorMessage(response.errorBody(), parentLayout);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    View parentLayout = findViewById(android.R.id.content);
+                    MethodUtil.showOnCatch(parentLayout);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<ResponseRegister>> call, Throwable t) {
+                Loading.hide(context);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void doLogin(String email, String pass){
+        RequestLogin requestLogin = new RequestLogin();
+        requestLogin.setEmail(email);
+        requestLogin.setPassword(pass);
+
+        Loading.show(this);
+        ApiCore.apiInterface().doSignIn(requestLogin).enqueue(new Callback<ResponseLogin>() {
+            @Override
+            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                Loading.hide(RegisterActivity.this);
+                try {
+                    if (response.isSuccessful()){
+                        PreferenceManager.setLoginResponse(response.body(), Constant.LOGIN_FROM_EMAIL);
+                        PreferenceManager.setLoginData(Objects.requireNonNull(response.body()).getFullName(), response.body().getEmail());
+                        PreferenceManager.setSessionToken("Bearer " + Objects.requireNonNull(response.body()).getAccessToken());
+                        directToMainActivity();
+                    } else {
+                        View view = findViewById(android.R.id.content);
+                        MethodUtil.getErrorMessage(response.errorBody(), view);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    View view = findViewById(android.R.id.content);
+                    MethodUtil.showOnCatch(view);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                t.printStackTrace();
+                Loading.hide(RegisterActivity.this);
+            }
+        });
     }
 
     private void handleFacebookAccessToken(AccessToken token) {

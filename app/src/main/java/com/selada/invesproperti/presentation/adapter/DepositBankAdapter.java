@@ -46,7 +46,7 @@ public class DepositBankAdapter extends RecyclerView.Adapter<DepositBankAdapter.
         holder.cvItem.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DetailDepositActivity.class);
             activity.startActivity(intent);
-            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         });
     }
 

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
 import com.selada.invesproperti.util.MethodUtil;
 
 import butterknife.BindView;
@@ -172,6 +173,14 @@ public class InputPaymentActivity extends AppCompatActivity {
     void onClickBtnBeli(){
         Intent intent = new Intent(InputPaymentActivity.this, InquiryPaymentActivity.class);
         startActivity(intent);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    @OnClick(R.id.btn_isi_saldo)
+    void onClickSaldo(){
+        Intent intent = new Intent(InputPaymentActivity.this, DepositActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.pull_up_from_bottom, R.anim.push_out_to_bottom);
     }
 
     @Override

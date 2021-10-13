@@ -32,7 +32,6 @@ public class ChangeIncomeYearActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        this.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

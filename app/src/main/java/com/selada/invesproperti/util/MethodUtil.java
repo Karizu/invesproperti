@@ -5,6 +5,8 @@ import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -19,17 +21,23 @@ import android.view.WindowManager;
 
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.response.ResponseError;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+
+import okhttp3.ResponseBody;
 
 /**
  * Created by Dhimas on 9/29/17.
@@ -258,5 +266,28 @@ public class MethodUtil extends Application {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static void getErrorMessage(ResponseBody body, View parentLayout){
+        ResponseError responseError = new Gson().fromJson(Objects.requireNonNull(body).charStream(), ResponseError.class);
+        String errorMessage = responseError.getErrorMessage();
+        Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    public static void showOnCatch(View parentLayout){
+        String errorMessage = "Response Code: Catch On";
+        Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    public static byte[] bitmapToByteArray(Bitmap bmp){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    public static Bitmap byteArrayToBitmap(byte[] byteArray){
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 }

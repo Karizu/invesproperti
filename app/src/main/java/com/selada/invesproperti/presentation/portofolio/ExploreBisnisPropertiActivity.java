@@ -150,4 +150,10 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
         rv_explore_bisnis.setAdapter(adapter);
         rv_explore_bisnis.scheduleLayoutAnimation();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
 }
