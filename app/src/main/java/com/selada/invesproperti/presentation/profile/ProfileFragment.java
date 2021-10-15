@@ -94,17 +94,6 @@ public class ProfileFragment extends Fragment {
         signOut();
     }
 
-    @OnClick(R.id.frameVerifikasi)
-    void onClickVerifikasi(){
-        if (PreferenceManager.isAlreadyQuesioner()){
-            Intent intent = new Intent(requireActivity(), VerificationActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(requireActivity(), QuestionerActivity.class);
-            startActivity(intent);
-        }
-    }
-
     @OnClick(R.id.btn_cs)
     void onClickCs(){
         Intent intent = new Intent(requireActivity(), BantuanActivity.class);
@@ -198,6 +187,10 @@ public class ProfileFragment extends Fragment {
                 tv_profile_type.setTextColor(getResources().getColor(R.color.black_primary));
                 frameVerifikasi.setVisibility(View.VISIBLE);
                 tv_title_verification_notif.setText("Verifikasi akun anda sekarang!");
+                frameVerifikasi.setOnClickListener(view -> {
+                    Intent intent = new Intent(requireActivity(), VerificationActivity.class);
+                    startActivity(intent);
+                });
                 break;
             case Constant.ON_VERIFICATION:
                 btn_profile.setVisibility(View.GONE);
@@ -210,6 +203,7 @@ public class ProfileFragment extends Fragment {
                 tv_profile_type.setTextColor(getResources().getColor(R.color.black_primary));
                 frameVerifikasi.setVisibility(View.VISIBLE);
                 tv_title_verification_notif.setText("Akun sedang dalam proses verifikasi data");
+                frameVerifikasi.setOnClickListener(view -> {});
                 break;
             case Constant.INVESTOR:
                 btn_profile.setVisibility(View.VISIBLE);
@@ -225,6 +219,10 @@ public class ProfileFragment extends Fragment {
                 } else {
                     tv_title_verification_notif.setText("Akun anda terverifikasi. Isi quesioner.");
                     frameVerifikasi.setVisibility(View.VISIBLE);
+                    frameVerifikasi.setOnClickListener(view -> {
+                        Intent intent = new Intent(requireActivity(), QuestionerActivity.class);
+                        startActivity(intent);
+                    });
                 }
                 break;
             case Constant.PRODUCT_OWNER:

@@ -1,10 +1,12 @@
 package com.selada.invesproperti.util;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -18,13 +20,20 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.SplashScreen;
+import com.selada.invesproperti.api.ApiCore;
+import com.selada.invesproperti.model.request.RequestRefreshToken;
 import com.selada.invesproperti.model.response.ResponseError;
+import com.selada.invesproperti.model.response.ResponseLogin;
+import com.selada.invesproperti.model.response.ResponseRefreshToken;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -38,6 +47,9 @@ import java.util.Locale;
 import java.util.Objects;
 
 import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Dhimas on 9/29/17.
@@ -281,6 +293,11 @@ public class MethodUtil extends Application {
                 .show();
     }
 
+    public static void showSnackBar(View parentLayout, String Msg){
+        Snackbar.make(parentLayout, Msg, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
     public static byte[] bitmapToByteArray(Bitmap bmp){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -289,5 +306,53 @@ public class MethodUtil extends Application {
 
     public static Bitmap byteArrayToBitmap(byte[] byteArray){
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+    }
+
+    public static void refreshToken(Activity activity){
+        new PreferenceManager(activity);
+        ResponseLogin responseLogin = PreferenceManager.getLoginResponse();
+
+        RequestRefreshToken requestRefreshToken = new RequestRefreshToken();
+        requestRefreshToken.setEmail(responseLogin.getEmail());
+        requestRefreshToken.setAccessToken(responseLogin.getAccessToken());
+        requestRefreshToken.setRefreshToken(responseLogin.getRefreshToken());
+
+        ApiCore.apiInterface().doRefreshToken(requestRefreshToken).enqueue(new Callback<ResponseRefreshToken>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<ResponseRefreshToken> call, Response<ResponseRefreshToken> response) {
+                try {
+                    if (response.isSuccessful()){
+                        PreferenceManager.setIsUnauthorized(false);
+                        responseLogin.setAccessToken(Objects.requireNonNull(response.body()).getAccessToken());
+                        PreferenceManager.setSessionToken("Bearer " + response.body().getAccessToken());
+                    } else {
+                        Dialog dialog = getDialogCart(R.layout.dialog_finger_failed, activity);
+                        TextView tv_title = dialog.findViewById(R.id.tv_title);
+                        TextView tv_desc = dialog.findViewById(R.id.tv_msg);
+                        CardView btn_proses = dialog.findViewById(R.id.btn_batal);
+                        TextView tv_text_btn = dialog.findViewById(R.id.tv_text_btn);
+
+                        tv_title.setText("Peringatan");
+                        tv_desc.setText("Sepertinya sesi anda telah berakhir, lakukan login ulang");
+                        btn_proses.setOnClickListener(view -> {
+                            PreferenceManager.logOut();
+                            activity.startActivity(new Intent(activity, SplashScreen.class));
+                            activity.finish();
+                        });
+                        tv_text_btn.setText("Login");
+
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    showSnackBar(activity.findViewById(android.R.id.content), "Response Code: On Catch");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseRefreshToken> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

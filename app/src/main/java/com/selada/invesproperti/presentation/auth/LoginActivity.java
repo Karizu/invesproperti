@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
     PasswordEditText etKataSandi;
 
     private FingerPrintAuthHelper printAuthHelper;
-    private boolean isLogin = false;
 
     @OnClick(R.id.btn_text_register)
     void onClickBtnTextRegister(){
@@ -59,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
     void onClickBtnFinger(){
         //Check if the device supports finger print hardware
         if (PreferenceManager.getFingerActive()){
+            MethodUtil.refreshToken(LoginActivity.this);
             boolean allowFingerPrintAuth = FingerPrintAuthHelper.isFingerPrintSupported(this);
             printAuthHelper = new FingerPrintAuthHelper(this, this);
 
@@ -84,13 +84,31 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
                 btnBatal.setOnClickListener(view -> dialogs.dismiss());
             }
         } else {
-            Dialog dialogs = MethodUtil.getDialogCart(R.layout.dialog_finger_failed, this);
-            dialogs.setCancelable(false);
-            dialogs.setCanceledOnTouchOutside(false);
-            CardView btnBatal = dialogs.findViewById(R.id.btn_batal);
-            TextView tvMsg = dialogs.findViewById(R.id.tv_msg);
-            tvMsg.setText("Silahkan aktifkan otentikasi sidik jari terlebih dahulu pada menu pengaturan");
-            btnBatal.setOnClickListener(view -> dialogs.dismiss());
+            if (PreferenceManager.isLogin()){
+                Dialog dialogs = MethodUtil.getDialogCart(R.layout.dialog_finger_failed, this);
+                dialogs.setCancelable(false);
+                dialogs.setCanceledOnTouchOutside(false);
+                CardView btnBatal = dialogs.findViewById(R.id.btn_batal);
+                CardView btnAktifkan = dialogs.findViewById(R.id.btn_aktifkan);
+                TextView tvMsg = dialogs.findViewById(R.id.tv_msg);
+                tvMsg.setText("Silahkan aktifkan otentikasi sidik jari terlebih dahulu");
+                btnBatal.setOnClickListener(view -> dialogs.dismiss());
+                btnAktifkan.setVisibility(View.VISIBLE);
+                btnAktifkan.setOnClickListener(view -> {
+                    dialogs.dismiss();
+                    onClickBtnActivate();
+                });
+            } else {
+                Dialog dialogs = MethodUtil.getDialogCart(R.layout.dialog_finger_failed, this);
+                dialogs.setCancelable(false);
+                dialogs.setCanceledOnTouchOutside(false);
+                CardView btnBatal = dialogs.findViewById(R.id.btn_batal);
+                TextView tv_text_btn = dialogs.findViewById(R.id.tv_text_btn);
+                tv_text_btn.setText("Kembali");
+                TextView tvMsg = dialogs.findViewById(R.id.tv_msg);
+                tvMsg.setText("Silahkan login terlebih dahulu");
+                btnBatal.setOnClickListener(view -> dialogs.dismiss());
+            }
         }
     }
 
@@ -114,15 +132,40 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
     }
 
     private void initComponent() {
-        isLogin = getIntent().getBooleanExtra("isLogin", false);
-        if (isLogin){
+        if (PreferenceManager.isLogin()){
             onClickBtnFinger();
         }
     }
 
     @Override
     public void onAuthSuccess(FingerprintManager.AuthenticationResult result) {
+        PreferenceManager.setIsFingerActive(true);
         directToMainActivity();
+    }
+
+    private void onClickBtnActivate(){
+        Dialog dialog = MethodUtil.getDialogCart(R.layout.dialog_finger_print, LoginActivity.this);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        TextView tv_batal = dialog.findViewById(R.id.tv_batal);
+        tv_batal.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+
+        boolean allowFingerPrintAuth = FingerPrintAuthHelper.isFingerPrintSupported(this);
+        printAuthHelper = new FingerPrintAuthHelper(this, this);
+        if(allowFingerPrintAuth){
+            printAuthHelper.startAuth();
+        } else{
+            dialog.dismiss();
+            Dialog dialogs = MethodUtil.getDialogCart(R.layout.dialog_finger_failed, LoginActivity.this);
+            dialogs.setCancelable(false);
+            dialogs.setCanceledOnTouchOutside(false);
+            CardView btnBatal = dialogs.findViewById(R.id.btn_batal);
+            TextView tvMsg = dialogs.findViewById(R.id.tv_msg);
+            tvMsg.setText("Perangkat anda tidak mendukung fitur fingerprint");
+            btnBatal.setOnClickListener(view -> dialogs.dismiss());
+        }
     }
 
     private void doLogin(){
@@ -140,6 +183,7 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
                 Loading.hide(LoginActivity.this);
                 try {
                     if (response.isSuccessful()){
+                        PreferenceManager.setIsUnauthorized(false);
                         PreferenceManager.setLoginResponse(response.body(), Constant.LOGIN_FROM_EMAIL);
                         PreferenceManager.setLoginData(Objects.requireNonNull(response.body()).getFullName(), response.body().getEmail());
                         PreferenceManager.setSessionToken("Bearer " + response.body().getAccessToken());
@@ -174,6 +218,12 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
     }
 
     private void directToMainActivity() {
+        if (!PreferenceManager.getFingerActive()){
+            Intent intent = new Intent(this, ActivateFingerActivity.class);
+            startActivity(intent);
+            return;
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

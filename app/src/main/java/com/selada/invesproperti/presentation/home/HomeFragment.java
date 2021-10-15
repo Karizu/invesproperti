@@ -94,17 +94,6 @@ public class HomeFragment extends Fragment {
         requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
-    @OnClick(R.id.frameVerifikasi)
-    void onClickFrameVerifikasi(){
-        if (PreferenceManager.isAlreadyQuesioner()){
-            Intent intent = new Intent(requireActivity(), VerificationActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(requireActivity(), QuestionerActivity.class);
-            startActivity(intent);
-        }
-    }
-
     @SuppressLint("InflateParams")
     @Nullable
     @Override
@@ -127,12 +116,15 @@ public class HomeFragment extends Fragment {
         refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
             @Override
             public void completeRefresh() {
-                refreshLayout.finishRefreshing();
+                setContentHome();
             }
 
             @Override
             public void refreshing() {
-
+                if (PreferenceManager.getUserStatus().equals(Constant.ON_VERIFICATION)){
+                    PreferenceManager.setUserStatus(Constant.INVESTOR);
+                    refreshLayout.finishRefreshing();
+                }
             }
         });
 
@@ -144,6 +136,11 @@ public class HomeFragment extends Fragment {
                 frameVerifikasi.setVisibility(View.VISIBLE);
                 btn_isi_saldo.setVisibility(View.VISIBLE);
                 btn_tarik_saldo.setVisibility(View.GONE);
+
+                frameVerifikasi.setOnClickListener(view -> {
+                    Intent intent = new Intent(requireActivity(), VerificationActivity.class);
+                    startActivity(intent);
+                });
                 break;
             case Constant.ON_VERIFICATION:
                 tv_user_status.setText("Guest");
@@ -152,6 +149,10 @@ public class HomeFragment extends Fragment {
                 frameVerifikasi.setVisibility(View.VISIBLE);
                 btn_isi_saldo.setVisibility(View.VISIBLE);
                 btn_tarik_saldo.setVisibility(View.GONE);
+
+                frameVerifikasi.setOnClickListener(view -> {
+
+                });
                 break;
             case Constant.INVESTOR:
                 tv_user_status.setText("Investor");
@@ -161,6 +162,10 @@ public class HomeFragment extends Fragment {
                 } else {
                     tv_title_verification_notif.setText("Akun anda terverifikasi. Isi quesioner.");
                     frameVerifikasi.setVisibility(View.VISIBLE);
+                    frameVerifikasi.setOnClickListener(view -> {
+                        Intent intent = new Intent(requireActivity(), QuestionerActivity.class);
+                        startActivity(intent);
+                    });
                 }
                 btn_isi_saldo.setVisibility(View.VISIBLE);
                 btn_tarik_saldo.setVisibility(View.GONE);

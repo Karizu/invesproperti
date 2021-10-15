@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.orhanobut.hawk.Hawk;
+import com.selada.invesproperti.model.UserVerification;
 import com.selada.invesproperti.model.response.ResponseLogin;
 
 
@@ -34,6 +35,9 @@ public class PreferenceManager {
     private static final String IS_ALREADY_QUESIONER = "isAlreadyQuesioner";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String LOGIN_RESPONSE = "loginResponse";
+    private static final String USER_VERIFICATION = "userVerfication";
+    private static final String IS_SAVE_VERIFICATION_DATA = "isSaveVerficationData";
+    private static final String IS_UNAUTHORIZED = "isUnauthorized";
 
     private static Context ctx;
     private static PreferenceManager mInstance;
@@ -61,9 +65,15 @@ public class PreferenceManager {
         return Hawk.get(SESSION_TOKEN, "");
     }
 
+    public static boolean isLogin(){
+        return Hawk.get(IS_LOGIN, false);
+    }
+
     public static void logOut() {
         //Hawk.put(USER_LOGIN, null);
         Hawk.put(IS_LOGIN, false);
+        Hawk.put(IS_FINGER_ACTIVE, false);
+        Hawk.delete(USER_STATUS);
 //        Hawk.delete(FULLNAME);
 //        Hawk.delete(EMAIL);
 //        Hawk.delete(IS_FIRST_TIME_LAUNCH);
@@ -153,4 +163,29 @@ public class PreferenceManager {
         return Hawk.get(LOGIN_RESPONSE, null);
     }
 
+    public static void setUserVerification(UserVerification userVerification){
+        Hawk.put(USER_VERIFICATION, userVerification);
+    }
+
+    public static UserVerification getUserVerification(){
+        return Hawk.get(USER_VERIFICATION, new UserVerification());
+    }
+
+
+    public static void setIsSaveVerificationData(boolean isSave){
+        Hawk.put(IS_SAVE_VERIFICATION_DATA, isSave);
+    }
+
+    public static boolean getIsSaveVerificationData(){
+        return Hawk.get(IS_SAVE_VERIFICATION_DATA, false);
+    }
+
+
+    public static void setIsUnauthorized(boolean isUnauthorized){
+        Hawk.put(IS_UNAUTHORIZED, isUnauthorized);
+    }
+
+    public static boolean getIsUnauthorized(){
+        return Hawk.get(IS_UNAUTHORIZED, false);
+    }
 }

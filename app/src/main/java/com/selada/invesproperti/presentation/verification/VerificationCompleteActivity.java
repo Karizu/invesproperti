@@ -29,7 +29,7 @@ public class VerificationCompleteActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         new PreferenceManager(this);
-        PreferenceManager.setUserStatus(INVESTOR);
+        PreferenceManager.setUserStatus(ON_VERIFICATION);
     }
 
     @Override

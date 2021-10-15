@@ -223,6 +223,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Loading.hide(RegisterActivity.this);
                 try {
                     if (response.isSuccessful()){
+                        PreferenceManager.setIsUnauthorized(false);
                         PreferenceManager.setLoginResponse(response.body(), Constant.LOGIN_FROM_EMAIL);
                         PreferenceManager.setLoginData(Objects.requireNonNull(response.body()).getFullName(), response.body().getEmail());
                         PreferenceManager.setSessionToken("Bearer " + Objects.requireNonNull(response.body()).getAccessToken());

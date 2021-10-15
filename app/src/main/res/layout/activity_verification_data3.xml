@@ -369,9 +369,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/transparent"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:gravity="start"
+                        android:gravity="center_vertical"
                         android:inputType="text"
                         android:fontFamily="@font/titilliumweb_regular"
                         android:textSize="16sp"
@@ -399,9 +397,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/transparent"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
-                        android:gravity="start"
+                        android:gravity="center_vertical"
                         android:inputType="text"
                         android:fontFamily="@font/titilliumweb_regular"
                         android:textSize="16sp"
@@ -421,7 +417,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:paddingStart="14dp"
+                    android:paddingStart="@dimen/padding_10"
                     android:background="@drawable/bg_round_field_verification">
 
                     <Spinner
@@ -514,7 +510,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:paddingStart="14dp"
+                    android:paddingStart="10dp"
                     android:background="@drawable/bg_round_field_verification">
 
                     <Spinner
@@ -540,7 +536,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:paddingStart="14dp"
+                    android:paddingStart="10dp"
                     android:background="@drawable/bg_round_field_verification">
 
                     <Spinner
@@ -571,7 +567,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rb_laki"
+                        android:id="@+id/rb_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -580,7 +576,7 @@
                         android:text="@string/ya"/>
 
                     <RadioButton
-                        android:id="@+id/rb_perempuan"
+                        android:id="@+id/rb_no"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/titilliumweb_regular"
