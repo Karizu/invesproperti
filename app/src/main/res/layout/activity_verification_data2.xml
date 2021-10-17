@@ -505,12 +505,20 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="14dp"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Alamat domisili"
+                    android:textColor="@color/grey_text"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/titilliumweb_regular"/>
+
                 <CheckBox
                     android:id="@+id/cb_sama_ktp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
-                    android:checked="true"
                     android:fontFamily="@font/titilliumweb_regular"
                     android:text="@string/sama_dengan_ktp"/>
 

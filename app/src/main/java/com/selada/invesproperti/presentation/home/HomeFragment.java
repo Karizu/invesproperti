@@ -16,9 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.SliderItem;
+import com.selada.invesproperti.model.response.ResponseProjects;
 import com.selada.invesproperti.presentation.adapter.HomeFeedAdapter;
 import com.selada.invesproperti.presentation.adapter.SliderAdapterExample;
 import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
@@ -28,17 +31,23 @@ import com.selada.invesproperti.presentation.questioner.QuestionerActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.Loading;
+import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 import com.selada.invesproperti.util.ShareBottomDialog;
+import com.skydoves.transformationlayout.TransformationCompat;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
@@ -64,6 +73,8 @@ public class HomeFragment extends Fragment {
     FrameLayout btn_tarik_saldo;
     @BindView(R.id.btn_isi_saldo)
     FrameLayout btn_isi_saldo;
+    @BindView(R.id.lottie_anim)
+    LottieAnimationView loading;
 
     private List<SliderItem> mSliderItems;
     private ViewGroup viewGroup;
@@ -104,6 +115,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        TransformationCompat.onTransformationStartContainer(this);
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         new PreferenceManager(requireActivity());
@@ -112,22 +124,19 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void setContentHome() {
+        getListProjects(false);
         tv_fullname.setText(PreferenceManager.getFullname());
         refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
             @Override
             public void completeRefresh() {
-                setContentHome();
+
             }
 
             @Override
             public void refreshing() {
-                if (PreferenceManager.getUserStatus().equals(Constant.ON_VERIFICATION)){
-                    PreferenceManager.setUserStatus(Constant.INVESTOR);
-                    refreshLayout.finishRefreshing();
-                }
+                getListProjects(true);
             }
         });
-
         switch (PreferenceManager.getUserStatus()){
             case Constant.GUEST:
                 tv_user_status.setText("Guest");
@@ -178,19 +187,6 @@ public class HomeFragment extends Fragment {
                 btn_tarik_saldo.setVisibility(View.VISIBLE);
                 break;
         }
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rvHome.setLayoutManager(layoutManager);
-
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
-            list.add("List "+i);
-        }
-
-        HomeFeedAdapter adapter = new HomeFeedAdapter(list, getContext(), getActivity());
-        rvHome.setAdapter(adapter);
-        rvHome.scheduleLayoutAnimation();
-
         mSliderItems = new ArrayList<>();
         for (int i = 0; i < 5; i++){
             SliderItem sliderItem = new SliderItem();
@@ -238,5 +234,34 @@ public class HomeFragment extends Fragment {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void getListProjects(boolean isRefresh){
+        loading.setVisibility(View.VISIBLE);
+        ApiCore.apiInterface().getListProjects(PreferenceManager.getSessionToken()).enqueue(new Callback<List<ResponseProjects>>() {
+            @Override
+            public void onResponse(Call<List<ResponseProjects>> call, Response<List<ResponseProjects>> response) {
+                loading.setVisibility(View.GONE);
+                if (isRefresh) refreshLayout.finishRefreshing();
+                try {
+                    if (response.isSuccessful()){
+                        rvHome.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+                        HomeFeedAdapter adapter = new HomeFeedAdapter(response.body(), getContext(), getActivity());
+                        rvHome.setAdapter(adapter);
+                        rvHome.scheduleLayoutAnimation();
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    MethodUtil.showOnCatch(requireActivity().findViewById(android.R.id.content));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ResponseProjects>> call, Throwable t) {
+                if (isRefresh) refreshLayout.finishRefreshing();
+                loading.setVisibility(View.GONE);
+                t.printStackTrace();
+            }
+        });
     }
 }

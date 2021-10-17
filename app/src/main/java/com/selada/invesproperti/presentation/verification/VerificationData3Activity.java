@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.Api;
 import com.selada.invesproperti.R;
@@ -26,8 +29,10 @@ import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -122,6 +127,7 @@ public class VerificationData3Activity extends AppCompatActivity {
 
     private void initComponent() {
         userVerification = new UserVerification();
+        setCurrency(et_pendapatan_tahunan);
         if (PreferenceManager.getIsSaveVerificationData()){
             userVerification = PreferenceManager.getUserVerification();
             et_pendapatan_tahunan.setText(userVerification.getYearlyIncome()!=null?userVerification.getYearlyIncome():"");
@@ -160,7 +166,7 @@ public class VerificationData3Activity extends AppCompatActivity {
     }
 
     private void getListSpouseRelation() {
-        String[] relation = {"Istri", "Suami"};
+        String[] relation = {"Suami", "Istri", "Anak", "Ayah", "Ibu"};
         ArrayAdapter aa_3 = new ArrayAdapter(this, R.layout.custom_simple_spinner_item, relation){
             @Override
             public boolean isEnabled(int position) {
@@ -313,6 +319,61 @@ public class VerificationData3Activity extends AppCompatActivity {
             public void onFailure(Call<List<InvestmentGoal>> call, Throwable t) {
                 t.printStackTrace();
                 Loading.hide(appActivity);
+            }
+        });
+    }
+
+    private void setCurrency(final EditText edt) {
+        edt.addTextChangedListener(new TextWatcher() {
+            private String current = "";
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().equals(current)) {
+                    edt.removeTextChangedListener(this);
+
+                    Locale local = new Locale("id", "id");
+                    String replaceable = String.format("[Rp,.\\s]",
+                            NumberFormat.getCurrencyInstance().getCurrency()
+                                    .getSymbol(local));
+                    String cleanString = s.toString().replaceAll(replaceable,
+                            "");
+
+                    double parsed;
+                    try {
+                        parsed = Double.parseDouble(cleanString);
+                    } catch (NumberFormatException e) {
+                        parsed = 0.00;
+                    }
+
+                    NumberFormat formatter = NumberFormat
+                            .getCurrencyInstance(local);
+                    formatter.setMaximumFractionDigits(0);
+                    formatter.setParseIntegerOnly(true);
+                    String formatted = formatter.format((parsed));
+
+                    String replace = String.format("[Rp\\s]",
+                            NumberFormat.getCurrencyInstance().getCurrency()
+                                    .getSymbol(local));
+                    String clean = formatted.replaceAll(replace, "");
+
+                    current = formatted;
+                    edt.setText(clean);
+                    edt.setSelection(clean.length());
+                    edt.addTextChangedListener(this);
+                }
             }
         });
     }

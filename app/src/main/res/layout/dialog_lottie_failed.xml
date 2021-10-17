@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:cardCornerRadius="10dp"
@@ -24,11 +24,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                app:lottie_rawRes="@raw/loading"
-                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/wrong"
+                app:lottie_loop="false"
                 app:lottie_autoPlay="true" />
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="Email sudah terdaftar.\nSilahkan login atau daftar dengan email baru"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/red_text"
+                android:textSize="18sp"/>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
+
+</LinearLayout>

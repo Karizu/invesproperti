@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -96,6 +98,13 @@ public class VerificationData2Activity extends AppCompatActivity {
             return;
         }
 
+        String email = et_email.getText().toString().trim();
+        if (!email.matches(MethodUtil.emailPattern())){
+            et_email.setError("Format email salah");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Format email salah");
+            return;
+        }
+
         setUserVerificationModel();
 
         Intent intent = new Intent(this, VerificationData3Activity.class);
@@ -138,6 +147,7 @@ public class VerificationData2Activity extends AppCompatActivity {
             et_alamat_ktp.setText(userVerification.getAddressIdCard()!=null?userVerification.getAddressIdCard():"");
         }
 
+//        setValidEmail(et_email);
         getListProvince();
         getListCity();
         getDistrict();
@@ -146,6 +156,27 @@ public class VerificationData2Activity extends AppCompatActivity {
             MethodUtil.refreshToken(this);
             initComponent();
         }
+    }
+
+    private void setValidEmail(final  EditText emailValidate){
+        String email = emailValidate.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        emailValidate.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+
+                if (email.matches(emailPattern) && s.length() > 0){
+
+                } else {
+                    MethodUtil.showSnackBar(findViewById(android.R.id.content), "format email salah");
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // other stuffs
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // other stuffs
+            }
+        });
     }
 
     private void getListProvince(){
@@ -346,7 +377,7 @@ public class VerificationData2Activity extends AppCompatActivity {
         userVerification.setCityIdCard(citySelectedItemId);
         userVerification.setDistrictIdCard(districtSelectedItemId);
         userVerification.setSubDistrictIdCard(subDistrictSelectedItemId);
-        userVerification.setPhone(et_phone.getText().toString());
+        userVerification.setPhone(et_phone.getText().toString().startsWith("0")?"62" + et_phone.getText().toString().substring(1) : "62" + et_phone.getText().toString());
         userVerification.setEmail(et_email.getText().toString());
         userVerification.setAddressIdCard(et_alamat_ktp.getText().toString());
         userVerification.setPostalCodeIdCard(et_kodepos.getText().toString());

@@ -29,5 +29,12 @@ public class VerificationRedirectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification_redirect);
         ButterKnife.bind(this);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

@@ -8,6 +8,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -115,11 +117,16 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
     @OnClick(R.id.btn_login)
     void onClickLogin(){
         if (etEmail.getText().toString().equals("") || etKataSandi.getText().toString().equals("")) {
-            Toast.makeText(this, "Silahkan lengkapi data", Toast.LENGTH_SHORT).show();
-        } else if (!etEmail.getText().toString().contains("@")) {
-            etEmail.setError("Format email salah");
-        } else {
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data");
+            return;
+        }
+
+        String email = etEmail.getText().toString().trim();
+        if (email.matches(MethodUtil.emailPattern())){
             doLogin();
+        } else {
+            etEmail.setError("Format email salah");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Format email salah");
         }
     }
 
@@ -190,8 +197,7 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
 
                         directToMainActivity();
                     } else {
-                        View view = findViewById(android.R.id.content);
-                        MethodUtil.getErrorMessage(response.errorBody(), view);
+                        MethodUtil.getErrorMessage(response.errorBody(), LoginActivity.this);
                     }
                 } catch (Exception e){
                     e.printStackTrace();

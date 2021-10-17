@@ -20,6 +20,7 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -34,6 +35,7 @@ import com.selada.invesproperti.model.request.RequestRefreshToken;
 import com.selada.invesproperti.model.response.ResponseError;
 import com.selada.invesproperti.model.response.ResponseLogin;
 import com.selada.invesproperti.model.response.ResponseRefreshToken;
+import com.selada.invesproperti.presentation.auth.RegisterActivity;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -280,15 +282,16 @@ public class MethodUtil extends Application {
         return "";
     }
 
-    public static void getErrorMessage(ResponseBody body, View parentLayout){
+    public static void getErrorMessage(ResponseBody body, Activity activity){
         ResponseError responseError = new Gson().fromJson(Objects.requireNonNull(body).charStream(), ResponseError.class);
         String errorMessage = responseError.getErrorMessage();
-        Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG)
-                .show();
+        Dialog dialog = MethodUtil.getDialogCart(R.layout.dialog_lottie_failed, activity);
+        TextView textView = dialog.findViewById(R.id.tv_msg);
+        textView.setText(errorMessage);
     }
 
     public static void showOnCatch(View parentLayout){
-        String errorMessage = "Response Code: Catch On";
+        String errorMessage = "Terjadi kesalahan, perika koneksi internet anda\nResponse Code: Catch On";
         Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG)
                 .show();
     }
@@ -338,7 +341,6 @@ public class MethodUtil extends Application {
                         btn_proses.setOnClickListener(view -> {
                             PreferenceManager.logOut();
                             activity.startActivity(new Intent(activity, SplashScreen.class));
-                            activity.finish();
                         });
                         tv_text_btn.setText("Login");
 
@@ -354,5 +356,9 @@ public class MethodUtil extends Application {
                 t.printStackTrace();
             }
         });
+    }
+
+    public static String emailPattern(){
+        return "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     }
 }

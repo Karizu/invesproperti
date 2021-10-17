@@ -1,15 +1,19 @@
 package com.selada.invesproperti.presentation.auth;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -105,12 +109,14 @@ public class RegisterActivity extends AppCompatActivity {
     @OnClick(R.id.btn_register)
     void onClickRegister(){
         if (etNamaLengkap.getText().toString().equals("") || etEmail.getText().toString().equals("") || etKataSandi.getText().toString().equals("")){
-            Toast.makeText(this, "Silahkan lengkapi data", Toast.LENGTH_SHORT).show();
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data");
         } else {
-            if (!etEmail.getText().toString().contains("@")){
-                etEmail.setError("Format email salah");
-            } else {
+            String email = etEmail.getText().toString().trim();
+            if (email.matches(MethodUtil.emailPattern())){
                 doRegister();
+            } else {
+                etEmail.setError("Format email salah");
+                MethodUtil.showSnackBar(findViewById(android.R.id.content), "Format email salah");
             }
         }
     }
@@ -125,8 +131,6 @@ public class RegisterActivity extends AppCompatActivity {
         configureGoogleSignIn();
         printHashKey();
         FacebookSdk.sdkInitialize(RegisterActivity.this);
-//        callbackManager = CallbackManager.Factory.create();
-//        facebookLogin();
         mAuth = FirebaseAuth.getInstance();
         initFacebookLogin();
     }
@@ -138,17 +142,13 @@ public class RegisterActivity extends AppCompatActivity {
         if(account!=null){
             directToMainActivity();
         }
-        // Check if user is signed in (non-null) and update UI accordingly.
         mAuth.addAuthStateListener(authStateListener);
         FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-//        updateUI(account);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
         if (authStateListener!=null){
             mAuth.removeAuthStateListener(authStateListener);
         }
@@ -191,10 +191,11 @@ public class RegisterActivity extends AppCompatActivity {
                 Loading.hide(context);
                 try {
                     if (response.isSuccessful()) {
-                        doLogin(email, pass);
+                        Dialog dialog = MethodUtil.getDialogCart(R.layout.dialog_lottie_success, RegisterActivity.this);
+                        Button button = dialog.findViewById(R.id.btn_lanjut);
+                        button.setOnClickListener(view -> doLogin(email, pass));
                     } else {
-                        View parentLayout = findViewById(android.R.id.content);
-                        MethodUtil.getErrorMessage(response.errorBody(), parentLayout);
+                        MethodUtil.getErrorMessage(response.errorBody(), RegisterActivity.this);
                     }
                 } catch (Exception e){
                     e.printStackTrace();
@@ -229,8 +230,7 @@ public class RegisterActivity extends AppCompatActivity {
                         PreferenceManager.setSessionToken("Bearer " + Objects.requireNonNull(response.body()).getAccessToken());
                         directToMainActivity();
                     } else {
-                        View view = findViewById(android.R.id.content);
-                        MethodUtil.getErrorMessage(response.errorBody(), view);
+                        MethodUtil.getErrorMessage(response.errorBody(), RegisterActivity.this);
                     }
                 } catch (Exception e){
                     e.printStackTrace();

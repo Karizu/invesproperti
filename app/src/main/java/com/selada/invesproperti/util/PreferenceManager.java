@@ -70,17 +70,8 @@ public class PreferenceManager {
     }
 
     public static void logOut() {
-        //Hawk.put(USER_LOGIN, null);
         Hawk.put(IS_LOGIN, false);
-        Hawk.put(IS_FINGER_ACTIVE, false);
-        Hawk.delete(USER_STATUS);
-//        Hawk.delete(FULLNAME);
-//        Hawk.delete(EMAIL);
-//        Hawk.delete(IS_FIRST_TIME_LAUNCH);
-//        Hawk.delete(GOOGLE_SIGN_IN_OBJECT);
-//        Hawk.delete(LOGIN_FROM);
-//        Hawk.delete(FACEBOOK_SIGN_IN_OBJECT);
-//        Hawk.delete(SESSION_TOKEN);
+        Hawk.deleteAll();
     }
 
     public static void setIsAlreadyQuesioner(boolean isAlreadyQuesioner){

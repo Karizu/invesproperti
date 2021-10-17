@@ -3,6 +3,7 @@ package com.selada.invesproperti.presentation.verification;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -12,13 +13,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.Api;
+import com.google.gson.Gson;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.UserVerification;
 import com.selada.invesproperti.model.response.Bank;
 import com.selada.invesproperti.model.response.InvestmentGoal;
+import com.selada.invesproperti.model.response.ResponseError;
+import com.selada.invesproperti.model.response.ResponseErrorVerification;
 import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
@@ -26,6 +31,7 @@ import com.selada.invesproperti.util.PreferenceManager;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -122,7 +128,7 @@ public class VerificationBankActivity extends AppCompatActivity {
                 .addFormDataPart("BirthDate", userVerification.getBirthDate())
                 .addFormDataPart("EducationId", userVerification.getEducationId())
                 .addFormDataPart("OccupationId", userVerification.getOccupationId())
-                .addFormDataPart("MaritalStatus", "MARRIED")
+                .addFormDataPart("MaritalStatus", userVerification.getMaritalStatus())
                 .addFormDataPart("SpouseName", userVerification.getSpouseName())
                 .addFormDataPart("Phone", userVerification.getPhone())
                 .addFormDataPart("Email", userVerification.getEmail())
@@ -154,6 +160,8 @@ public class VerificationBankActivity extends AppCompatActivity {
                 Loading.hide(appActivity);
                 try {
                     if (response.isSuccessful()){
+                        PreferenceManager.setUserVerification(null);
+                        PreferenceManager.setIsSaveVerificationData(false);
                         Intent intent = new Intent(appActivity, VerificationCompleteActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -161,6 +169,12 @@ public class VerificationBankActivity extends AppCompatActivity {
                     } else {
                         if (response.message().toLowerCase().contains("unauthorized")){
                             PreferenceManager.setIsUnauthorized(true);
+                        } else {
+                            ResponseErrorVerification responseError = new Gson().fromJson(Objects.requireNonNull(response.body()).charStream(), ResponseErrorVerification.class);
+                            String errorMessage = responseError.getTitle();
+                            Dialog dialog = MethodUtil.getDialogCart(R.layout.dialog_lottie_failed, VerificationBankActivity.this);
+                            TextView textView = dialog.findViewById(R.id.tv_msg);
+                            textView.setText(errorMessage);
                         }
                     }
                 } catch (Exception e){

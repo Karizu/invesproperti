@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/White">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
+                    app:lottie_rawRes="@raw/success"
+                    app:lottie_loop="false"
+                    app:lottie_autoPlay="true" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    app:lottie_rawRes="@raw/fireworks"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Selamat.. \nRegistrasi anda berhasil"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/green_primary"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/btn_lanjut"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Lanjutkan"
+                android:textSize="18sp"
+                android:background="@drawable/bg_round_green"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                android:fontFamily="@font/titilliumweb_bold"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

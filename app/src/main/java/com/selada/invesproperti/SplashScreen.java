@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.ImageView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.selada.invesproperti.presentation.auth.LoginActivity;
 import com.selada.invesproperti.util.PreferenceManager;
 
@@ -30,9 +31,6 @@ public class SplashScreen extends Activity {
         ButterKnife.bind(this);
 
         new PreferenceManager(this);
-//        imgSplash.setAlpha(0f);
-//        imgSplash.animate().alpha(1f).setDuration(500);
-//        imgLogoSplash.animate().rotationY(360).setDuration(500);
         downTimer();
     }
 

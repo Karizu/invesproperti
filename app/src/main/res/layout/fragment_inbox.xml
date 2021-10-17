@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F3F3F3">
 
     <TextView
@@ -32,24 +33,26 @@
         android:id="@+id/layoutGuest"
         android:layout_below="@+id/tvTitleBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingBottom="8dp"
         android:gravity="center"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img_portofolio"
-            android:layout_width="211.5dp"
-            android:layout_height="211.5dp"
-            android:layout_marginTop="106dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_ilustration_2"
-            android:layout_marginBottom="55dp"/>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/on_verification"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5.83dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:lineSpacingExtra="0sp"
             android:text="@string/content_inbox"

@@ -208,7 +208,8 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
         getListEducation();
         getListOccupation();
 
-        String[] status = {"Pilih status pernikahan", "Menikah", "Belum Menikah"};
+        String[] status = {"Pilih status pernikahan", "Menikah", "Lajang", "Cerai", "Janda"};
+        String[] statusId = {" ", "MARRIED", "SINGLE", "DIVORCE", "WIDOW"};
         ArrayAdapter aa_3 = new ArrayAdapter(this, R.layout.custom_simple_spinner_item, status){
             @Override
             public boolean isEnabled(int position) {
@@ -237,7 +238,7 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0){
-                    statusSelectedItem = adapterView.getSelectedItem().toString();
+                    statusSelectedItem = statusId[i];
                 }
             }
 

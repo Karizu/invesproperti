@@ -30,6 +30,8 @@ import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.MyViewPager;
 import com.selada.invesproperti.util.PreferenceManager;
+import com.skydoves.transformationlayout.TransformationCompat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TransformationCompat.onTransformationStartContainer(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

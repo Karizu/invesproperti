@@ -13,9 +13,11 @@ import com.selada.invesproperti.model.response.InvestmentGoal;
 import com.selada.invesproperti.model.response.Occupation;
 import com.selada.invesproperti.model.response.Province;
 import com.selada.invesproperti.model.response.ResponseLogin;
+import com.selada.invesproperti.model.response.ResponseProjects;
 import com.selada.invesproperti.model.response.ResponseRefreshToken;
 import com.selada.invesproperti.model.response.ResponseRegister;
 import com.selada.invesproperti.model.response.ResponseUserVerification;
+import com.selada.invesproperti.model.response.detailproject.ResponseDetailProject;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -72,4 +75,10 @@ public interface ApiInterface {
 
     @GET("bank")
     Call<List<Bank>> getListBank(@Header("Authorization") String token);
+
+    @GET("project")
+    Call<List<ResponseProjects>> getListProjects(@Header("Authorization") String token);
+
+    @GET("project/{id}")
+    Call<ResponseDetailProject> getDetailProject(@Path("id") String id, @Header("Authorization") String token);
 }

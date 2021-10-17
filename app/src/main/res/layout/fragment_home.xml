@@ -417,6 +417,17 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="6dp"/>
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:visibility="gone"
+                    android:id="@+id/lottie_anim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    app:lottie_rawRes="@raw/loading_recycler"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true" />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

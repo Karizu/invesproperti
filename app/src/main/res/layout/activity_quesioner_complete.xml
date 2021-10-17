@@ -16,18 +16,40 @@
         android:layout_marginTop="47dp"
         android:layout_marginEnd="26dp"/>
 
-    <ImageView
-        android:id="@+id/img_portofolio"
-        android:layout_width="211.5dp"
-        android:layout_height="211.5dp"
-        android:src="@drawable/bg_ilustration_2"
-        android:layout_centerInParent="true"/>
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            app:lottie_rawRes="@raw/success"
+            app:lottie_loop="false"
+            app:lottie_autoPlay="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/fireworks"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/layout_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/img_portofolio"
+        android:layout_below="@id/relativeLayout"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="26dp"
         android:layout_marginTop="14dp"
