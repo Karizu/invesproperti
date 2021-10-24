@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.orhanobut.hawk.Hawk;
 import com.selada.invesproperti.model.UserVerification;
 import com.selada.invesproperti.model.response.ResponseLogin;
+import com.selada.invesproperti.model.response.ResponseUserProfile;
 
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class PreferenceManager {
     private static final String USER_VERIFICATION = "userVerfication";
     private static final String IS_SAVE_VERIFICATION_DATA = "isSaveVerficationData";
     private static final String IS_UNAUTHORIZED = "isUnauthorized";
+    private static final String USER_PROFILE = "userProfile";
 
     private static Context ctx;
     private static PreferenceManager mInstance;
@@ -71,7 +73,18 @@ public class PreferenceManager {
 
     public static void logOut() {
         Hawk.put(IS_LOGIN, false);
-        Hawk.deleteAll();
+        Hawk.delete(USER_STATUS);
+        Hawk.delete(IS_UNAUTHORIZED);
+        Hawk.delete(IS_SAVE_VERIFICATION_DATA);
+        Hawk.delete(IS_FINGER_ACTIVE);
+        Hawk.delete(SESSION_TOKEN);
+        Hawk.delete(IS_ALREADY_QUESIONER);
+        Hawk.delete(FACEBOOK_SIGN_IN_OBJECT);
+        Hawk.delete(GOOGLE_SIGN_IN_OBJECT);
+        Hawk.delete(USER_VERIFICATION);
+        Hawk.delete(LOGIN_RESPONSE);
+        Hawk.delete(LOGIN_FROM);
+        Hawk.delete(USER_PROFILE);
     }
 
     public static void setIsAlreadyQuesioner(boolean isAlreadyQuesioner){
@@ -178,5 +191,13 @@ public class PreferenceManager {
 
     public static boolean getIsUnauthorized(){
         return Hawk.get(IS_UNAUTHORIZED, false);
+    }
+
+    public static void setResponseUserProfile(ResponseUserProfile responseUserProfile){
+        Hawk.put(USER_PROFILE, responseUserProfile);
+    }
+
+    public static ResponseUserProfile getUserProfile() {
+        return Hawk.get(USER_PROFILE);
     }
 }

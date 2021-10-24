@@ -610,11 +610,11 @@
                             android:id="@+id/text_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:fontFamily="@font/titilliumweb_regular"
+                            android:fontFamily="@font/titilliumweb_bold"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="Tambah Investasi lain"
-                            android:textColor="@color/black_primary"
+                            android:textColor="@color/green_primary"
                             android:drawablePadding="8dp"
                             android:drawableStart="@drawable/ic_baseline_add_24_green"
                             android:textSize="18sp"/>

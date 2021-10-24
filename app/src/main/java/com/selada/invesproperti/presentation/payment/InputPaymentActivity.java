@@ -15,7 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.response.detailproject.ResponseDetailProject;
 import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
 import com.selada.invesproperti.util.MethodUtil;
 
@@ -57,10 +59,24 @@ public class InputPaymentActivity extends AppCompatActivity {
     @BindView(R.id.check_text_7)
     CheckedTextView check_text_7;
 
-    private int hargaPerLot = 1350000;
+    @BindView(R.id.rp_1_350_000_lot)
+    TextView tvPricePerLot;
+    @BindView(R.id._7000_lot)
+    TextView tvTotalLot;
+    @BindView(R.id.rp_1_350_000_lot2)
+    TextView tvProvideDividen;
+    @BindView(R.id.rp_1_350_000_lot8)
+    TextView tvEstimateDividen;
+
+    @BindView(R.id.tv_balance)
+    TextView tvBalance;
+
+    private int pricePerLot = 0;
     private int qty = 0;
     private boolean IS_PLUS = true;
     private boolean IS_MIN = false;
+    private String json;
+    private int total;
 
     @OnClick(R.id.check_text_1)
     void check_text_1(){
@@ -172,6 +188,9 @@ public class InputPaymentActivity extends AppCompatActivity {
     @OnClick(R.id.btn_beli)
     void onClickBtnBeli(){
         Intent intent = new Intent(InputPaymentActivity.this, InquiryPaymentActivity.class);
+        intent.putExtra("json", json);
+        intent.putExtra("inq_total_lot", et_jumlah_lot.getText().toString());
+        intent.putExtra("inq_total_amount", String.valueOf(total));
         startActivity(intent);
         this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
@@ -194,7 +213,22 @@ public class InputPaymentActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void initComponent() {
-        tv_title_bar.setText("Yellow Carwash Galuh Mas");
+        checkBalanceInquiry();
+
+        json = getIntent().getStringExtra("json");
+        ResponseDetailProject detailProject = new Gson().fromJson(json, ResponseDetailProject.class);
+        String projectName = detailProject.getName();
+        pricePerLot = detailProject.getPricePerLot();
+        int lotAvailable = detailProject.getTotalLot();
+        String provideDividen = detailProject.getDividenPeriod();
+        String estimateDividen = detailProject.getInterestRate();
+
+
+        tvPricePerLot.setText("Rp. " + MethodUtil.toCurrencyFormat(String.valueOf(pricePerLot)) + "/lot");
+        tvProvideDividen.setText(provideDividen);
+        tvTotalLot.setText(lotAvailable + " lot");
+        tvEstimateDividen.setText(estimateDividen);
+        tv_title_bar.setText(projectName);
         et_jumlah_lot.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -207,7 +241,7 @@ public class InputPaymentActivity extends AppCompatActivity {
                     tv_total_pembelian.setText("0");
                     et_jumlah_lot.setText("0");
                 } else {
-                    int total = Integer.parseInt(charSequence.toString()) * hargaPerLot;
+                    total = Integer.parseInt(charSequence.toString()) * pricePerLot;
                     tv_total_pembelian.setText(MethodUtil.toCurrencyFormat(String.valueOf(total)));
                 }
             }
@@ -217,6 +251,10 @@ public class InputPaymentActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void checkBalanceInquiry(){
+
     }
 
     private void setStyleOnClickPlus() {
@@ -252,7 +290,7 @@ public class InputPaymentActivity extends AppCompatActivity {
             }
         }
 
-        int total = qty * hargaPerLot;
+        int total = qty * pricePerLot;
         et_jumlah_lot.setText(String.valueOf(qty));
         tv_total_pembelian.setText(MethodUtil.toCurrencyFormat(String.valueOf(total)));
     }

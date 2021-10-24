@@ -25,6 +25,7 @@ import com.selada.invesproperti.model.response.InvestmentGoal;
 import com.selada.invesproperti.model.response.ResponseError;
 import com.selada.invesproperti.model.response.ResponseErrorVerification;
 import com.selada.invesproperti.util.Loading;
+import com.selada.invesproperti.util.LoadingPost;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 
@@ -109,7 +110,7 @@ public class VerificationBankActivity extends AppCompatActivity {
     }
 
     private void doUserVerification(){
-        Loading.show(appActivity);
+        LoadingPost.show(appActivity);
 
         userVerification = PreferenceManager.getUserVerification();
 
@@ -157,7 +158,7 @@ public class VerificationBankActivity extends AppCompatActivity {
         ApiCore.apiInterface().doUserVerification(requestBody, PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Loading.hide(appActivity);
+                LoadingPost.hide(appActivity);
                 try {
                     if (response.isSuccessful()){
                         PreferenceManager.setUserVerification(null);
@@ -186,7 +187,7 @@ public class VerificationBankActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
-                Loading.hide(appActivity);
+                LoadingPost.hide(appActivity);
             }
         });
     }

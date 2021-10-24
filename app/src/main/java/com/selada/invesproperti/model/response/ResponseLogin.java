@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ResponseLogin {
+
+    @SerializedName("id")
+    @Expose
+    private String id;
     @SerializedName("email")
     @Expose
     private String email;
@@ -25,6 +29,15 @@ public class ResponseLogin {
     @SerializedName("errorMessage")
     @Expose
     private String errorMessage;
+    @SerializedName("isInvestor")
+    @Expose
+    private boolean isInvestor;
+    @SerializedName("isProjectOwner")
+    @Expose
+    private boolean isProjectOwner;
+    @SerializedName("status")
+    @Expose
+    private String status;
 
     public String getEmail() {
         return email;
@@ -82,4 +95,35 @@ public class ResponseLogin {
         this.errorMessage = errorMessage;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isInvestor() {
+        return isInvestor;
+    }
+
+    public void setInvestor(boolean investor) {
+        isInvestor = investor;
+    }
+
+    public boolean isProjectOwner() {
+        return isProjectOwner;
+    }
+
+    public void setProjectOwner(boolean projectOwner) {
+        isProjectOwner = projectOwner;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

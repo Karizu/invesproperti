@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,6 +63,8 @@ public class PortofolioFragment extends Fragment {
     LinearLayout layout_no_produk;
     @BindView(R.id.refreshLayout)
     LiquidRefreshLayout refreshLayout;
+    @BindView(R.id.text_btn)
+    TextView text_btn;
 
     @OnClick(R.id.btn_verifikasi)
     void onClickBtnVerifikasi(){
@@ -111,9 +114,13 @@ public class PortofolioFragment extends Fragment {
 
     @OnClick(R.id.btn_add)
     void onClickAdd(){
-        Intent intent = new Intent(requireActivity(), ExploreBisnisPropertiActivity.class);
-        startActivity(intent);
-        requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        if (PreferenceManager.getUserStatus().equals(Constant.INVESTOR)){
+            Intent intent = new Intent(requireActivity(), ExploreBisnisPropertiActivity.class);
+            startActivity(intent);
+            requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        } else {
+
+        }
     }
 
     @OnClick(R.id.btnFilterHome)
@@ -136,6 +143,7 @@ public class PortofolioFragment extends Fragment {
         setContentHome();
     }
 
+    @SuppressLint("SetTextI18n")
     private void setContentHome() {
         refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
             @Override
@@ -167,6 +175,7 @@ public class PortofolioFragment extends Fragment {
                 cv_aset.setVisibility(View.VISIBLE);
                 cv_aset_po.setVisibility(View.GONE);
                 btn_isi_saldo.setVisibility(View.VISIBLE);
+                text_btn.setText("Tambah Investasi Lain");
                 break;
             case Constant.PRODUCT_OWNER:
                 layoutGuest.setVisibility(View.GONE);
@@ -174,6 +183,7 @@ public class PortofolioFragment extends Fragment {
                 cv_aset.setVisibility(View.GONE);
                 cv_aset_po.setVisibility(View.VISIBLE);
                 btn_isi_saldo.setVisibility(View.INVISIBLE);
+                text_btn.setText("Tambah Produk");
                 break;
         }
 

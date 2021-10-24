@@ -58,12 +58,22 @@
             android:fontFamily="@font/titilliumweb_regular"/>
         
         <ImageView
+            android:visibility="gone"
             android:layout_width="211.5dp"
             android:layout_height="211.5dp"
             android:layout_centerInParent="true"
             android:src="@drawable/bg_ilustration_2"
             android:layout_marginBottom="88dp"
             android:layout_above="@id/tv_pilih_peranan"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_siapkan_ktp"
+            android:layout_above="@id/tv_pilih_peranan"
+            app:lottie_rawRes="@raw/id_card"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true" />
 
         <TextView
             android:id="@+id/tv_pilih_peranan"

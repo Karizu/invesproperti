@@ -8,8 +8,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +34,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -48,11 +45,10 @@ import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.request.RequestLogin;
 import com.selada.invesproperti.model.request.RequestRegister;
 import com.selada.invesproperti.model.response.ApiResponse;
-import com.selada.invesproperti.model.response.ResponseError;
 import com.selada.invesproperti.model.response.ResponseLogin;
 import com.selada.invesproperti.model.response.ResponseRegister;
 import com.selada.invesproperti.util.Constant;
-import com.selada.invesproperti.util.Loading;
+import com.selada.invesproperti.util.LoadingPost;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 
@@ -184,16 +180,14 @@ public class RegisterActivity extends AppCompatActivity {
         requestRegister.setPassword(pass);
         requestRegister.setRepassword(pass);
 
-        Loading.show(this);
+        LoadingPost.show(this);
         ApiCore.apiInterface().doRegister(requestRegister).enqueue(new Callback<ApiResponse<ResponseRegister>>() {
             @Override
             public void onResponse(Call<ApiResponse<ResponseRegister>> call, Response<ApiResponse<ResponseRegister>> response) {
-                Loading.hide(context);
+                LoadingPost.hide(context);
                 try {
                     if (response.isSuccessful()) {
-                        Dialog dialog = MethodUtil.getDialogCart(R.layout.dialog_lottie_success, RegisterActivity.this);
-                        Button button = dialog.findViewById(R.id.btn_lanjut);
-                        button.setOnClickListener(view -> doLogin(email, pass));
+                        doLogin(email, pass);
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), RegisterActivity.this);
                     }
@@ -206,7 +200,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ApiResponse<ResponseRegister>> call, Throwable t) {
-                Loading.hide(context);
+                LoadingPost.hide(context);
                 t.printStackTrace();
             }
         });
@@ -217,18 +211,21 @@ public class RegisterActivity extends AppCompatActivity {
         requestLogin.setEmail(email);
         requestLogin.setPassword(pass);
 
-        Loading.show(this);
+        LoadingPost.show(this);
         ApiCore.apiInterface().doSignIn(requestLogin).enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                Loading.hide(RegisterActivity.this);
+                LoadingPost.hide(RegisterActivity.this);
                 try {
                     if (response.isSuccessful()){
                         PreferenceManager.setIsUnauthorized(false);
                         PreferenceManager.setLoginResponse(response.body(), Constant.LOGIN_FROM_EMAIL);
                         PreferenceManager.setLoginData(Objects.requireNonNull(response.body()).getFullName(), response.body().getEmail());
                         PreferenceManager.setSessionToken("Bearer " + Objects.requireNonNull(response.body()).getAccessToken());
-                        directToMainActivity();
+
+                        Intent intent = new Intent(RegisterActivity.this, RegistrationCompleteActivity.class);
+                        intent.putExtra("name", response.body().getFullName());
+                        startActivity(intent);
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), RegisterActivity.this);
                     }
@@ -242,7 +239,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseLogin> call, Throwable t) {
                 t.printStackTrace();
-                Loading.hide(RegisterActivity.this);
+                LoadingPost.hide(RegisterActivity.this);
             }
         });
     }

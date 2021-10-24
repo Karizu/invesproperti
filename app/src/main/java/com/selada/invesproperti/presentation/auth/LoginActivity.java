@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Api;
 import com.selada.invesproperti.MainActivity;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
@@ -22,10 +23,12 @@ import com.selada.invesproperti.model.request.RequestLogin;
 import com.selada.invesproperti.model.request.RequestRegister;
 import com.selada.invesproperti.model.response.ApiResponse;
 import com.selada.invesproperti.model.response.ResponseLogin;
+import com.selada.invesproperti.model.response.ResponseUserProfile;
 import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.FingerPrintAuthCallback;
 import com.selada.invesproperti.util.FingerPrintAuthHelper;
 import com.selada.invesproperti.util.Loading;
+import com.selada.invesproperti.util.LoadingPost;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 
@@ -183,11 +186,11 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
         requestLogin.setEmail(email);
         requestLogin.setPassword(pass);
 
-        Loading.show(LoginActivity.this);
+        LoadingPost.show(LoginActivity.this);
         ApiCore.apiInterface().doSignIn(requestLogin).enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                Loading.hide(LoginActivity.this);
+                LoadingPost.hide(LoginActivity.this);
                 try {
                     if (response.isSuccessful()){
                         PreferenceManager.setIsUnauthorized(false);
@@ -195,6 +198,21 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
                         PreferenceManager.setLoginData(Objects.requireNonNull(response.body()).getFullName(), response.body().getEmail());
                         PreferenceManager.setSessionToken("Bearer " + response.body().getAccessToken());
 
+                        switch (Objects.requireNonNull(response.body()).getStatus()){
+                            case Constant.GUEST:
+                                PreferenceManager.setUserStatus(Constant.GUEST);
+                                break;
+                            case Constant.ON_VERIFICATION:
+                                PreferenceManager.setUserStatus(Constant.ON_VERIFICATION);
+                                break;
+                            case Constant.VERIFIED:
+                                if (response.body().isInvestor()){
+                                    PreferenceManager.setUserStatus(Constant.INVESTOR);
+                                } else {
+                                    PreferenceManager.setUserStatus(Constant.PRODUCT_OWNER);
+                                }
+                                break;
+                        }
                         directToMainActivity();
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), LoginActivity.this);
@@ -209,7 +227,7 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
             @Override
             public void onFailure(Call<ResponseLogin> call, Throwable t) {
                 t.printStackTrace();
-                Loading.hide(LoginActivity.this);
+                LoadingPost.hide(LoginActivity.this);
             }
         });
     }

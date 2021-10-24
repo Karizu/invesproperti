@@ -19,6 +19,7 @@ import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.response.ResponseProjects;
 import com.selada.invesproperti.presentation.adapter.HomeFeedAdapter;
+import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 
@@ -59,8 +60,6 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
     TextView tv_title_bar;
     @BindView(R.id.refreshLayout)
     LiquidRefreshLayout refreshLayout;
-    @BindView(R.id.lottie_anim)
-    LottieAnimationView loading;
 
     private HomeFeedAdapter adapter;
     private Typeface tf_bold;
@@ -164,11 +163,11 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
     }
 
     private void getListProjects(boolean isRefresh){
-        loading.setVisibility(View.VISIBLE);
+        Loading.show(ExploreBisnisPropertiActivity.this);
         ApiCore.apiInterface().getListProjects(PreferenceManager.getSessionToken()).enqueue(new Callback<List<ResponseProjects>>() {
             @Override
             public void onResponse(Call<List<ResponseProjects>> call, Response<List<ResponseProjects>> response) {
-                loading.setVisibility(View.GONE);
+                Loading.hide(ExploreBisnisPropertiActivity.this);
                 if (isRefresh) refreshLayout.finishRefreshing();
                 try {
                     if (response.isSuccessful()){
@@ -186,7 +185,7 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ResponseProjects>> call, Throwable t) {
                 if (isRefresh) refreshLayout.finishRefreshing();
-                loading.setVisibility(View.GONE);
+                Loading.hide(ExploreBisnisPropertiActivity.this);
                 t.printStackTrace();
             }
         });

@@ -48,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Context context;
 
     @Override
+    public void onStart() {
+        super.onStart();
+        MethodUtil.refreshToken(MainActivity.this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         TransformationCompat.onTransformationStartContainer(this);
         super.onCreate(savedInstanceState);
@@ -64,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initComponent() {
 //        loadFragment(new HomeFragment());///
         bottomNavigation.setOnNavigationItemSelectedListener(this::onNavigationItemSelected);
+        if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)){
+            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_product);
+            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Produk");
+        } else {
+            bottomNavigation.getMenu().findItem(R.id.item1).setIcon(R.drawable.ic_outline_featured_play_list_24);
+            bottomNavigation.getMenu().findItem(R.id.item1).setTitle("Portofolio");
+        }
 
         viewPager = findViewById(R.id.view_pager);
         ViewPagerAdapter mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());

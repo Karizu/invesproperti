@@ -72,7 +72,8 @@ public class InboxFragment extends Fragment {
                 layoutInvestor.setVisibility(View.VISIBLE);
                 break;
             case Constant.PRODUCT_OWNER:
-
+                layoutInvestor.setVisibility(View.VISIBLE);
+                layoutGuest.setVisibility(View.GONE);
                 break;
         }
     }

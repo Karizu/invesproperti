@@ -153,7 +153,7 @@ c. Kriteria Pemodal dan batasan pembelian saham oleh Pemodal sebagaimana dimaksu
     <string name="harga_lot_awal">Harga lot awal</string>
     <string name="_0">0</string>
     <string name="text_peringatan">Jumlah pembelian melebihi batas investasi\nberdasarkan penghasilan tahunan anda</string>
-    <string name="ketentuan">Harap membaca Ketentuan Investasi Penawaran Efek Bersifat Ekuitas Berupa Saham ini (“Ketentuan”) dengan seksama sehubungan dengan investasi yang Anda pilih dalam Platform. Apabila Anda memiliki keragu-raguan dengan Ketentuan ini, harap untuk dapat berkonsultasi terlebih dahulu dengan Kami. Atau Anda dapat memutuskan untuk tidak melanjutkan proses setelahnya untuk penggunaan Platform.\n\nMenyetujui,\nRizky G Azhary</string>
+    <string name="ketentuan">Harap membaca Ketentuan Investasi Penawaran Efek Bersifat Ekuitas Berupa Saham ini (“Ketentuan”) dengan seksama sehubungan dengan investasi yang Anda pilih dalam Platform. Apabila Anda memiliki keragu-raguan dengan Ketentuan ini, harap untuk dapat berkonsultasi terlebih dahulu dengan Kami. Atau Anda dapat memutuskan untuk tidak melanjutkan proses setelahnya untuk penggunaan Platform.\n\nMenyetujui,</string>
     <string name="syarat">Dengan ini saya telah membaca, memahami, dan menyetujui hal-hal yang tercantum pada Ketentuan Investasi InvesProperti</string>
     <string name="saldo_tidak_cukup">Saldo anda tidak cukup. Silahkan lakukan pengisian.</string>
     <string name="string_payment_complete">Terima kasih, pembayaran anda sedang kami proses.\n\nJika sudah kami terima, Lot pembelian anda akan muncul di halaman Portfolio.</string>

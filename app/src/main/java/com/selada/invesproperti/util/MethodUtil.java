@@ -35,6 +35,7 @@ import com.selada.invesproperti.model.request.RequestRefreshToken;
 import com.selada.invesproperti.model.response.ResponseError;
 import com.selada.invesproperti.model.response.ResponseLogin;
 import com.selada.invesproperti.model.response.ResponseRefreshToken;
+import com.selada.invesproperti.presentation.auth.LoginActivity;
 import com.selada.invesproperti.presentation.auth.RegisterActivity;
 
 import org.apache.commons.lang3.StringUtils;
@@ -340,7 +341,9 @@ public class MethodUtil extends Application {
                         tv_desc.setText("Sepertinya sesi anda telah berakhir, lakukan login ulang");
                         btn_proses.setOnClickListener(view -> {
                             PreferenceManager.logOut();
-                            activity.startActivity(new Intent(activity, SplashScreen.class));
+                            Intent intent = new Intent(activity, LoginActivity.class);
+                            activity.startActivity(intent);
+                            activity.finish();
                         });
                         tv_text_btn.setText("Login");
 
@@ -360,5 +363,16 @@ public class MethodUtil extends Application {
 
     public static String emailPattern(){
         return "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    }
+
+    public static boolean filterPhone(String phone_text) {
+        boolean correct;
+        if ((phone_text.length() <= 13) && (phone_text.matches("^[0-9-]+$")))
+            correct = true;
+        else
+            correct = false;
+
+        System.out.println("correct =" + correct);
+        return correct;
     }
 }

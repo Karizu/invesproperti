@@ -1,5 +1,7 @@
 package com.selada.invesproperti.api;
 
+import com.selada.invesproperti.model.request.ChangePassRequest;
+import com.selada.invesproperti.model.request.PaymentRequest;
 import com.selada.invesproperti.model.request.RequestLogin;
 import com.selada.invesproperti.model.request.RequestRefreshToken;
 import com.selada.invesproperti.model.request.RequestRegister;
@@ -16,6 +18,7 @@ import com.selada.invesproperti.model.response.ResponseLogin;
 import com.selada.invesproperti.model.response.ResponseProjects;
 import com.selada.invesproperti.model.response.ResponseRefreshToken;
 import com.selada.invesproperti.model.response.ResponseRegister;
+import com.selada.invesproperti.model.response.ResponseUserProfile;
 import com.selada.invesproperti.model.response.ResponseUserVerification;
 import com.selada.invesproperti.model.response.detailproject.ResponseDetailProject;
 
@@ -81,4 +84,14 @@ public interface ApiInterface {
 
     @GET("project/{id}")
     Call<ResponseDetailProject> getDetailProject(@Path("id") String id, @Header("Authorization") String token);
+
+    @GET("applicationuser/userprofile")
+    Call<ResponseUserProfile> getUserProfile(@Header("Authorization") String token);
+
+    @POST("crowdfunding")
+    Call<ResponseBody> createPayment(@Body PaymentRequest paymentRequest, @Header("Authorization") String token);
+
+    @POST("user/changepassword")
+    Call<ResponseBody> changePass(@Body ChangePassRequest changePassRequest, @Header("Authorization") String token);
+
 }

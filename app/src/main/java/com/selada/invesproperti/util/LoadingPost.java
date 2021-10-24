@@ -1,0 +1,50 @@
+package com.selada.invesproperti.util;
+
+
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
+import android.view.WindowManager;
+
+import com.selada.invesproperti.R;
+
+import java.util.Objects;
+
+public class LoadingPost {
+    private static Dialog dialog;
+    @SuppressLint("NewApi")
+    public static void show(final Context context){
+        if(!isShowing(context)) {
+            dialog = new Dialog(context);
+            //SET TITLE
+            dialog.setTitle("Loading");
+
+            //set content
+            dialog.setContentView(R.layout.dialog_post_progress);
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            Objects.requireNonNull(dialog.getWindow()).getAttributes().windowAnimations = R.style.DialogThemes;
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(Objects.requireNonNull(dialog.getWindow()).getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            dialog.show();
+            dialog.getWindow().setAttributes(lp);
+        }
+    }
+    public static void hide(final Context context){
+        if (dialog.isShowing()){
+            dialog.dismiss();
+        }
+    }
+
+    public static boolean isShowing(final Context context)
+    {
+        if(dialog != null){
+            return dialog.isShowing();
+        }
+        return false;
+    }
+
+}

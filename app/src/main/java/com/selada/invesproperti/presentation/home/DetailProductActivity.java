@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.gson.Gson;
 import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
@@ -22,6 +24,7 @@ import com.selada.invesproperti.presentation.payment.InputPaymentActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.presentation.verification.VerificationRedirectActivity;
 import com.selada.invesproperti.util.Constant;
+import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 import com.skydoves.transformationlayout.TransformationAppCompatActivity;
@@ -69,17 +72,20 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
     TextView tv_desc_usaha;
     @BindView(R.id.textView2)
     TextView tv_address;
-    @BindView(R.id.lottie_anim)
-    LottieAnimationView loading;
     @BindView(R.id.refreshLayout)
     LiquidRefreshLayout refreshLayout;
 
     private List<SliderItem> mSliderItems;
     private String id;
+    private String latitude, longitude;
+    private ResponseDetailProject detailProject;
 
     @OnClick(R.id.frame_open_maps)
     void onClickOpenMaps(){
-
+        Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 
     @OnClick(R.id.frame_unduh)
@@ -96,7 +102,9 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
     void onClickBtnBeli(){
         // status user belum verifikasi
         if (PreferenceManager.getUserStatus().equals(Constant.INVESTOR)){
+            String json = new Gson().toJson(detailProject);
             Intent intent1 = new Intent(this, InputPaymentActivity.class);
+            intent1.putExtra("json", json);
             startActivity(intent1);
             this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         } else if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)) {
@@ -162,21 +170,23 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
     }
 
     private void getDetailProject(String id, boolean isRefresh){
-        loading.setVisibility(View.VISIBLE);
+        Loading.show(DetailProductActivity.this);
         ApiCore.apiInterface().getDetailProject(id, PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseDetailProject>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<ResponseDetailProject> call, Response<ResponseDetailProject> response) {
-                loading.setVisibility(View.GONE);
+                Loading.hide(DetailProductActivity.this);
                 if (isRefresh) refreshLayout.finishRefreshing();
                 try {
                     if (response.isSuccessful()){
-                        ResponseDetailProject detailProject = response.body();
+                        detailProject = response.body();
                         String street = Objects.requireNonNull(detailProject).getAddress().getStreet();
                         String subDistrict = detailProject.getAddress().getSubDistrict();
                         String district = detailProject.getAddress().getDistrict();
                         String city = detailProject.getAddress().getCity()!=null? ", " + detailProject.getAddress().getCity().getName():"";
                         String province = detailProject.getAddress().getCity()!=null? ", " + detailProject.getAddress().getProvince().getName():"";
+                        latitude = detailProject.getLatitude();
+                        longitude = detailProject.getLongitude();
 
                         tv_start_price.setText("Rp " + MethodUtil.toCurrencyFormat(String.valueOf(Objects.requireNonNull(detailProject).getFundingAmount())));
                         tv_end_price.setText("Rp " + MethodUtil.toCurrencyFormat(String.valueOf(detailProject.getRequestedAmount())));
@@ -196,7 +206,7 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
             @Override
             public void onFailure(Call<ResponseDetailProject> call, Throwable t) {
                 if (isRefresh) refreshLayout.finishRefreshing();
-                loading.setVisibility(View.GONE);
+                Loading.hide(DetailProductActivity.this);
                 t.printStackTrace();
             }
         });

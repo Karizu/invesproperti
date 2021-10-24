@@ -22,8 +22,10 @@ import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.SliderItem;
 import com.selada.invesproperti.model.response.ResponseProjects;
+import com.selada.invesproperti.model.response.ResponseUserProfile;
 import com.selada.invesproperti.presentation.adapter.HomeFeedAdapter;
 import com.selada.invesproperti.presentation.adapter.SliderAdapterExample;
+import com.selada.invesproperti.presentation.auth.LoginActivity;
 import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
 import com.selada.invesproperti.presentation.portofolio.withdrawal.WithdrawalActivity;
 import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
@@ -31,6 +33,7 @@ import com.selada.invesproperti.presentation.questioner.QuestionerActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.Loading;
+import com.selada.invesproperti.util.LoadingPost;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 import com.selada.invesproperti.util.ShareBottomDialog;
@@ -120,6 +123,7 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, view);
         new PreferenceManager(requireActivity());
         setContentHome();
+        getUserProfile(false);
     }
 
     @SuppressLint("SetTextI18n")
@@ -135,8 +139,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void refreshing() {
                 getListProjects(true);
+                getUserProfile(true);
             }
         });
+
         switch (PreferenceManager.getUserStatus()){
             case Constant.GUEST:
                 tv_user_status.setText("Guest");
@@ -187,6 +193,7 @@ public class HomeFragment extends Fragment {
                 btn_tarik_saldo.setVisibility(View.VISIBLE);
                 break;
         }
+
         mSliderItems = new ArrayList<>();
         for (int i = 0; i < 5; i++){
             SliderItem sliderItem = new SliderItem();
@@ -260,6 +267,48 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call<List<ResponseProjects>> call, Throwable t) {
                 if (isRefresh) refreshLayout.finishRefreshing();
                 loading.setVisibility(View.GONE);
+                t.printStackTrace();
+            }
+        });
+    }
+
+
+    private void getUserProfile(boolean isRefresh){
+        Loading.show(requireActivity());
+        ApiCore.apiInterface().getUserProfile(PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseUserProfile>() {
+            @Override
+            public void onResponse(Call<ResponseUserProfile> call, Response<ResponseUserProfile> response) {
+                if (isRefresh) refreshLayout.finishRefreshing();
+                Loading.hide(requireActivity());
+                try {
+                    if (response.isSuccessful()){
+                        switch (Objects.requireNonNull(response.body()).getStatus()){
+                            case Constant.GUEST:
+                                PreferenceManager.setUserStatus(Constant.GUEST);
+                                break;
+                            case Constant.ON_VERIFICATION:
+                                PreferenceManager.setUserStatus(Constant.ON_VERIFICATION);
+                                break;
+                            case Constant.VERIFIED:
+                                if (response.body().isInvestor()){
+                                    PreferenceManager.setUserStatus(Constant.INVESTOR);
+                                } else {
+                                    PreferenceManager.setUserStatus(Constant.PRODUCT_OWNER);
+                                }
+                                break;
+                        }
+
+                        setContentHome();
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseUserProfile> call, Throwable t) {
+                if (isRefresh) refreshLayout.finishRefreshing();
+                Loading.hide(requireActivity());
                 t.printStackTrace();
             }
         });

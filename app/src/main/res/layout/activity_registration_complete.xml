@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.payment.PaymentCompleteActivity">
+    tools:context=".presentation.auth.RegistrationCompleteActivity">
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/img_close"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/ic_close"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="26dp"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -73,16 +84,6 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/img_close"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:src="@drawable/ic_close"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="26dp"/>
-
     <LinearLayout
         android:id="@+id/layout_name"
         android:layout_width="match_parent"
@@ -116,16 +117,33 @@
         android:id="@+id/tv_type_investor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_above="@id/btn_lanjut"
         android:gravity="center"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="26dp"
-        android:text="@string/string_quesioner_complete"
+        android:text="Selamat Registrasi Anda Berhasil..\n\nSilahkan tekan tombol untuk melanjutkan"
         android:textColor="@color/black_primary"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:fontFamily="@font/titilliumweb_regular"
         tools:ignore="RtlCompat" />
+
+    <Button
+        android:id="@+id/btn_lanjut"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="Lanjutkan"
+        android:textSize="18sp"
+        android:background="@drawable/bg_round_green"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        android:fontFamily="@font/titilliumweb_bold"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"/>
 
 </RelativeLayout>

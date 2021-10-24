@@ -21,7 +21,7 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 app:lottie_rawRes="@raw/wrong"
@@ -34,6 +34,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
                 android:text="Email sudah terdaftar.\nSilahkan login atau daftar dengan email baru"
                 android:fontFamily="@font/titilliumweb_regular"
                 android:gravity="center"

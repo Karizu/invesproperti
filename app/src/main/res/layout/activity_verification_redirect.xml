@@ -19,17 +19,29 @@
         android:layout_marginEnd="26dp"/>
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/img_portofolio"
         android:layout_width="211.5dp"
         android:layout_height="211.5dp"
         android:src="@drawable/bg_ilustration_2"
         android:layout_centerInParent="true"/>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_anim"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        app:lottie_rawRes="@raw/on_verification"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
+
     <TextView
         android:id="@+id/content_verification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/img_portofolio"
+        android:layout_below="@id/lottie_anim"
         android:gravity="center"
         android:layout_marginTop="14dp"
         android:text="Silahkan verifikasi akun anda untuk\nmelakukan pembelian"

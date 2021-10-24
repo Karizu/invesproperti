@@ -19,11 +19,11 @@ public class UserVerification {
     private String SubDistrictIdCard;
     private String PostalCodeIdCard;
     private boolean IsDomicileSameWithIdCard;
-//AddressDomicile;
-//CityIdDomicile;
-//DistrictDomicile;
-//SubDistrictDomicile;
-//PostalCodeDomicile;
+    private String AddressDomicile;
+    private String CityDomicile;
+    private String DistrictDomicile;
+    private String SubDistrictDomicile;
+    private String PostalCodeDomicile;
     private String IdCardNumber;
 //TaxCardNumber;
     private String MotherName;
@@ -294,5 +294,57 @@ public class UserVerification {
 
     public void setPhotoSelfie(byte[] photoSelfie) {
         this.photoSelfie = photoSelfie;
+    }
+
+    public boolean isDomicileSameWithIdCard() {
+        return IsDomicileSameWithIdCard;
+    }
+
+    public void setDomicileSameWithIdCard(boolean domicileSameWithIdCard) {
+        IsDomicileSameWithIdCard = domicileSameWithIdCard;
+    }
+
+    public String getAddressDomicile() {
+        return AddressDomicile;
+    }
+
+    public void setAddressDomicile(String addressDomicile) {
+        AddressDomicile = addressDomicile;
+    }
+
+    public String getCityDomicile() {
+        return CityDomicile;
+    }
+
+    public void setCityDomicile(String cityDomicile) {
+        CityDomicile = cityDomicile;
+    }
+
+    public String getDistrictDomicile() {
+        return DistrictDomicile;
+    }
+
+    public void setDistrictDomicile(String districtDomicile) {
+        DistrictDomicile = districtDomicile;
+    }
+
+    public String getSubDistrictDomicile() {
+        return SubDistrictDomicile;
+    }
+
+    public void setSubDistrictDomicile(String subDistrictDomicile) {
+        SubDistrictDomicile = subDistrictDomicile;
+    }
+
+    public String getPostalCodeDomicile() {
+        return PostalCodeDomicile;
+    }
+
+    public void setPostalCodeDomicile(String postalCodeDomicile) {
+        PostalCodeDomicile = postalCodeDomicile;
+    }
+
+    public boolean isHasSecuritiesAccount() {
+        return HasSecuritiesAccount;
     }
 }

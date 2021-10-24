@@ -21,17 +21,6 @@
         android:layout_below="@+id/app_bar"
         android:layout_above="@+id/btn_beli">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:visibility="gone"
-            android:id="@+id/lottie_anim"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            app:lottie_rawRes="@raw/fireworks"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true" />
-
         <com.madapps.liquid.LiquidRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"

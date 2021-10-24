@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -57,6 +58,20 @@ public class VerificationData2Activity extends AppCompatActivity {
     Spinner spinner_kelurahan;
     @BindView(R.id.cb_sama_ktp)
     CheckBox cb_sama_ktp;
+    @BindView(R.id.layout_same_id_card)
+    LinearLayout layout_same_id_card;
+    @BindView(R.id.et_alamat_domisili)
+    EditText et_alamat_domisili;
+    @BindView(R.id.et_kodepos_domisili)
+    EditText et_kodepos_domisili;
+    @BindView(R.id.spinner_provinsi_domisili)
+    Spinner spinner_provinsi_domisili;
+    @BindView(R.id.spinner_kota_domisili)
+    Spinner spinner_kota_domisili;
+    @BindView(R.id.spinner_kecamatan_domisili)
+    Spinner spinner_kecamatan_domisili;
+    @BindView(R.id.spinner_kelurahan_domisili)
+    Spinner spinner_kelurahan_domisili;
 
     private Activity appActivity;
     private boolean isInvestor, isProjectOwner, isDomicileSameWithIdCard;
@@ -64,22 +79,12 @@ public class VerificationData2Activity extends AppCompatActivity {
     private List<String> provinceIdList, cityIdList, districtIdList, subDistrictIdList;
     private String fullname, maritalStatus, occupationId, educationId, birthDay, birthPlace, gender, spouseName;
     private String provinceSelectedItemId, citySelectedItemId, districtSelectedItemId, subDistrictSelectedItemId;
+    private String provinceDomicileSelectedItemId, cityDomicileSelectedItemId, districtDomicileSelectedItemId, subDistrictDomicileSelectedItemId;
     private UserVerification userVerification;
 
     @OnClick(R.id.btn_back)
     void onClickBtnBack(){
         onBackPressed();
-    }
-
-    @OnClick(R.id.cb_sama_ktp)
-    void onClickCbSamaKtp(){
-        if (cb_sama_ktp.isChecked()){
-            isDomicileSameWithIdCard = false;
-            cb_sama_ktp.setChecked(false);
-        } else {
-            isDomicileSameWithIdCard = true;
-            cb_sama_ktp.setChecked(true);
-        }
     }
 
     @OnClick(R.id.frame_save)
@@ -98,6 +103,19 @@ public class VerificationData2Activity extends AppCompatActivity {
             return;
         }
 
+        if (!MethodUtil.filterPhone(et_phone.getText().toString())){
+            et_phone.setError("Format No Handphone Salah");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Format No Handphone Salah");
+            return;
+        }
+
+        if (!isDomicileSameWithIdCard){
+            if (TextUtils.isEmpty(et_alamat_domisili.getText().toString()) || TextUtils.isEmpty(et_kodepos_domisili.getText().toString())) {
+                MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data diri");
+                return;
+            }
+        }
+
         String email = et_email.getText().toString().trim();
         if (!email.matches(MethodUtil.emailPattern())){
             et_email.setError("Format email salah");
@@ -110,7 +128,6 @@ public class VerificationData2Activity extends AppCompatActivity {
         Intent intent = new Intent(this, VerificationData3Activity.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
     }
 
     @Override
@@ -145,7 +162,18 @@ public class VerificationData2Activity extends AppCompatActivity {
             et_kodepos.setText(userVerification.getPostalCodeIdCard()!=null?userVerification.getPostalCodeIdCard():"");
             et_email.setText(userVerification.getEmail()!=null?userVerification.getEmail():"");
             et_alamat_ktp.setText(userVerification.getAddressIdCard()!=null?userVerification.getAddressIdCard():"");
+            et_alamat_domisili.setText(userVerification.getAddressDomicile()!=null?userVerification.getAddressDomicile():"");
         }
+
+        cb_sama_ktp.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b){
+                layout_same_id_card.setVisibility(View.GONE);
+                isDomicileSameWithIdCard = true;
+            } else {
+                layout_same_id_card.setVisibility(View.VISIBLE);
+                isDomicileSameWithIdCard = false;
+            }
+        });
 
 //        setValidEmail(et_email);
         getListProvince();
@@ -210,6 +238,19 @@ public class VerificationData2Activity extends AppCompatActivity {
 
                             }
                         });
+
+                        spinner_provinsi_domisili.setAdapter(aa);
+                        spinner_provinsi_domisili.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                provinceDomicileSelectedItemId = provinceIdList.get(i);
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
                     } else {
                         if (response.message().toLowerCase().contains("unauthorized")){
                             PreferenceManager.setIsUnauthorized(true);
@@ -259,10 +300,31 @@ public class VerificationData2Activity extends AppCompatActivity {
 
                             }
                         });
+
+                        spinner_kota_domisili.setAdapter(aa);
+                        spinner_kota_domisili.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                cityDomicileSelectedItemId = cityIdList.get(i);
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+
                         if (userVerification.getCityIdCard()!=null) {
                             for (int i = 0; i < cityIdList.size(); i++){
                                 if (cityIdList.get(i).equals(userVerification.getCityIdCard())){
                                     spinner_kota.setSelection(i);
+                                }
+                            }
+                        }
+                        if (userVerification.getCityDomicile()!=null) {
+                            for (int i = 0; i < cityIdList.size(); i++){
+                                if (cityIdList.get(i).equals(userVerification.getCityDomicile())){
+                                    spinner_kota_domisili.setSelection(i);
                                 }
                             }
                         }
@@ -322,9 +384,26 @@ public class VerificationData2Activity extends AppCompatActivity {
 
             }
         });
+        spinner_kecamatan_domisili.setAdapter(aa_3);
+        spinner_kecamatan_domisili.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                districtDomicileSelectedItemId = adapterView.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         if (userVerification.getDistrictIdCard() != null) {
             int spinnerPosition = aa_3.getPosition(userVerification.getDistrictIdCard());
             spinner_kecamatan.setSelection(spinnerPosition);
+        }
+        if (userVerification.getDistrictDomicile() != null) {
+            int spinnerPosition = aa_3.getPosition(userVerification.getDistrictDomicile());
+            spinner_kecamatan_domisili.setSelection(spinnerPosition);
         }
     }
 
@@ -366,22 +445,47 @@ public class VerificationData2Activity extends AppCompatActivity {
 
             }
         });
+
+        spinner_kelurahan_domisili.setAdapter(aa_3);
+        spinner_kelurahan_domisili.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                subDistrictDomicileSelectedItemId = adapterView.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         if (userVerification.getSubDistrictIdCard() != null) {
             int spinnerPosition = aa_3.getPosition(userVerification.getSubDistrictIdCard());
             spinner_kelurahan.setSelection(spinnerPosition);
+        }
+        if (userVerification.getSubDistrictDomicile() != null) {
+            int spinnerPosition = aa_3.getPosition(userVerification.getSubDistrictDomicile());
+            spinner_kelurahan_domisili.setSelection(spinnerPosition);
         }
     }
 
     private void setUserVerificationModel() {
         UserVerification userVerification = PreferenceManager.getUserVerification();
-        userVerification.setCityIdCard(citySelectedItemId);
-        userVerification.setDistrictIdCard(districtSelectedItemId);
-        userVerification.setSubDistrictIdCard(subDistrictSelectedItemId);
         userVerification.setPhone(et_phone.getText().toString().startsWith("0")?"62" + et_phone.getText().toString().substring(1) : "62" + et_phone.getText().toString());
         userVerification.setEmail(et_email.getText().toString());
         userVerification.setAddressIdCard(et_alamat_ktp.getText().toString());
+        userVerification.setSubDistrictIdCard(subDistrictSelectedItemId);
+        userVerification.setDistrictIdCard(districtSelectedItemId);
+        userVerification.setCityIdCard(citySelectedItemId);
         userVerification.setPostalCodeIdCard(et_kodepos.getText().toString());
         userVerification.setIsDomicileSameWithIdCard(isDomicileSameWithIdCard);
+        if (!isDomicileSameWithIdCard){
+            userVerification.setAddressDomicile(et_alamat_domisili.getText().toString());
+            userVerification.setSubDistrictDomicile(subDistrictDomicileSelectedItemId);
+            userVerification.setDistrictDomicile(districtDomicileSelectedItemId);
+            userVerification.setCityDomicile(cityDomicileSelectedItemId);
+            userVerification.setPostalCodeDomicile(et_kodepos_domisili.getText().toString());
+        }
         PreferenceManager.setUserVerification(userVerification);
     }
 
