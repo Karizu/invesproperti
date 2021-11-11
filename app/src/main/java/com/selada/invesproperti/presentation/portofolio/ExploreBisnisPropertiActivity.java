@@ -149,6 +149,7 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
         tv_title_bar.setText("Eksplore Bisnis & Property");
         tf_bold = getResources().getFont(R.font.titilliumweb_bold);
         tf_regular = getResources().getFont(R.font.titilliumweb_regular);
+        getListProjects(false);
         refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
             @Override
             public void completeRefresh() {

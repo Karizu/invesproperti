@@ -10,7 +10,8 @@
     android:layout_marginEnd="18dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="#FAFAFA">
+    app:cardBackgroundColor="#FAFAFA"
+    android:background="?attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

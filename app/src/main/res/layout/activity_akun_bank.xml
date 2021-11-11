@@ -64,7 +64,11 @@
         android:visibility="visible"
         android:id="@+id/rv_akun_bank"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:itemCount="1"
+        tools:listitem="@layout/list_item_bank"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     <FrameLayout
         android:id="@+id/frame_tambah_rekening"

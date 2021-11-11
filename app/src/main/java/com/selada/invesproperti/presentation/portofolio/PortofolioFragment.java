@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,17 +19,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.madapps.liquid.LiquidRefreshLayout;
-import com.selada.invesproperti.IntroSliderActivity;
 import com.selada.invesproperti.R;
-import com.selada.invesproperti.presentation.adapter.HomeFeedAdapter;
 import com.selada.invesproperti.presentation.adapter.PortofolioFeedAdapter;
-import com.selada.invesproperti.presentation.home.DetailProductActivity;
+import com.selada.invesproperti.presentation.adapter.PortofolioFeedPOAdapter;
 import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
 import com.selada.invesproperti.presentation.portofolio.history.HistoryActivity;
 import com.selada.invesproperti.presentation.portofolio.withdrawal.WithdrawalActivity;
-import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
-import com.selada.invesproperti.presentation.profile.detail.DetailProfileActivity;
-import com.selada.invesproperti.presentation.profile.detail.income.ChangeIncomeYearActivity;
+import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.PreferenceManager;
@@ -74,7 +69,7 @@ public class PortofolioFragment extends Fragment {
 
     @OnClick(R.id.btn_cs)
     void onClickCs(){
-        Intent intent = new Intent(requireActivity(), BantuanActivity.class);
+        Intent intent = new Intent(requireActivity(), CallCenterActivity.class);
         startActivity(intent);
         requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
@@ -170,6 +165,7 @@ public class PortofolioFragment extends Fragment {
                 btn_isi_saldo.setVisibility(View.VISIBLE);
                 break;
             case Constant.INVESTOR:
+                getPortofolioInvestor();
                 layoutGuest.setVisibility(View.GONE);
                 layout_verified.setVisibility(View.VISIBLE);
                 cv_aset.setVisibility(View.VISIBLE);
@@ -178,6 +174,7 @@ public class PortofolioFragment extends Fragment {
                 text_btn.setText("Tambah Investasi Lain");
                 break;
             case Constant.PRODUCT_OWNER:
+                getPortofolioPO();
                 layoutGuest.setVisibility(View.GONE);
                 layout_verified.setVisibility(View.VISIBLE);
                 cv_aset.setVisibility(View.GONE);
@@ -186,10 +183,9 @@ public class PortofolioFragment extends Fragment {
                 text_btn.setText("Tambah Produk");
                 break;
         }
+    }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rv_portofolio.setLayoutManager(layoutManager);
-
+    private void getPortofolioInvestor(){
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 5; i++){
             list.add("List "+i);
@@ -205,7 +201,30 @@ public class PortofolioFragment extends Fragment {
             }
         }
 
+        rv_portofolio.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         PortofolioFeedAdapter adapter = new PortofolioFeedAdapter(list, getContext(), getActivity());
+        rv_portofolio.setAdapter(adapter);
+        rv_portofolio.scheduleLayoutAnimation();
+    }
+
+    private void getPortofolioPO(){
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            list.add("List "+i);
+        }
+
+        //if list null
+        if (list.size() == 0){
+            rv_portofolio.setVisibility(View.GONE);
+            if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)){
+                layout_no_produk.setVisibility(View.VISIBLE);
+            } else {
+                layout_no_investasi.setVisibility(View.VISIBLE);
+            }
+        }
+
+        rv_portofolio.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        PortofolioFeedPOAdapter adapter = new PortofolioFeedPOAdapter(list, getContext(), getActivity());
         rv_portofolio.setAdapter(adapter);
         rv_portofolio.scheduleLayoutAnimation();
     }

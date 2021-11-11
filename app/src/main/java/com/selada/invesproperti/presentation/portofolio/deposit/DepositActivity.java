@@ -9,9 +9,7 @@ import android.os.Bundle;
 
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.presentation.adapter.DepositBankAdapter;
-import com.selada.invesproperti.presentation.adapter.ListBankAdapter;
-import com.selada.invesproperti.presentation.portofolio.withdrawal.KonfirmasiWithdrawalActivity;
-import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
+import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,7 @@ public class DepositActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_cs)
     void onClickCs(){
-        Intent intent = new Intent(this, BantuanActivity.class);
+        Intent intent = new Intent(this, CallCenterActivity.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

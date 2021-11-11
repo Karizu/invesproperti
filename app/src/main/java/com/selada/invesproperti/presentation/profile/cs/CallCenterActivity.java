@@ -1,4 +1,4 @@
-package com.selada.invesproperti.presentation.profile.bantuan;
+package com.selada.invesproperti.presentation.profile.cs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import com.selada.invesproperti.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BantuanActivity extends AppCompatActivity {
+public class CallCenterActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_back)
     void onClickBack(){

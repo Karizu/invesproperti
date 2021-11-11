@@ -7,13 +7,15 @@
 
     <ImageView
         android:id="@+id/img_close"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="15dp"
         android:src="@drawable/ic_close"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="47dp"
-        android:layout_marginEnd="26dp"/>
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackground"/>
 
     <ImageView
         android:id="@+id/img_portofolio"

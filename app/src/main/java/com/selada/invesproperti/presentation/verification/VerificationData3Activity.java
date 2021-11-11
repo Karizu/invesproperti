@@ -102,10 +102,33 @@ public class VerificationData3Activity extends AppCompatActivity {
 
     @OnClick(R.id.btn_lanjut)
     void onClickBtnLanjut(){
-        if (TextUtils.isEmpty(et_ahli.getText().toString()) || TextUtils.isEmpty(et_ibu_kandung.getText().toString())
-                || TextUtils.isEmpty(et_ktp.getText().toString()) || TextUtils.isEmpty(et_npwp.getText().toString())
-                ||  TextUtils.isEmpty(et_pendapatan_tahunan.getText().toString())) {
-            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data diri");
+        if (TextUtils.isEmpty(et_ahli.getText().toString())) {
+            et_ahli.setError("Nama ahli waris tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nama ahli waris tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(et_ibu_kandung.getText().toString())){
+            et_ibu_kandung.setError("Nama Ibu Kandung tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nama Ibu Kandung tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(et_ktp.getText().toString())){
+            et_ktp.setError("Nomor KTP tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nomor KTP tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(et_pendapatan_tahunan.getText().toString())){
+            et_pendapatan_tahunan.setError("Pendapatan Tahunan tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Pendapatan Tahunan tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(etKataSandi.getText().toString())){
+            etKataSandi.setError("Kata Sandi tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Kata Sandi tidak boleh kosong");
             return;
         }
 
@@ -157,7 +180,7 @@ public class VerificationData3Activity extends AppCompatActivity {
         userVerification.setMotherName(et_ibu_kandung.getText().toString());
         userVerification.setHeirName(et_ahli.getText().toString());
         userVerification.setRelation(hubunganAhliSelectedItemId);
-        userVerification.setYearlyIncome(et_pendapatan_tahunan.getText().toString());
+        userVerification.setYearlyIncome(et_pendapatan_tahunan.getText().toString().replace(".",""));
         userVerification.setFundSourceId(fundSourceSelectedItemId);
         userVerification.setInvestmentGoalId(investmentGoalSelectedItemId);
         userVerification.setHasSecuritiesAccount(hasSecuritiesAccount);

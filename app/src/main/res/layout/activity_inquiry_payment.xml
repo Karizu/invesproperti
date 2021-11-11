@@ -458,7 +458,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/titilliumweb_regular"
                             android:gravity="center_vertical"
-                            android:text="Rizky Azhary"
+                            android:text="-"
                             android:textColor="@color/black_primary"
                             android:textSize="14sp" />
 

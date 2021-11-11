@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -66,6 +67,11 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
     @BindView(R.id.tv_tgl_lahir)
     TextView tv_tgl_lahir;
 
+    @BindView(R.id.label_nama_pasangan)
+    TextView label_nama_pasangan;
+    @BindView(R.id.layout_nama_pasangan)
+    FrameLayout layout_nama_pasangan;
+
     private boolean isInvestor, isProjectOwner;
     private byte[] photoKtp, photoSelfie;
     private List<String> educationIdList, occupationIdList;
@@ -111,12 +117,48 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
     @OnClick(R.id.btn_lanjut)
     void onClickBtnLanjut() {
         //send all data to verif data 2
-        if (TextUtils.isEmpty(et_nama_lengkap.getText().toString()) || TextUtils.isEmpty(et_nama_pasangan.getText().toString())
-                || TextUtils.isEmpty(et_tempat_lahir.getText().toString()) || TextUtils.isEmpty(gender)
-                || TextUtils.isEmpty(tv_tgl_lahir.getText().toString()) || TextUtils.isEmpty(educationSelectedItemId)
-                || TextUtils.isEmpty(occupationSelectedItemId) || TextUtils.isEmpty(statusSelectedItem))  {
-            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data diri");
+        if (TextUtils.isEmpty(et_nama_lengkap.getText().toString()))  {
+            et_nama_lengkap.setError("Nama lengkap tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nama Lengkap tidak boleh kosong");
             return;
+        }
+
+        if (TextUtils.isEmpty(et_tempat_lahir.getText().toString())) {
+            et_tempat_lahir.setError("Tempat Lahir tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Tempat Lahir tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(gender)){
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan pilih jenis kelamin");
+            return;
+        }
+
+        if (TextUtils.isEmpty(tv_tgl_lahir.getText().toString())){
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Tanggal lahir tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(educationSelectedItemId)) {
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Pendidikan tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(occupationSelectedItemId)) {
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Pekerjaan tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(statusSelectedItem)) {
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Status tidak boleh kosong");
+            return;
+        }
+
+        if (layout_nama_pasangan.getVisibility() == View.VISIBLE){
+            if (TextUtils.isEmpty(et_nama_pasangan.getText().toString())){
+                MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nama pasangan tidak boleh kosong");
+                return;
+            }
         }
 
         setUserVerificationModel();
@@ -133,7 +175,7 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
         intent.putExtra("education_id", educationSelectedItemId);
         intent.putExtra("occupation_id", occupationSelectedItemId);
         intent.putExtra("marital_status", statusSelectedItem);
-        intent.putExtra("spouse_name", et_nama_pasangan.getText().toString());
+        intent.putExtra("spouse_name", et_nama_pasangan.getText().toString().equals("")?"-":et_nama_pasangan.getText().toString());
         startActivity(intent);
         this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
@@ -200,7 +242,7 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
         userVerification.setEducationId(educationSelectedItemId);
         userVerification.setOccupationId(occupationSelectedItemId);
         userVerification.setMaritalStatus(statusSelectedItem);
-        userVerification.setSpouseName(et_nama_pasangan.getText().toString());
+        userVerification.setSpouseName(et_nama_pasangan.getText().toString().equals("")?"-":et_nama_pasangan.getText().toString());
         PreferenceManager.setUserVerification(userVerification);
     }
 
@@ -239,6 +281,13 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0){
                     statusSelectedItem = statusId[i];
+                    if (statusId[i].equals("MARRIED")){
+                        label_nama_pasangan.setVisibility(View.VISIBLE);
+                        layout_nama_pasangan.setVisibility(View.VISIBLE);
+                    } else {
+                        label_nama_pasangan.setVisibility(View.GONE);
+                        layout_nama_pasangan.setVisibility(View.GONE);
+                    }
                 }
             }
 

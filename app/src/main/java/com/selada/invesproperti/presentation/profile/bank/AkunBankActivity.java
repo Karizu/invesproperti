@@ -50,9 +50,6 @@ public class AkunBankActivity extends AppCompatActivity {
     }
 
     private void initComponent() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rv_akun_bank.setLayoutManager(layoutManager);
-
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 1; i++){
             list.add("List "+i);

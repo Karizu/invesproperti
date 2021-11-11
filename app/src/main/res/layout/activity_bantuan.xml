@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F3F3F3"
-    tools:context=".presentation.profile.bantuan.BantuanActivity">
+    tools:context=".presentation.profile.cs.CallCenterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

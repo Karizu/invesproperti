@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,14 @@ import androidx.fragment.app.Fragment;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.util.PreferenceManager;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Quesioner01Fragment extends Fragment {
+
+    @BindView(R.id.tv_name)
+    TextView tv_name;
+
     @SuppressLint("InflateParams")
     @Nullable
     @Override
@@ -32,6 +38,6 @@ public class Quesioner01Fragment extends Fragment {
     }
 
     private void initComponent() {
-
+        tv_name.setText(PreferenceManager.getFullname());
     }
 }

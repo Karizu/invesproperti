@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,14 +30,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.SplashScreen;
+import com.selada.invesproperti.api.ApiCore;
+import com.selada.invesproperti.model.response.ResponseUserProfile;
 import com.selada.invesproperti.presentation.profile.bank.AkunBankActivity;
-import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
+import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
 import com.selada.invesproperti.presentation.profile.detail.DetailProfileActivity;
 import com.selada.invesproperti.presentation.profile.disclaimer.DisclaimerActivity;
 import com.selada.invesproperti.presentation.profile.kebijakan.KebijakanPrivasiActivity;
@@ -44,18 +49,26 @@ import com.selada.invesproperti.presentation.profile.mitigasi.MitigasiResikoActi
 import com.selada.invesproperti.presentation.questioner.QuestionerActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
+import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 
-import org.jetbrains.annotations.NotNull;
-
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import kotlin.jvm.internal.Intrinsics;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -96,7 +109,7 @@ public class ProfileFragment extends Fragment {
 
     @OnClick(R.id.btn_cs)
     void onClickCs(){
-        Intent intent = new Intent(requireActivity(), BantuanActivity.class);
+        Intent intent = new Intent(requireActivity(), CallCenterActivity.class);
         startActivity(intent);
         requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
@@ -138,7 +151,7 @@ public class ProfileFragment extends Fragment {
 
     @OnClick(R.id.btn_bantuan)
     void onClickBtnBantuan(){
-        Intent intent = new Intent(requireActivity(), BantuanActivity.class);
+        Intent intent = new Intent(requireActivity(), CallCenterActivity.class);
         startActivity(intent);
         requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
@@ -172,6 +185,8 @@ public class ProfileFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void setContentHome() {
+        getUserProfile();
+
         tv_profile_name.setText(PreferenceManager.getFullname());
         tv_profile_email.setText(PreferenceManager.getEmail());
 
@@ -287,9 +302,37 @@ public class ProfileFragment extends Fragment {
                 if(selectedImageUri!=null){
                     img_profile.setImageURI(selectedImageUri);
                     String imagePath = getRealPathFromURI(requireContext(), selectedImageUri);
+                    if(imagePath!=null){
+                        File file = new File(imagePath);
+                        Log.i("Register","Nombre del archivo "+file.getName());
+                        RequestBody requestFile =
+                                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+                        RequestBody requestBody = new MultipartBody.Builder()
+                                .setType(MultipartBody.FORM)
+                                .addFormDataPart("ProfilePicture", file.getName(), requestFile)
+                                .build();
+                        Bitmap bitmap = null;
+                        try {
+                            bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), selectedImageUri);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        updateProfilePicture(requestBody, bitmap);
+                    }
                 } else {
                     Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
-                    img_profile.setImageBitmap(bitmap);
+
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    Objects.requireNonNull(bitmap).compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+
+                    RequestBody requestBody = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("ProfilePicture", "photo.jpeg", RequestBody.create(MediaType.parse("image/jpeg"), byteArrayOutputStream.toByteArray()))
+                            .build();
+
+                    updateProfilePicture(requestBody, bitmap);
                 }
             } else {
                 Log.d("==>","Operation canceled!");
@@ -301,6 +344,77 @@ public class ProfileFragment extends Fragment {
                         Intent.createChooser(intent, "Select profile picture"), IMAGE_PICK_REQUEST);
             }
         }
+    }
+
+    private void updateProfilePicture(RequestBody requestBody, Bitmap bitmap) {
+        Loading.show(requireActivity());
+        ApiCore.apiInterface().updateProfilePicture(requestBody, PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Loading.hide(requireActivity());
+                try {
+                    if (response.isSuccessful()){
+                        img_profile.setImageBitmap(bitmap);
+                    } else {
+                        MethodUtil.getErrorMessage(response.errorBody(), requireActivity());
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    MethodUtil.showSnackBar(requireActivity(), "Terjadi kesalahan, Silahkan coba beberapa saat lagi");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Loading.hide(requireActivity());
+                Loading.hide(requireActivity());
+            }
+        });
+    }
+
+    private void getUserProfile(){
+        Loading.show(requireActivity());
+        ApiCore.apiInterface().getUserProfile(PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseUserProfile>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<ResponseUserProfile> call, Response<ResponseUserProfile> response) {
+                Loading.hide(requireActivity());
+                try {
+                    if (response.isSuccessful()){
+                        ResponseUserProfile userProfile = response.body();
+                        byte[] decodedString = Base64.decode(Objects.requireNonNull(userProfile).getProfilePicture(), Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        img_profile.setImageBitmap(decodedByte);
+
+                        PreferenceManager.setResponseUserProfile(userProfile);
+
+                        switch (Objects.requireNonNull(response.body()).getStatus()){
+                            case Constant.GUEST:
+                                PreferenceManager.setUserStatus(Constant.GUEST);
+                                break;
+                            case Constant.ON_VERIFICATION:
+                                PreferenceManager.setUserStatus(Constant.ON_VERIFICATION);
+                                break;
+                            case Constant.VERIFIED:
+                                if (response.body().isInvestor()){
+                                    PreferenceManager.setUserStatus(Constant.INVESTOR);
+                                } else {
+                                    PreferenceManager.setUserStatus(Constant.PRODUCT_OWNER);
+                                }
+                                break;
+                        }
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseUserProfile> call, Throwable t) {
+                Loading.hide(requireActivity());
+                t.printStackTrace();
+            }
+        });
     }
 
     private void displayChoiceDialog() {

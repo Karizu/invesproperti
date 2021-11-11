@@ -61,6 +61,8 @@ public class InputPaymentActivity extends AppCompatActivity {
 
     @BindView(R.id.rp_1_350_000_lot)
     TextView tvPricePerLot;
+    @BindView(R.id.tv_harga_per_lot)
+    TextView tvPricePerLotOnPayment;
     @BindView(R.id._7000_lot)
     TextView tvTotalLot;
     @BindView(R.id.rp_1_350_000_lot2)
@@ -185,8 +187,15 @@ public class InputPaymentActivity extends AppCompatActivity {
         calculateLot(IS_MIN);
     }
 
+    @SuppressLint("SetTextI18n")
     @OnClick(R.id.btn_beli)
     void onClickBtnBeli(){
+        if (et_jumlah_lot.getText().toString().equals("0") || et_jumlah_lot.getText().toString().equals("")){
+            et_jumlah_lot.setText("Masukkan jumlah lot");
+            MethodUtil.showSnackBar(InputPaymentActivity.this, "Masukkan jumlah lot");
+            return;
+        }
+
         Intent intent = new Intent(InputPaymentActivity.this, InquiryPaymentActivity.class);
         intent.putExtra("json", json);
         intent.putExtra("inq_total_lot", et_jumlah_lot.getText().toString());
@@ -225,6 +234,7 @@ public class InputPaymentActivity extends AppCompatActivity {
 
 
         tvPricePerLot.setText("Rp. " + MethodUtil.toCurrencyFormat(String.valueOf(pricePerLot)) + "/lot");
+        tvPricePerLotOnPayment.setText(MethodUtil.toCurrencyFormat(String.valueOf(pricePerLot)));
         tvProvideDividen.setText(provideDividen);
         tvTotalLot.setText(lotAvailable + " lot");
         tvEstimateDividen.setText(estimateDividen);

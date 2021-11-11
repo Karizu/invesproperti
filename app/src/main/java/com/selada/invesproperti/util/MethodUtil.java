@@ -297,8 +297,13 @@ public class MethodUtil extends Application {
                 .show();
     }
 
-    public static void showSnackBar(View parentLayout, String Msg){
-        Snackbar.make(parentLayout, Msg, Snackbar.LENGTH_LONG)
+    public static void showSnackBar(View view, String Msg){
+        Snackbar.make(view, Msg, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    public static void showSnackBar(Activity activity, String Msg){
+        Snackbar.make(activity.findViewById(android.R.id.content), Msg, Snackbar.LENGTH_LONG)
                 .show();
     }
 

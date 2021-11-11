@@ -43,19 +43,6 @@
             app:layout_constraintStart_toEndOf="@+id/img_aset"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_percentage"
-            android:layout_width="wrap_content"
-            android:layout_height="23dp"
-            android:layout_marginEnd="19dp"
-            android:fontFamily="@font/titilliumweb_bold"
-            android:gravity="top"
-            android:text="+0.0%"
-            android:textColor="@color/green_primary"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_aset3" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="30dp"
@@ -84,28 +71,28 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_type_aset" />
 
         <TextView
-            android:id="@+id/tv_aset"
+            android:id="@+id/terdanai"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="14dp"
             android:fontFamily="@font/titilliumweb_regular"
             android:gravity="center_vertical"
-            android:text="@string/last_price"
+            android:text="Terdanai"
             android:textColor="@color/black_primary"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_asset_name" />
 
         <TextView
-            android:id="@+id/tv_aset3"
+            android:id="@+id/target"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginStart="166dp"
             android:layout_marginTop="14dp"
             android:fontFamily="@font/titilliumweb_regular"
             android:gravity="center_vertical"
-            android:text="Lot"
+            android:text="Target"
             android:textColor="@color/black_primary"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +108,7 @@
             android:paddingTop="6dp"
             android:src="@drawable/ic_aset"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_aset" />
+            app:layout_constraintTop_toBottomOf="@+id/terdanai" />
 
         <ImageView
             android:id="@+id/img_price_tag5"
@@ -131,12 +118,12 @@
             android:layout_marginStart="165dp"
             android:layout_marginTop="2dp"
             android:paddingTop="6dp"
-            android:src="@drawable/ic_layers_black"
+            android:src="@drawable/ic_aset"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_aset3" />
+            app:layout_constraintTop_toBottomOf="@+id/target" />
 
         <TextView
-            android:id="@+id/tv_last_price"
+            android:id="@+id/tv_terdanai"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginStart="7dp"
@@ -147,10 +134,50 @@
             android:textColor="@color/black_primary"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/img_price_tag"
-            app:layout_constraintTop_toBottomOf="@+id/tv_aset" />
+            app:layout_constraintTop_toBottomOf="@+id/terdanai" />
 
         <TextView
-            android:id="@+id/tv_lot"
+            android:id="@+id/tv_target"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="@string/rp_1_350_000"
+            android:textColor="@color/black_primary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/img_price_tag5"
+            app:layout_constraintTop_toBottomOf="@+id/target" />
+
+        <TextView
+            android:id="@+id/lot_terjual"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="Lot Terjual"
+            android:textColor="@color/black_primary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_price_tag" />
+
+        <ImageView
+            android:id="@+id/img_lot_terjual"
+            android:layout_width="12.98dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/ic_layers_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lot_terjual" />
+
+        <TextView
+            android:id="@+id/tv_lot_terjual"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginStart="7dp"
@@ -160,8 +187,48 @@
             android:text="1000 lot"
             android:textColor="@color/black_primary"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/img_price_tag5"
-            app:layout_constraintTop_toBottomOf="@+id/tv_aset3" />
+            app:layout_constraintStart_toEndOf="@+id/img_lot_terjual"
+            app:layout_constraintTop_toBottomOf="@+id/lot_terjual" />
+
+        <TextView
+            android:id="@+id/didanai_oleh"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="166dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="Didanai oleh"
+            android:textColor="@color/black_primary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_price_tag" />
+
+        <ImageView
+            android:id="@+id/img_didanai_oleh"
+            android:layout_width="12.98dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="2dp"
+            android:paddingTop="6dp"
+            android:src="@drawable/ic_layers_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/didanai_oleh" />
+
+        <TextView
+            android:id="@+id/tv_didanai_oleh"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:gravity="center_vertical"
+            android:text="135 Investor"
+            android:textColor="@color/black_primary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/img_didanai_oleh"
+            app:layout_constraintTop_toBottomOf="@+id/didanai_oleh" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

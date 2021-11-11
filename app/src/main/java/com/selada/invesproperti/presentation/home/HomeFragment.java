@@ -25,15 +25,13 @@ import com.selada.invesproperti.model.response.ResponseProjects;
 import com.selada.invesproperti.model.response.ResponseUserProfile;
 import com.selada.invesproperti.presentation.adapter.HomeFeedAdapter;
 import com.selada.invesproperti.presentation.adapter.SliderAdapterExample;
-import com.selada.invesproperti.presentation.auth.LoginActivity;
 import com.selada.invesproperti.presentation.portofolio.deposit.DepositActivity;
 import com.selada.invesproperti.presentation.portofolio.withdrawal.WithdrawalActivity;
-import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
+import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
 import com.selada.invesproperti.presentation.questioner.QuestionerActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.Loading;
-import com.selada.invesproperti.util.LoadingPost;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 import com.selada.invesproperti.util.ShareBottomDialog;
@@ -103,7 +101,7 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.btn_cs)
     void onClickCs(){
-        Intent intent = new Intent(requireActivity(), BantuanActivity.class);
+        Intent intent = new Intent(requireActivity(), CallCenterActivity.class);
         startActivity(intent);
         requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

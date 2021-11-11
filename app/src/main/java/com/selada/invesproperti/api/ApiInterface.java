@@ -5,6 +5,7 @@ import com.selada.invesproperti.model.request.PaymentRequest;
 import com.selada.invesproperti.model.request.RequestLogin;
 import com.selada.invesproperti.model.request.RequestRefreshToken;
 import com.selada.invesproperti.model.request.RequestRegister;
+import com.selada.invesproperti.model.request.RequestUpdatePhone;
 import com.selada.invesproperti.model.response.ApiResponse;
 import com.selada.invesproperti.model.response.Bank;
 import com.selada.invesproperti.model.response.City;
@@ -24,6 +25,7 @@ import com.selada.invesproperti.model.response.detailproject.ResponseDetailProje
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,7 +34,10 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Streaming;
 
 public interface ApiInterface {
 
@@ -94,4 +99,13 @@ public interface ApiInterface {
     @POST("user/changepassword")
     Call<ResponseBody> changePass(@Body ChangePassRequest changePassRequest, @Header("Authorization") String token);
 
+    @POST("applicationuser/updateavatar")
+    Call<ResponseBody> updateProfilePicture(@Body RequestBody requestBody, @Header("Authorization") String token);
+
+    @Streaming
+    @GET("project/prospectus/{id}")
+    Call<ResponseBody> getProspectus(@Path("id") String id, @Header("Authorization") String token);
+
+    @PUT("applicationuser")
+    Call<ResponseBody> updatePhoneNumber(@Body RequestUpdatePhone requestUpdatePhone, @Header("Authorization") String token);
 }

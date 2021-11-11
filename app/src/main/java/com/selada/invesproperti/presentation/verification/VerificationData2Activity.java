@@ -97,9 +97,21 @@ public class VerificationData2Activity extends AppCompatActivity {
 
     @OnClick(R.id.btn_lanjut)
     void onClickBtnLanjut(){
-        if (TextUtils.isEmpty(et_alamat_ktp.getText().toString()) || TextUtils.isEmpty(et_email.getText().toString())
-                || TextUtils.isEmpty(et_kodepos.getText().toString()) || TextUtils.isEmpty(et_phone.getText().toString())) {
-            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data diri");
+        if (TextUtils.isEmpty(et_alamat_ktp.getText().toString())){
+            et_alamat_ktp.setError("Alamat KTP tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Alamat KTP tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(et_email.getText().toString())){
+            et_email.setError("Email tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Email tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(et_kodepos.getText().toString())){
+            et_kodepos.setError("Kode POS tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Kode POS tidak boleh kosong");
             return;
         }
 
@@ -110,8 +122,15 @@ public class VerificationData2Activity extends AppCompatActivity {
         }
 
         if (!isDomicileSameWithIdCard){
-            if (TextUtils.isEmpty(et_alamat_domisili.getText().toString()) || TextUtils.isEmpty(et_kodepos_domisili.getText().toString())) {
-                MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data diri");
+            if (TextUtils.isEmpty(et_alamat_domisili.getText().toString())){
+                et_alamat_domisili.setError("Alamat domisili tidak boleh kosong");
+                MethodUtil.showSnackBar(findViewById(android.R.id.content), "Alamat domisili tidak boleh kosong");
+                return;
+            }
+
+            if (TextUtils.isEmpty(et_kodepos_domisili.getText().toString())){
+                et_kodepos_domisili.setError("Kode POS domisili tidak boleh kosong");
+                MethodUtil.showSnackBar(findViewById(android.R.id.content), "Kode POS domisili tidak boleh kosong");
                 return;
             }
         }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F3F3"
+    android:orientation="vertical"
     tools:context=".presentation.portofolio.ExploreBisnisPropertiActivity">
 
     <include
@@ -14,106 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/layout_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_10"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="2dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar"
-        tools:layout_editor_absoluteX="0dp">
-
-        <FrameLayout
-            android:id="@+id/btn_semua"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:background="@drawable/bg_round_tab">
-
-            <TextView
-                android:id="@+id/tv_semua"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/titilliumweb_bold"
-                android:gravity="center"
-                android:text="@string/semua"
-                android:textColor="@color/black_primary"
-                android:textSize="12sp" />
-
-        </FrameLayout>
-
-
-        <FrameLayout
-            android:id="@+id/btn_baru"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/bg_round_tab_normal">
-
-            <TextView
-                android:id="@+id/tv_baru"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/titilliumweb_regular"
-                android:gravity="center"
-                android:text="@string/baru"
-                android:textColor="@color/black_primary"
-                android:textSize="12sp" />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/btn_sedang_berjalan"
-            android:layout_width="110dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/bg_round_tab_normal">
-
-            <TextView
-                android:id="@+id/tv_sedang_berjalan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/titilliumweb_regular"
-                android:gravity="center"
-                android:text="@string/sedang_berjalan"
-                android:textColor="@color/black_primary"
-                android:textSize="12sp" />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/btn_terdanai"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/bg_round_tab_normal">
-
-            <TextView
-                android:id="@+id/tv_terdanai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/titilliumweb_regular"
-                android:gravity="center"
-                android:text="@string/terdanai"
-                android:textColor="@color/black_primary"
-                android:textSize="12sp" />
-
-        </FrameLayout>
-
-    </LinearLayout>
-
     <com.madapps.liquid.LiquidRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:AniBackColor="#F3F3F3"
         app:AniForeColor="@color/green_primary"
         app:CircleSmaller="6"
@@ -132,6 +37,102 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/layout_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_10"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/app_bar"
+                    tools:layout_editor_absoluteX="0dp">
+
+                    <FrameLayout
+                        android:id="@+id/btn_semua"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:background="@drawable/bg_round_tab">
+
+                        <TextView
+                            android:id="@+id/tv_semua"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/titilliumweb_bold"
+                            android:gravity="center"
+                            android:text="@string/semua"
+                            android:textColor="@color/black_primary"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+
+                    <FrameLayout
+                        android:id="@+id/btn_baru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@drawable/bg_round_tab_normal">
+
+                        <TextView
+                            android:id="@+id/tv_baru"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            android:gravity="center"
+                            android:text="@string/baru"
+                            android:textColor="@color/black_primary"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/btn_sedang_berjalan"
+                        android:layout_width="110dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@drawable/bg_round_tab_normal">
+
+                        <TextView
+                            android:id="@+id/tv_sedang_berjalan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            android:gravity="center"
+                            android:text="@string/sedang_berjalan"
+                            android:textColor="@color/black_primary"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/btn_terdanai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@drawable/bg_round_tab_normal">
+
+                        <TextView
+                            android:id="@+id/tv_terdanai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/titilliumweb_regular"
+                            android:gravity="center"
+                            android:text="@string/terdanai"
+                            android:textColor="@color/black_primary"
+                            android:textSize="12sp" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_explore_bisnis"
                     android:layout_width="match_parent"
@@ -147,4 +148,4 @@
 
     </com.madapps.liquid.LiquidRefreshLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

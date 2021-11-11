@@ -59,6 +59,7 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
         int minPrice = responseProjects.getFundingAmount();
         int maxPrice = responseProjects.getRequestedAmount();
         int pricePerLot = responseProjects.getPricePerLot();
+        int percentage = (minPrice/maxPrice) * 100;
         int totalLot = responseProjects.getTotalLot();
         String dividenPeriod = responseProjects.getDividenPeriod();
         String interestRate = responseProjects.getInterestRate();
@@ -70,7 +71,7 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
         holder.tvTotalLot.setText(totalLot + " lot");
         holder.tvDividenPeriod.setText(dividenPeriod);
         holder.tvInterestRate.setText(interestRate);
-        holder.progressBar.setProgressInTime(20,2500);
+        holder.progressBar.setProgressInTime(percentage,2500);
         holder.cvItem.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailProductActivity.class);
             intent.putExtra("id", id);

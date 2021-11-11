@@ -35,6 +35,9 @@ public class ResponseUserProfile {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("profilePicture")
+    @Expose
+    private String profilePicture;
 
     public String getId() {
         return id;
@@ -114,5 +117,13 @@ public class ResponseUserProfile {
 
     public void setProjectOwner(boolean projectOwner) {
         isProjectOwner = projectOwner;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

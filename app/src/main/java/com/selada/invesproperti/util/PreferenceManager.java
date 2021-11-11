@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.orhanobut.hawk.Hawk;
+import com.selada.invesproperti.model.QuesionerData;
 import com.selada.invesproperti.model.UserVerification;
 import com.selada.invesproperti.model.response.ResponseLogin;
 import com.selada.invesproperti.model.response.ResponseUserProfile;
@@ -40,6 +41,7 @@ public class PreferenceManager {
     private static final String IS_SAVE_VERIFICATION_DATA = "isSaveVerficationData";
     private static final String IS_UNAUTHORIZED = "isUnauthorized";
     private static final String USER_PROFILE = "userProfile";
+    private static final String QUESIONER_DATA = "quesionerData";
 
     private static Context ctx;
     private static PreferenceManager mInstance;
@@ -198,6 +200,14 @@ public class PreferenceManager {
     }
 
     public static ResponseUserProfile getUserProfile() {
-        return Hawk.get(USER_PROFILE);
+        return Hawk.get(USER_PROFILE, null);
+    }
+
+    public static void setQuesionerData(QuesionerData quesionerData) {
+        Hawk.put(QUESIONER_DATA, quesionerData);
+    }
+
+    public static QuesionerData getQuesionerData(){
+        return Hawk.get(QUESIONER_DATA, null);
     }
 }

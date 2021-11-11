@@ -122,6 +122,7 @@ public class InquiryPaymentActivity extends AppCompatActivity {
         paymentRequest.setPricePerLot(pricePerLot);
         paymentRequest.setTotal(Integer.parseInt(inqTotalAmount));
 
+        tvFullname.setText(PreferenceManager.getFullname());
         tv_title_bar.setText("Konfirmasi Pembelian");
         tvPropertiName.setText(projectName);
         tvCompanyName.setText(companyName);
@@ -178,6 +179,7 @@ public class InquiryPaymentActivity extends AppCompatActivity {
                     if (response.isSuccessful()){
                         Intent intent = new Intent(InquiryPaymentActivity.this, PaymentCompleteActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), InquiryPaymentActivity.this);

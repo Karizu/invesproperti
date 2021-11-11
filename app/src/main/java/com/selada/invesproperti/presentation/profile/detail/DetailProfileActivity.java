@@ -103,10 +103,11 @@ public class DetailProfileActivity extends AppCompatActivity {
 
                         String fullname = Objects.requireNonNull(userProfile).getName();
                         String email = userProfile.getEmail();
-                        String phone = userProfile.getPhone();
-                        String ktp = userProfile.getIdCardNumber();
+                        String phone = userProfile.getPhone()!=null?userProfile.getPhone():"-";
+                        String ktp = userProfile.getIdCardNumber()!=null?userProfile.getIdCardNumber():"-";
                         int yearlyIncome = userProfile.getYearlyIncome();
-                        String address = userProfile.getAddress().getStreet() + " " +userProfile.getAddress().getSubDistrict() + " " + userProfile.getAddress().getDistrict();
+                        String address = "-";
+                        if (userProfile.getAddress()!=null) address = userProfile.getAddress().getStreet() + " " +userProfile.getAddress().getSubDistrict() + " " + userProfile.getAddress().getDistrict();
 
                         tv_fullname.setText(fullname);
                         tv_email.setText(email);

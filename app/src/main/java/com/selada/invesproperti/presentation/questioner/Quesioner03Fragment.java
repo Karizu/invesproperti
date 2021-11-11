@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,43 @@ import androidx.fragment.app.Fragment;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.util.PreferenceManager;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Quesioner03Fragment extends Fragment {
+
+    @BindView(R.id.rb_1)
+    RadioButton rb_1;
+    @BindView(R.id.rb_2)
+    RadioButton rb_2;
+    @BindView(R.id.rb_3)
+    RadioButton rb_3;
+
+    private String data1 = "";
+
+    @OnClick(R.id.rb_1)
+    void onClickRb1(){
+        data1 = "";
+        rb_1.setChecked(true);
+        rb_2.setChecked(false);
+        rb_3.setChecked(false);
+    }
+    @OnClick(R.id.rb_2)
+    void onClickRb2(){
+        data1 = "";
+        rb_1.setChecked(false);
+        rb_2.setChecked(true);
+        rb_3.setChecked(false);
+    }
+    @OnClick(R.id.rb_3)
+    void onClickRb3(){
+        data1 = "";
+        rb_1.setChecked(false);
+        rb_2.setChecked(false);
+        rb_3.setChecked(true);
+    }
+
     @SuppressLint("InflateParams")
     @Nullable
     @Override

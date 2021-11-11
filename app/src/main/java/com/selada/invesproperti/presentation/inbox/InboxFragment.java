@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.selada.invesproperti.R;
-import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
+import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
 import com.selada.invesproperti.util.PreferenceManager;
@@ -37,7 +37,7 @@ public class InboxFragment extends Fragment {
 
     @OnClick(R.id.btn_cs)
     void onClickCs(){
-        Intent intent = new Intent(requireActivity(), BantuanActivity.class);
+        Intent intent = new Intent(requireActivity(), CallCenterActivity.class);
         startActivity(intent);
         requireActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

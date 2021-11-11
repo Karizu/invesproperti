@@ -79,6 +79,18 @@ public class VerificationBankActivity extends AppCompatActivity {
             return;
         }
 
+        if (TextUtils.isEmpty(et_pemilik_rekening.getText().toString())){
+            et_pemilik_rekening.setError("Nama pemilik rekening tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nama pemilik rekening tidak boleh kosong");
+            return;
+        }
+
+        if (TextUtils.isEmpty(et_no_rekening.getText().toString())){
+            et_no_rekening.setError("Nomor rekening tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nomor rekening tidak boleh kosong");
+            return;
+        }
+
         setUserVerificationModel();
         doUserVerification();
     }

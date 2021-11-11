@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.selada.invesproperti.MainActivity;
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.util.PreferenceManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,9 +26,7 @@ public class PaymentCompleteActivity extends AppCompatActivity {
 
     @OnClick(R.id.img_close)
     void onClickImgClose(){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override
@@ -35,7 +34,8 @@ public class PaymentCompleteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_complete);
         ButterKnife.bind(this);
-
+        new PreferenceManager(this);
+        tv_name.setText(PreferenceManager.getFullname());
     }
 
     @Override
@@ -43,6 +43,7 @@ public class PaymentCompleteActivity extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

@@ -3,16 +3,24 @@ package com.selada.invesproperti.presentation.home;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Html;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.gms.common.api.Api;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
@@ -33,6 +41,11 @@ import com.skydoves.transformationlayout.TransformationLayout;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -40,6 +53,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,7 +104,7 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
 
     @OnClick(R.id.frame_unduh)
     void onClickUnduhProspektus(){
-
+        getProspectus();
     }
 
     @OnClick(R.id.btn_back)
@@ -234,6 +248,97 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
             }
         } catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    private void getProspectus(){
+        Loading.show(DetailProductActivity.this);
+        ApiCore.apiInterface().getProspectus(id, PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Loading.hide(DetailProductActivity.this);
+                try {
+                    if (response.isSuccessful()){
+                        boolean writtenToDisk = writeResponseBodyToDisk(Objects.requireNonNull(response.body()));
+                        if (writtenToDisk) {
+                            String fileName = "prospectus.pdf";
+                            //File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+                            java.io.File file = new java.io.File(Environment
+                                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                    + "/" + fileName);
+                            try {
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                startActivity(intent);
+                            } catch (ActivityNotFoundException e) {
+                                Snackbar.make(findViewById(android.R.id.content), "No PDF reader found to open this file.", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+                    } else {
+                        MethodUtil.getErrorMessage(response.errorBody(), DetailProductActivity.this);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    MethodUtil.showOnCatch(findViewById(android.R.id.content));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Loading.hide(DetailProductActivity.this);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private boolean writeResponseBodyToDisk(ResponseBody body) {
+        try {
+            // todo change the file location/name according to your needs
+            File futureStudioIconFile = new File(getExternalFilesDir(null) + File.separator + "prospectus.pdf");
+
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+
+            try {
+                byte[] fileReader = new byte[4096];
+
+                long fileSize = body.contentLength();
+                long fileSizeDownloaded = 0;
+
+                inputStream = body.byteStream();
+                outputStream = new FileOutputStream(futureStudioIconFile);
+
+                while (true) {
+                    int read = inputStream.read(fileReader);
+
+                    if (read == -1) {
+                        break;
+                    }
+
+                    outputStream.write(fileReader, 0, read);
+
+                    fileSizeDownloaded += read;
+
+                    Log.d("TAG", "file download: " + fileSizeDownloaded + " of " + fileSize);
+                }
+
+                outputStream.flush();
+
+                return true;
+            } catch (IOException e) {
+                return false;
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            }
+        } catch (IOException e) {
+            return false;
         }
     }
 

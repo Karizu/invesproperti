@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.selada.invesproperti.R;
-import com.selada.invesproperti.presentation.profile.bantuan.BantuanActivity;
+import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class KonfirmasiWithdrawalPassActivity extends AppCompatActivity {
+public class WithdrawalConfirmationPassActivity extends AppCompatActivity {
 
     @BindView(R.id.etKataSandi)
     in.anshul.libray.PasswordEditText etKataSandi;
@@ -35,7 +35,7 @@ public class KonfirmasiWithdrawalPassActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_cs)
     void onClickBtnCs(){
-        Intent intent = new Intent(this, BantuanActivity.class);
+        Intent intent = new Intent(this, CallCenterActivity.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

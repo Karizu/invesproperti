@@ -1,6 +1,8 @@
 package com.selada.invesproperti.presentation.portofolio.tablayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class InfoFragment extends Fragment {
     @BindView(R.id.imageSlider)
@@ -35,6 +38,19 @@ public class InfoFragment extends Fragment {
     TextView tvCountDay;
 
     private List<SliderItem> mSliderItems;
+
+    @OnClick(R.id.frame_open_maps)
+    void onClickOpenMaps(){
+        Uri gmmIntentUri = Uri.parse("geo:" + "-6.328637399491694" + "," + "107.29603381016592");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+    }
+
+    @OnClick(R.id.frame_unduh)
+    void onClickUnduhProspektus(){
+
+    }
 
     @SuppressLint("InflateParams")
     @Nullable

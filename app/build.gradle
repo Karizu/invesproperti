@@ -100,4 +100,6 @@ dependencies {
     implementation 'com.github.skydoves:powerspinner:1.1.9'
     implementation "com.airbnb.android:lottie:4.2.0"
     implementation "com.github.skydoves:transformationlayout:1.1.0"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'me.ithebk:barchart:0.9'
 }

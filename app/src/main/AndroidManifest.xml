@@ -15,13 +15,13 @@
         tools:targetApi="n">
         <activity android:name=".presentation.auth.RegistrationCompleteActivity"></activity>
         <activity android:name=".presentation.portofolio.history.HistoryActivity" />
-        <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalPassActivity" />
+        <activity android:name=".presentation.portofolio.withdrawal.WithdrawalConfirmationPassActivity" />
         <activity android:name=".presentation.portofolio.withdrawal.CompleteWithdrawalActivity" />
-        <activity android:name=".presentation.portofolio.withdrawal.KonfirmasiWithdrawalActivity" />
+        <activity android:name=".presentation.portofolio.withdrawal.WithdrawalConfirmationActivity" />
         <activity android:name=".presentation.portofolio.withdrawal.WithdrawalActivity" />
         <activity android:name=".presentation.portofolio.deposit.DetailDepositActivity" />
         <activity android:name=".presentation.portofolio.deposit.DepositActivity" />
-        <activity android:name=".presentation.profile.bantuan.BantuanActivity" />
+        <activity android:name=".presentation.profile.cs.CallCenterActivity" />
         <activity android:name=".presentation.profile.bank.DetailBankActivity" />
         <activity android:name=".presentation.profile.detail.efek.ChangeEfekActivity" />
         <activity android:name=".presentation.profile.detail.income.ChangeIncomeYearActivity" />

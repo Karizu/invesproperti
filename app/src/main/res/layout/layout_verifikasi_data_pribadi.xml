@@ -52,7 +52,7 @@
 
             <LinearLayout
                 android:id="@+id/layout_circle_1"
-                android:layout_width="55dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
@@ -74,9 +74,10 @@
 
                 <TextView
                     android:id="@+id/tv_siapkan_ktp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ktp_selfie"
+                    android:gravity="center"
                     android:textColor="@color/Black"
                     android:textSize="10sp"
                     android:fontFamily="@font/titilliumweb_regular"
@@ -103,7 +104,7 @@
 
             <LinearLayout
                 android:id="@+id/layout_circle_2"
-                android:layout_width="55dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_alignParentTop="true"
@@ -123,9 +124,10 @@
                     android:background="@drawable/bg_circle_step"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/data_pribadi"
+                    android:gravity="center"
                     android:textColor="@color/Black"
                     android:textSize="10sp"
                     android:fontFamily="@font/titilliumweb_regular"
@@ -172,7 +174,7 @@
 
             <LinearLayout
                 android:id="@+id/layout_circle_3"
-                android:layout_width="55dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
@@ -193,9 +195,10 @@
                     android:background="@drawable/bg_circle_step_disable"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/info_bank"
+                    android:gravity="center"
                     android:textColor="@color/Black"
                     android:textSize="10sp"
                     android:fontFamily="@font/titilliumweb_regular"
@@ -465,6 +468,7 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/label_nama_pasangan"
                     android:layout_width="match_parent"
                     android:layout_height="27dp"
                     android:layout_marginTop="12dp"
@@ -474,6 +478,7 @@
                     android:fontFamily="@font/titilliumweb_regular"/>
 
                 <FrameLayout
+                    android:id="@+id/layout_nama_pasangan"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:layout_marginBottom="12dp"
