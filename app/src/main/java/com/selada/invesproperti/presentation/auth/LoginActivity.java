@@ -234,11 +234,15 @@ public class LoginActivity extends AppCompatActivity implements FingerPrintAuthC
 
     @Override
     public void onAuthFailed() {
-        Dialog dialog = MethodUtil.getDialogCart(R.layout.dialog_finger_failed, this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        CardView btnBatal = dialog.findViewById(R.id.btn_batal);
-        btnBatal.setOnClickListener(view -> dialog.dismiss());
+        try {
+            Dialog dialog = MethodUtil.getDialogCart(R.layout.dialog_finger_failed, this);
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            CardView btnBatal = dialog.findViewById(R.id.btn_batal);
+            btnBatal.setOnClickListener(view -> dialog.dismiss());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void directToMainActivity() {

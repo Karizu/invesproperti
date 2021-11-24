@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:id="@+id/cvItem"
+    android:layout_width="match_parent"
+    android:layout_height="218dp"
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="6dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_background"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"/>
+
+        <FrameLayout
+            android:id="@+id/frame_4"
+            android:layout_width="45dp"
+            android:layout_height="24dp"
+            android:paddingStart="@dimen/padding_10"
+            android:paddingEnd="@dimen/padding_10"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_round_shimmer">
+
+            <TextView
+                android:id="@+id/baru_"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="#FAFAFA"
+                android:fontFamily="@font/titilliumweb_regular"
+                android:textStyle="normal"
+                android:lineSpacingExtra="2sp"
+                android:translationY="-0.87sp"
+                />
+
+        </FrameLayout>
+        <!--        -->
+        <!--        <FrameLayout-->
+        <!--            android:id="@+id/progressBarItem"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:layout_marginStart="20dp"-->
+        <!--            android:layout_marginEnd="20dp"-->
+        <!--            android:layout_marginBottom="14dp"-->
+        <!--            android:layout_marginTop="3dp"-->
+        <!--            android:layout_above="@+id/frame_bottom"-->
+        <!--            android:background="#FAFAFA"-->
+        <!--            android:indeterminate="true"/>-->
+
+        <com.white.progressview.HorizontalProgressView
+            android:id="@+id/progressBarItem"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="3dp"
+            android:layout_above="@+id/frame_bottom"
+            android:padding="10dp"
+            android:progress="20"
+            app:progressReachColor="#B3B3B3"
+            app:progressTextVisible="false"
+            />
+
+        <TextView
+            android:id="@+id/tvMinPrice"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/progressBarItem"
+            android:layout_marginStart="20dp"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:textStyle="normal"
+            android:lineSpacingExtra="2sp"
+            android:translationY="-0.87sp"
+            android:background="@drawable/bg_round_shimmer"
+            />
+
+        <TextView
+            android:id="@+id/tvMaxPrice"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/progressBarItem"
+            android:layout_marginEnd="20dp"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/titilliumweb_regular"
+            android:textStyle="normal"
+            android:lineSpacingExtra="2sp"
+            android:translationY="-0.87sp"
+            android:background="@drawable/bg_round_shimmer"
+            />
+
+        <TextView
+            android:id="@+id/tvTitleItem"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/tvMinPrice"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="6dp"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/titilliumweb_semibold"
+            android:textStyle="normal"
+            android:lineSpacingExtra="2sp"
+            android:translationY="-0.87sp"
+            android:background="@drawable/bg_round_shimmer"
+            />
+
+        <RelativeLayout
+            android:id="@+id/frame_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/img_price_tag"
+                android:layout_width="16dp"
+                android:layout_height="12.98dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="4.33dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_round_shimmer"/>
+
+            <TextView
+                android:id="@+id/rp_1_350_000_lot"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="7.33dp"
+                android:layout_toRightOf="@+id/img_price_tag"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:textColor="@color/White"
+                android:textSize="12sp"
+                android:background="@drawable/bg_round_shimmer"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:id="@+id/img_schedule"
+                android:layout_width="16dp"
+                android:layout_height="12.98dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="1.33dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_round_shimmer"/>
+
+            <TextView
+                android:id="@+id/tv_dividen_period"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="7.33dp"
+                android:layout_toRightOf="@+id/img_schedule"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:textColor="@color/White"
+                android:textSize="12sp"
+                android:background="@drawable/bg_round_shimmer"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:id="@+id/img_layers"
+                android:layout_width="16dp"
+                android:layout_height="12.98dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/rp_1_350_000_lot"
+                android:layout_marginStart="31.65dp"
+                android:layout_marginTop="4.33dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_round_shimmer"/>
+
+            <TextView
+                android:id="@+id/tv_total_lot"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="7.33dp"
+                android:layout_toRightOf="@+id/img_layers"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:textColor="@color/White"
+                android:textSize="12sp"
+                android:background="@drawable/bg_round_shimmer"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+            <ImageView
+                android:id="@+id/img_charts"
+                android:layout_width="16dp"
+                android:layout_height="12.98dp"
+                android:layout_toRightOf="@+id/rp_1_350_000_lot"
+                android:layout_marginStart="31.65dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="1.33dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_round_shimmer"/>
+
+            <TextView
+                android:id="@+id/tv_interest_rate"
+                android:layout_width="65dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="7.33dp"
+                android:layout_toRightOf="@+id/img_charts"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="0sp"
+                android:textColor="@color/White"
+                android:textSize="12sp"
+                android:background="@drawable/bg_round_shimmer"
+                android:fontFamily="@font/titilliumweb_regular"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

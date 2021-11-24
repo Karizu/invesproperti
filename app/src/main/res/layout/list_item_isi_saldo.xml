@@ -32,8 +32,7 @@
                 android:id="@+id/img_logo_bank"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
-                android:src="@drawable/logo_bca" />
+                android:padding="5dp" />
 
         </androidx.cardview.widget.CardView>
 

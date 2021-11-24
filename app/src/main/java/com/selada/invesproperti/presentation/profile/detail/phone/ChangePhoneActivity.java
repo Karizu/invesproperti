@@ -2,6 +2,7 @@ package com.selada.invesproperti.presentation.profile.detail.phone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +11,9 @@ import android.widget.Toast;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.request.RequestUpdatePhone;
+import com.selada.invesproperti.presentation.profile.bank.AddBankActivity;
+import com.selada.invesproperti.presentation.profile.bank.AkunBankActivity;
+import com.selada.invesproperti.presentation.profile.detail.DetailProfileActivity;
 import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
@@ -78,8 +82,12 @@ public class ChangePhoneActivity extends AppCompatActivity {
                 Loading.hide(ChangePhoneActivity.this);
                 try {
                     if (response.isSuccessful()){
+                        Intent intent = new Intent(ChangePhoneActivity.this, DetailProfileActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        ChangePhoneActivity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                         Toast.makeText(ChangePhoneActivity.this, "Berhasil menyimpan perubahan", Toast.LENGTH_SHORT).show();
-                        onBackPressed();
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), ChangePhoneActivity.this);
                     }

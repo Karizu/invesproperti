@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +66,16 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
         int totalLot = responseProjects.getTotalLot();
         String dividenPeriod = responseProjects.getDividenPeriod();
         String interestRate = responseProjects.getInterestRate();
+        try {
+            String base64 = responseProjects.getPicture().get(0);
+            byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            holder.img_background.setImageBitmap(bitmap);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         holder.tvTitleItem.setText(name);
         holder.tvMinPrice.setText("Rp " + MethodUtil.toCurrencyFormat(String.valueOf(minPrice)));
@@ -79,7 +92,7 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
             TransformationCompat.startActivity(holder.transformationLayout, intent);
         });
         //kondisi
-        holder.baru_.setText("Baru");
+        holder.baru_.setText(responseProjects.getLabel());
         holder.frame_4.setBackground(activity.getResources().getDrawable(R.drawable.bg_round_home_item_orange));
     }
 
@@ -94,6 +107,7 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
         TextView tvMinPrice, tvDividenPeriod;
         TextView tvMaxPrice, tvPricePerLot;
         HorizontalProgressView progressBar;
+        ImageView img_background;
         FrameLayout frame_4;
         TransformationLayout transformationLayout;
         CardView cvItem;
@@ -112,6 +126,7 @@ public class HomeFeedAdapter extends RecyclerView.Adapter<HomeFeedAdapter.ViewHo
             frame_4 = v.findViewById(R.id.frame_4);
             cvItem = v.findViewById(R.id.cvItem);
             transformationLayout = v.findViewById(R.id.transformationLayout);
+            img_background = v.findViewById(R.id.img_background);
         }
     }
 }

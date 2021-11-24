@@ -6,10 +6,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.api.ApiCore;
+import com.selada.invesproperti.model.response.Bank;
 import com.selada.invesproperti.presentation.adapter.DepositBankAdapter;
+import com.selada.invesproperti.presentation.portofolio.submitproject.SubmitProject6Activity;
 import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
+import com.selada.invesproperti.util.Loading;
+import com.selada.invesproperti.util.MethodUtil;
+import com.selada.invesproperti.util.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +26,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DepositActivity extends AppCompatActivity {
 
@@ -47,16 +59,33 @@ public class DepositActivity extends AppCompatActivity {
     }
 
     private void initComponent() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rv_isi_saldo.setLayoutManager(layoutManager);
+        getListBank();
+    }
 
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
-            list.add("List "+i);
-        }
+    private void getListBank() {
+        Loading.show(this);
+        ApiCore.apiInterface().getListBank(PreferenceManager.getSessionToken()).enqueue(new Callback<List<Bank>>() {
+            @Override
+            public void onResponse(Call<List<Bank>> call, Response<List<Bank>> response) {
+                Loading.hide(DepositActivity.this);
+                try {
+                    if (response.isSuccessful()) {
+                        rv_isi_saldo.setLayoutManager(new LinearLayoutManager(DepositActivity.this, LinearLayoutManager.VERTICAL, false));
+                        adapter = new DepositBankAdapter(response.body(), DepositActivity.this, DepositActivity.this);
+                        rv_isi_saldo.setAdapter(adapter);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MethodUtil.showOnCatch(findViewById(android.R.id.content));
+                }
+            }
 
-        adapter = new DepositBankAdapter(list, this, this);
-        rv_isi_saldo.setAdapter(adapter);
+            @Override
+            public void onFailure(Call<List<Bank>> call, Throwable t) {
+                t.printStackTrace();
+                Loading.hide(DepositActivity.this);
+            }
+        });
     }
 
     @Override

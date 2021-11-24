@@ -49,6 +49,7 @@
             app:lottie_autoPlay="true" />
 
         <TextView
+            android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -717,5 +718,16 @@
 
     </com.madapps.liquid.LiquidRefreshLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_hite_24"
+        app:rippleColor="@color/background"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="18dp"
+        app:elevation="3dp" />
 
 </RelativeLayout>

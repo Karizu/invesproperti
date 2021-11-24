@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
@@ -60,6 +61,8 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
     TextView tv_title_bar;
     @BindView(R.id.refreshLayout)
     LiquidRefreshLayout refreshLayout;
+    @BindView(R.id.shimmerLayout)
+    ShimmerFrameLayout shimmerLayout;
 
     private HomeFeedAdapter adapter;
     private Typeface tf_bold;
@@ -158,17 +161,19 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
 
             @Override
             public void refreshing() {
+                shimmerLayout.setVisibility(View.VISIBLE);
                 getListProjects(true);
             }
         });
     }
 
     private void getListProjects(boolean isRefresh){
-        Loading.show(ExploreBisnisPropertiActivity.this);
+        shimmerLayout.startShimmer();
         ApiCore.apiInterface().getListProjects(PreferenceManager.getSessionToken()).enqueue(new Callback<List<ResponseProjects>>() {
             @Override
             public void onResponse(Call<List<ResponseProjects>> call, Response<List<ResponseProjects>> response) {
-                Loading.hide(ExploreBisnisPropertiActivity.this);
+                shimmerLayout.stopShimmer();
+                shimmerLayout.setVisibility(View.GONE);
                 if (isRefresh) refreshLayout.finishRefreshing();
                 try {
                     if (response.isSuccessful()){
@@ -186,7 +191,8 @@ public class ExploreBisnisPropertiActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ResponseProjects>> call, Throwable t) {
                 if (isRefresh) refreshLayout.finishRefreshing();
-                Loading.hide(ExploreBisnisPropertiActivity.this);
+                shimmerLayout.stopShimmer();
+                shimmerLayout.setVisibility(View.GONE);
                 t.printStackTrace();
             }
         });

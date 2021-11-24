@@ -65,8 +65,7 @@
                         android:textColor="@color/green_primary"
                         android:text="Ya"
                         android:textSize="18sp"
-                        android:fontFamily="@font/titilliumweb_bold"
-                        android:enabled="false"/>
+                        android:fontFamily="@font/titilliumweb_bold"/>
 
                     <Button
                         android:id="@+id/btn_tidak"
@@ -79,8 +78,7 @@
                         android:textColor="#FAFAFA"
                         android:text="Tidak"
                         android:textSize="18sp"
-                        android:fontFamily="@font/titilliumweb_bold"
-                        android:enabled="false"/>
+                        android:fontFamily="@font/titilliumweb_bold"/>
 
                 </LinearLayout>
 

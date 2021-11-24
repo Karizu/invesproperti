@@ -427,7 +427,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_beli"
+        android:id="@+id/btn_buy_project"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="8dp"

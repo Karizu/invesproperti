@@ -1,7 +1,11 @@
 package com.selada.invesproperti.presentation.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.model.SliderItem;
+import com.selada.invesproperti.presentation.verification.GuideKycActivity;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
@@ -57,12 +62,26 @@ public class SliderAdapterExample extends
         viewHolder.textViewDescription.setText(sliderItem.getDescription());
 //        viewHolder.textViewDescription.setTextSize(16);
         viewHolder.textViewDescription.setTextColor(Color.WHITE);
-        Glide.with(viewHolder.itemView)
-                .load(sliderItem.getImg_url())
-                .fitCenter()
-                .into(viewHolder.imageViewBackground);
+//        Glide.with(viewHolder.itemView)
+//                .load(sliderItem.getImg_url())
+//                .fitCenter()
+//                .into(viewHolder.imageViewBackground);
+        try {
+            String base64 = sliderItem.getImgBase64();
+            byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
 
-        viewHolder.itemView.setOnClickListener(v -> Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show());
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            viewHolder.imageViewBackground.setImageBitmap(bitmap);
+
+            viewHolder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, GuideKycActivity.class);
+                intent.putExtra("is_from_article", true);
+                intent.putExtra("bitmap", decodedString);
+                context.startActivity(intent);
+            });
+        } catch (Exception e){
+//            e.printStackTrace();
+        }
     }
 
     @Override

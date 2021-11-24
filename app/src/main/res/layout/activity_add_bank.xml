@@ -29,6 +29,7 @@
             android:background="?attr/selectableItemBackground"/>
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
@@ -71,11 +72,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="Pilih Bank"
+                android:text=""
                 android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                 android:fontFamily="@font/titilliumweb_regular"
                 android:textSize="16sp"
                 android:textColor="@color/black_primary"/>
+
+            <Spinner
+                android:visibility="gone"
+                android:id="@+id/spinnerBank"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"/>
 
         </FrameLayout>
 
@@ -129,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/transparent"
-                android:inputType="numberDecimal"
+                android:inputType="text"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/titilliumweb_regular"
                 android:textSize="16sp"

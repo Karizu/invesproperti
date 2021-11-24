@@ -1,6 +1,7 @@
 package com.selada.invesproperti.presentation.home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.text.Html;
 import android.text.format.Time;
 import android.util.Log;
@@ -26,6 +28,7 @@ import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.SliderItem;
+import com.selada.invesproperti.model.response.detailproject.ProjectDataPayment;
 import com.selada.invesproperti.model.response.detailproject.ResponseDetailProject;
 import com.selada.invesproperti.presentation.adapter.SliderAdapterExample;
 import com.selada.invesproperti.presentation.payment.InputPaymentActivity;
@@ -41,14 +44,18 @@ import com.skydoves.transformationlayout.TransformationLayout;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -112,21 +119,31 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
         onBackPressed();
     }
 
-    @OnClick(R.id.btn_beli)
-    void onClickBtnBeli(){
+    @OnClick(R.id.btn_buy_project)
+    void onClickBtnBuyProject(){
         // status user belum verifikasi
-        if (PreferenceManager.getUserStatus().equals(Constant.INVESTOR)){
-            String json = new Gson().toJson(detailProject);
-            Intent intent1 = new Intent(this, InputPaymentActivity.class);
-            intent1.putExtra("json", json);
-            startActivity(intent1);
-            this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        } else if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)) {
+        try {
+            if (PreferenceManager.getUserStatus().equals(Constant.INVESTOR)){
+                try {
+                    // remove array photos
+                    List<String> list = new ArrayList<>();
+                    ResponseDetailProject responseDetailProject = detailProject;
+                    responseDetailProject.setPicture(list);
+                    String json = new Gson().toJson(responseDetailProject);
+                    Intent intent1 = new Intent(DetailProductActivity.this, InputPaymentActivity.class);
+                    intent1.putExtra("json", json);
+                    startActivity(intent1);
+                    DetailProductActivity.this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                } catch (Exception e){e.printStackTrace();}
+            } else if (PreferenceManager.getUserStatus().equals(Constant.PRODUCT_OWNER)) {
 
-        } else {
-            Intent intent = new Intent(this, VerificationRedirectActivity.class);
-            startActivity(intent);
-            this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            } else {
+                Intent intent = new Intent(this, VerificationRedirectActivity.class);
+                startActivity(intent);
+                this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -135,7 +152,10 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_product);
         ButterKnife.bind(this);
-
+        new PreferenceManager(this);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
         initComponent();
     }
 
@@ -147,28 +167,6 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
             String name = getIntent().getStringExtra("name");
             tv_title_bar.setText(name);
         }
-
-        String day = "44";
-        String styledText = "<font color='#428828;'>"+ day +"</font> hari lagi";
-        tvCountDay.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
-
-        mSliderItems = new ArrayList<>();
-        for (int i = 0; i < 3; i++){
-            SliderItem sliderItem = new SliderItem();
-            sliderItem.setDescription("");
-            sliderItem.setImg_url("https://archinect.imgix.net/uploads/p9/p9m1npbrua0zyn97.jpg?fit=crop&auto=compress%2Cformat&w=1200");
-            mSliderItems.add(sliderItem);
-        }
-
-        imageSlider.setSliderAdapter(new SliderAdapterExample(this, mSliderItems));
-        imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        try {
-            imageSlider.setCurrentPageListener(this::addBottomDots);
-        } catch (Exception e){}
-        imageSlider.setScrollTimeInSec(4);
-        imageSlider.startAutoCycle();
-
-        addBottomDots(0);
 
         refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
             @Override
@@ -211,6 +209,33 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
                         tv_estimasi_deviden.setText(detailProject.getInterestRate());
                         tv_desc_usaha.setText(detailProject.getDetail());
                         tv_address.setText(street + ", " + subDistrict + ", " + district +  city + province);
+                        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date dateEnd = sdf.parse(detailProject.getDeadlineDate());
+                        Date dateStart = new Date();
+                        long diff = Objects.requireNonNull(dateEnd).getTime() - dateStart.getTime();
+                        System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+                        String styledText = "<font color='#428828;'>"+ TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) +"</font> hari lagi";
+
+                        tvCountDay.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
+
+                        mSliderItems = new ArrayList<>();
+                        for (int i = 0; i < detailProject.getPicture().size(); i++){
+                            SliderItem sliderItem = new SliderItem();
+                            sliderItem.setDescription("");
+                            sliderItem.setImg_url("https://archinect.imgix.net/uploads/p9/p9m1npbrua0zyn97.jpg?fit=crop&auto=compress%2Cformat&w=1200");
+                            sliderItem.setImgBase64(detailProject.getPicture().get(i));
+                            mSliderItems.add(sliderItem);
+                        }
+
+                        imageSlider.setSliderAdapter(new SliderAdapterExample(DetailProductActivity.this, mSliderItems));
+                        imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+                        try {
+                            imageSlider.setCurrentPageListener(DetailProductActivity.this::addBottomDots);
+                        } catch (Exception e){}
+                        imageSlider.setScrollTimeInSec(4);
+                        imageSlider.startAutoCycle();
+
+                        addBottomDots(0);
                     }
                 } catch (Exception e){
                     e.printStackTrace();
@@ -263,11 +288,13 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
                         if (writtenToDisk) {
                             String fileName = "prospectus.pdf";
                             //File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
-                            java.io.File file = new java.io.File(Environment
-                                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                    + "/" + fileName);
+                            java.io.File file = new java.io.File(getExternalFilesDir(null) + File.separator + "project-prospectus.pdf");
+
+//                            Uri fileUri = FileProvider.getUriForFile(DetailProductActivity.this, DetailProductActivity.this.getApplicationContext().getPackageName() + ".provider", file);
+
                             try {
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 intent.setDataAndType(Uri.fromFile(file), "application/pdf");
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                 startActivity(intent);
@@ -295,7 +322,7 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
     private boolean writeResponseBodyToDisk(ResponseBody body) {
         try {
             // todo change the file location/name according to your needs
-            File futureStudioIconFile = new File(getExternalFilesDir(null) + File.separator + "prospectus.pdf");
+            File futureStudioIconFile = new File(getExternalFilesDir(null) + File.separator + "project-prospectus.pdf");
 
             InputStream inputStream = null;
             OutputStream outputStream = null;
@@ -306,7 +333,8 @@ public class DetailProductActivity extends TransformationAppCompatActivity {
                 long fileSize = body.contentLength();
                 long fileSizeDownloaded = 0;
 
-                inputStream = body.byteStream();
+                inputStream = new BufferedInputStream(body.byteStream());
+//                inputStream = body.byteStream();
                 outputStream = new FileOutputStream(futureStudioIconFile);
 
                 while (true) {

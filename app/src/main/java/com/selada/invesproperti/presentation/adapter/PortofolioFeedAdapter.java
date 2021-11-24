@@ -15,18 +15,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.response.ResponseProjects;
 import com.selada.invesproperti.presentation.home.DetailProductActivity;
 import com.selada.invesproperti.presentation.portofolio.DetailProductDidanaiActivity;
+import com.selada.invesproperti.util.MethodUtil;
 import com.white.progressview.HorizontalProgressView;
 
 import java.util.List;
 
 public class PortofolioFeedAdapter extends RecyclerView.Adapter<PortofolioFeedAdapter.ViewHolder> {
-    private List<String> transactionModels;
+    private List<ResponseProjects> transactionModels;
     private Context context;
     private Activity activity;
 
-    public PortofolioFeedAdapter(List<String> transactionModels, Context context, Activity activity) {
+    public PortofolioFeedAdapter(List<ResponseProjects> transactionModels, Context context, Activity activity) {
         this.transactionModels = transactionModels;
         this.context = context;
         this.activity = activity;
@@ -44,8 +46,16 @@ public class PortofolioFeedAdapter extends RecyclerView.Adapter<PortofolioFeedAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        holder.progressBar.setProgressInTime(20,2500);
+        ResponseProjects responseProjects = transactionModels.get(position);
+
+//        holder.tv_type_aset.setText(responseProjects.get);
+        holder.tv_asset_name.setText(responseProjects.getName());
+        holder.tv_last_price.setText("Rp " + MethodUtil.toCurrencyFormat(String.valueOf(responseProjects.getPricePerLot())));
+        holder.tv_lot.setText(responseProjects.getTotalLot() + " Lot");
         holder.cvItem.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailProductDidanaiActivity.class);
+            intent.putExtra("id", responseProjects.getId());
+            intent.putExtra("name", responseProjects.getName());
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         });

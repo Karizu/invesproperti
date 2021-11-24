@@ -74,13 +74,16 @@ public class VerificationData2Activity extends AppCompatActivity {
     Spinner spinner_kelurahan_domisili;
 
     private Activity appActivity;
-    private boolean isInvestor, isProjectOwner, isDomicileSameWithIdCard;
+    private boolean isInvestor, isProjectOwner;
+    private boolean isDomicileSameWithIdCard = true;
     private byte[] photoKtp, photoSelfie;
     private List<String> provinceIdList, cityIdList, districtIdList, subDistrictIdList;
     private String fullname, maritalStatus, occupationId, educationId, birthDay, birthPlace, gender, spouseName;
     private String provinceSelectedItemId, citySelectedItemId, districtSelectedItemId, subDistrictSelectedItemId;
     private String provinceDomicileSelectedItemId, cityDomicileSelectedItemId, districtDomicileSelectedItemId, subDistrictDomicileSelectedItemId;
     private UserVerification userVerification;
+    private String cityNameSaved;
+    private String cityDomicileNameSaved;
 
     @OnClick(R.id.btn_back)
     void onClickBtnBack(){
@@ -167,21 +170,35 @@ public class VerificationData2Activity extends AppCompatActivity {
             fullname = getIntent().getStringExtra("fullname");
             gender = getIntent().getStringExtra("gender");
             birthPlace = getIntent().getStringExtra("birth_place");
-            birthPlace = getIntent().getStringExtra("birth_date");
+            birthDay = getIntent().getStringExtra("birth_date");
             educationId = getIntent().getStringExtra("education_id");
             occupationId = getIntent().getStringExtra("occupation_id");
             maritalStatus = getIntent().getStringExtra("marital_status");
             spouseName = getIntent().getStringExtra("spouse_name");
         }
 
-            userVerification = new UserVerification();
         if (PreferenceManager.getIsSaveVerificationData()){
             userVerification = PreferenceManager.getUserVerification();
             et_phone.setText(userVerification.getPhone()!=null?userVerification.getPhone():"");
             et_kodepos.setText(userVerification.getPostalCodeIdCard()!=null?userVerification.getPostalCodeIdCard():"");
-            et_email.setText(userVerification.getEmail()!=null?userVerification.getEmail():"");
+            et_email.setText(PreferenceManager.getEmail()!=null?PreferenceManager.getEmail():"");
             et_alamat_ktp.setText(userVerification.getAddressIdCard()!=null?userVerification.getAddressIdCard():"");
             et_alamat_domisili.setText(userVerification.getAddressDomicile()!=null?userVerification.getAddressDomicile():"");
+            spinner_kota.setSelection(MethodUtil.getIndex(spinner_kota, cityNameSaved));
+            spinner_kelurahan.setSelection(MethodUtil.getIndex(spinner_kelurahan, userVerification.getSubDistrictIdCard()));
+            spinner_kecamatan.setSelection(MethodUtil.getIndex(spinner_kecamatan, userVerification.getDistrictIdCard()));
+            if (userVerification.isDomicileSameWithIdCard()) {
+                cb_sama_ktp.setChecked(true);
+                layout_same_id_card.setVisibility(View.GONE);
+                isDomicileSameWithIdCard = true;
+            } else {
+                cb_sama_ktp.setChecked(false);
+                layout_same_id_card.setVisibility(View.VISIBLE);
+                isDomicileSameWithIdCard = false;
+            }
+            spinner_kota_domisili.setSelection(MethodUtil.getIndex(spinner_kota_domisili, cityDomicileNameSaved));
+            spinner_kelurahan_domisili.setSelection(MethodUtil.getIndex(spinner_kelurahan_domisili, userVerification.getSubDistrictDomicile()));
+            spinner_kecamatan_domisili.setSelection(MethodUtil.getIndex(spinner_kecamatan_domisili, userVerification.getDistrictDomicile()));
         }
 
         cb_sama_ktp.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -303,6 +320,20 @@ public class VerificationData2Activity extends AppCompatActivity {
                             City city = response.body().get(i);
                             cityList.add(city.getName());
                             cityIdList.add(city.getId());
+
+                            if (PreferenceManager.getIsSaveVerificationData()) {
+                                UserVerification userVerification = PreferenceManager.getUserVerification();
+                                if (city.getId().equals(userVerification.getCityIdCard())){
+                                    cityNameSaved = city.getName();
+                                }
+                            }
+
+                            if (PreferenceManager.getIsSaveVerificationData()) {
+                                UserVerification userVerification = PreferenceManager.getUserVerification();
+                                if (city.getId().equals(userVerification.getCityDomicile())){
+                                    cityDomicileNameSaved = city.getName();
+                                }
+                            }
                         }
 
                         ArrayAdapter aa = new ArrayAdapter(appActivity, R.layout.custom_simple_spinner_item, cityList);

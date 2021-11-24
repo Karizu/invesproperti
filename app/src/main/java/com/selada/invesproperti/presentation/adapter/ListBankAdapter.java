@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.response.bankaccount.BankAccountResponse;
 import com.selada.invesproperti.presentation.portofolio.DetailProductDidanaiActivity;
 import com.selada.invesproperti.presentation.profile.bank.AddBankActivity;
 import com.selada.invesproperti.presentation.profile.bank.AkunBankActivity;
@@ -23,11 +25,11 @@ import com.selada.invesproperti.util.Constant;
 import java.util.List;
 
 public class ListBankAdapter extends RecyclerView.Adapter<ListBankAdapter.ViewHolder> {
-    private List<String> transactionModels;
+    private List<BankAccountResponse> transactionModels;
     private Context context;
     private Activity activity;
 
-    public ListBankAdapter(List<String> transactionModels, Context context, Activity activity) {
+    public ListBankAdapter(List<BankAccountResponse> transactionModels, Context context, Activity activity) {
         this.transactionModels = transactionModels;
         this.context = context;
         this.activity = activity;
@@ -44,9 +46,18 @@ public class ListBankAdapter extends RecyclerView.Adapter<ListBankAdapter.ViewHo
     @SuppressLint({"SetTextI18n", "ResourceAsColor", "CheckResult"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.progressBar.setProgressInTime(20,2500);
+        BankAccountResponse accountResponse = transactionModels.get(position);
+        String bankName = accountResponse.getBank().getName();
+        String accountName = accountResponse.getAccountName();
+        String accountNumber = accountResponse.getAccountNumber();
+        accountNumber = "**** **** " + accountNumber.substring(accountNumber.length()-4);
+
+        holder.tv_bank_name.setText(bankName);
+        holder.tv_name.setText(accountName);
+        holder.tv_account_no.setText(accountNumber);
         holder.cvItem.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DetailBankActivity.class);
+            intent.putExtra("json", new Gson().toJson(accountResponse));
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         });

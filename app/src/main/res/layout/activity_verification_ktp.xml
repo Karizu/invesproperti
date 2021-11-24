@@ -218,7 +218,7 @@
 
         <TextView
             android:id="@+id/tv_tahap_1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="36dp"
@@ -227,6 +227,23 @@
             android:textSize="14sp"
             android:layout_below="@id/layout_circle_1"
             android:layout_marginStart="26dp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+        <TextView
+            android:id="@+id/tv_lihat_panduan_kyc_1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/lihat_panduan"
+            android:textStyle="bold"
+            android:textColor="@color/Black"
+            android:textSize="14sp"
+            android:gravity="end"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/layout_circle_1"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="26dp"
             android:fontFamily="@font/titilliumweb_regular"/>
 
         <FrameLayout
@@ -272,7 +289,7 @@
 
         <TextView
             android:id="@+id/tv_tahap_2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="28dp"
@@ -281,6 +298,23 @@
             android:textSize="14sp"
             android:layout_below="@id/frame_tahap_1"
             android:layout_marginStart="26dp"
+            android:fontFamily="@font/titilliumweb_regular"/>
+
+        <TextView
+            android:id="@+id/tv_lihat_panduan_kyc_2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/lihat_panduan"
+            android:textStyle="bold"
+            android:textColor="@color/Black"
+            android:textSize="14sp"
+            android:gravity="end"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/frame_tahap_1"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="26dp"
             android:fontFamily="@font/titilliumweb_regular"/>
 
         <FrameLayout

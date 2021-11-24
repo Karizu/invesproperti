@@ -102,4 +102,7 @@ dependencies {
     implementation "com.github.skydoves:transformationlayout:1.1.0"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'me.ithebk:barchart:0.9'
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    implementation 'com.github.ParkSangGwon:TedPicker:v1.0.10'
+    implementation 'com.github.ibnux:Location-Picker:1.9'
 }

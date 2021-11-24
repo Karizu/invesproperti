@@ -366,7 +366,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:paddingStart="14dp"
+                    android:paddingStart="7dp"
                     android:background="@drawable/bg_round_field_verification">
 
                     <Spinner
@@ -394,7 +394,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:paddingStart="14dp"
+                    android:paddingStart="7dp"
                     android:background="@drawable/bg_round_field_verification">
 
                     <Spinner
@@ -452,7 +452,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:paddingStart="14dp"
+                    android:paddingStart="7dp"
                     android:background="@drawable/bg_round_field_verification">
 
                     <Spinner

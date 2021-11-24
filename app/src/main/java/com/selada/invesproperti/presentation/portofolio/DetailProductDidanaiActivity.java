@@ -49,10 +49,14 @@ public class DetailProductDidanaiActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void initComponent() {
-        tv_title_bar.setText("Yellow Carwash Galuh Mas");
+        String id = getIntent().getStringExtra("id");
+        String name = getIntent().getStringExtra("name");
+        tv_title_bar.setText(name);
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
         adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.titleA, InfoFragment.class)
+                .add(R.string.titleA, InfoFragment.class, bundle)
                 .add(R.string.titleB, FinancialFragment.class)
                 .add(R.string.titleC, ReportFragment.class)
                 .create());

@@ -24,11 +24,6 @@ public class PaymentCompleteActivity extends AppCompatActivity {
     @BindView(R.id.tv_name)
     TextView tv_name;
 
-    @OnClick(R.id.img_close)
-    void onClickImgClose(){
-        onBackPressed();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -222,45 +222,49 @@ public class InputPaymentActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void initComponent() {
-        checkBalanceInquiry();
+        try {
+            checkBalanceInquiry();
 
-        json = getIntent().getStringExtra("json");
-        ResponseDetailProject detailProject = new Gson().fromJson(json, ResponseDetailProject.class);
-        String projectName = detailProject.getName();
-        pricePerLot = detailProject.getPricePerLot();
-        int lotAvailable = detailProject.getTotalLot();
-        String provideDividen = detailProject.getDividenPeriod();
-        String estimateDividen = detailProject.getInterestRate();
+            json = getIntent().getStringExtra("json");
+            ResponseDetailProject detailProject = new Gson().fromJson(json, ResponseDetailProject.class);
+            String projectName = detailProject.getName();
+            pricePerLot = detailProject.getPricePerLot();
+            int lotAvailable = detailProject.getTotalLot();
+            String provideDividen = detailProject.getDividenPeriod();
+            String estimateDividen = detailProject.getInterestRate();
 
 
-        tvPricePerLot.setText("Rp. " + MethodUtil.toCurrencyFormat(String.valueOf(pricePerLot)) + "/lot");
-        tvPricePerLotOnPayment.setText(MethodUtil.toCurrencyFormat(String.valueOf(pricePerLot)));
-        tvProvideDividen.setText(provideDividen);
-        tvTotalLot.setText(lotAvailable + " lot");
-        tvEstimateDividen.setText(estimateDividen);
-        tv_title_bar.setText(projectName);
-        et_jumlah_lot.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            tvPricePerLot.setText("Rp. " + MethodUtil.toCurrencyFormat(String.valueOf(pricePerLot)) + "/lot");
+            tvPricePerLotOnPayment.setText(MethodUtil.toCurrencyFormat(String.valueOf(pricePerLot)));
+            tvProvideDividen.setText(provideDividen);
+            tvTotalLot.setText(lotAvailable + " lot");
+            tvEstimateDividen.setText(estimateDividen);
+            tv_title_bar.setText(projectName);
+            et_jumlah_lot.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().equals("")){
-                    tv_total_pembelian.setText("0");
-                    et_jumlah_lot.setText("0");
-                } else {
-                    total = Integer.parseInt(charSequence.toString()) * pricePerLot;
-                    tv_total_pembelian.setText(MethodUtil.toCurrencyFormat(String.valueOf(total)));
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (charSequence.toString().equals("")){
+                        tv_total_pembelian.setText("0");
+                        et_jumlah_lot.setText("0");
+                    } else {
+                        total = Integer.parseInt(charSequence.toString()) * pricePerLot;
+                        tv_total_pembelian.setText(MethodUtil.toCurrencyFormat(String.valueOf(total)));
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void checkBalanceInquiry(){

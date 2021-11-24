@@ -1,13 +1,16 @@
 package com.selada.invesproperti.api;
 
+import com.selada.invesproperti.model.request.BankAccountRequest;
 import com.selada.invesproperti.model.request.ChangePassRequest;
 import com.selada.invesproperti.model.request.PaymentRequest;
 import com.selada.invesproperti.model.request.RequestLogin;
 import com.selada.invesproperti.model.request.RequestRefreshToken;
 import com.selada.invesproperti.model.request.RequestRegister;
 import com.selada.invesproperti.model.request.RequestUpdatePhone;
+import com.selada.invesproperti.model.request.UpdateBankAccountRequest;
 import com.selada.invesproperti.model.response.ApiResponse;
 import com.selada.invesproperti.model.response.Bank;
+import com.selada.invesproperti.model.response.BusinessType;
 import com.selada.invesproperti.model.response.City;
 import com.selada.invesproperti.model.response.Country;
 import com.selada.invesproperti.model.response.Education;
@@ -21,6 +24,7 @@ import com.selada.invesproperti.model.response.ResponseRefreshToken;
 import com.selada.invesproperti.model.response.ResponseRegister;
 import com.selada.invesproperti.model.response.ResponseUserProfile;
 import com.selada.invesproperti.model.response.ResponseUserVerification;
+import com.selada.invesproperti.model.response.bankaccount.BankAccountResponse;
 import com.selada.invesproperti.model.response.detailproject.ResponseDetailProject;
 
 import java.util.List;
@@ -30,6 +34,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -37,6 +42,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 
 public interface ApiInterface {
@@ -87,6 +93,9 @@ public interface ApiInterface {
     @GET("project")
     Call<List<ResponseProjects>> getListProjects(@Header("Authorization") String token);
 
+    @GET("project")
+    Call<List<ResponseProjects>> getListProjectsOwned(@Query("owned") String s, @Header("Authorization") String token);
+
     @GET("project/{id}")
     Call<ResponseDetailProject> getDetailProject(@Path("id") String id, @Header("Authorization") String token);
 
@@ -102,10 +111,27 @@ public interface ApiInterface {
     @POST("applicationuser/updateavatar")
     Call<ResponseBody> updateProfilePicture(@Body RequestBody requestBody, @Header("Authorization") String token);
 
-    @Streaming
     @GET("project/prospectus/{id}")
     Call<ResponseBody> getProspectus(@Path("id") String id, @Header("Authorization") String token);
 
     @PUT("applicationuser")
     Call<ResponseBody> updatePhoneNumber(@Body RequestUpdatePhone requestUpdatePhone, @Header("Authorization") String token);
+
+    @GET("bankaccount")
+    Call<List<BankAccountResponse>> getBankAccount(@Header("Authorization") String token);
+
+    @POST("bankaccount")
+    Call<ResponseBody> createBankAccount(@Body BankAccountRequest bankAccountRequest, @Header("Authorization") String token);
+
+    @PUT("bankaccount")
+    Call<ResponseBody> updateBankAccount(@Body UpdateBankAccountRequest updateBankAccountRequest, @Header("Authorization") String token);
+
+    @DELETE("bankaccount/{id}")
+    Call<ResponseBody> deleteBankAccount(@Path("id") String id, @Header("Authorization") String token);
+
+    @GET("businesstype")
+    Call<List<BusinessType>> getListBusinessType(@Header("Authorization") String token);
+
+    @POST("project")
+    Call<ResponseBody> createProject(@Body RequestBody requestBody, @Header("Authorization") String token);
 }

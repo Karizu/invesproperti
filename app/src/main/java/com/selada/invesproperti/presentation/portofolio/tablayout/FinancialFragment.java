@@ -1,6 +1,7 @@
 package com.selada.invesproperti.presentation.portofolio.tablayout;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +18,18 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.view.LineChartView;
 import me.ithebk.barchart.BarChart;
 import me.ithebk.barchart.BarChartModel;
 
 public class FinancialFragment extends Fragment {
     @BindView(R.id.bar_chart_vertical)
     BarChart barChart;
+    @BindView(R.id.chart)
+    LineChartView chart;
 
     @SuppressLint("InflateParams")
     @Nullable
@@ -40,6 +47,27 @@ public class FinancialFragment extends Fragment {
     }
 
     private void setContentHome() {
+        //line chart
+        List<PointValue> values = new ArrayList<>();
+        values.add(new PointValue(0, 50));
+        values.add(new PointValue(1, 70));
+        values.add(new PointValue(2, 35));
+        values.add(new PointValue(3, 95));
+        values.add(new PointValue(4, 40));
+
+        //In most cased you can call data model methods in builder-pattern-like manner.
+        Line line = new Line(values).setColor(getResources().getColor(R.color.green_primary)).setCubic(true);
+        List<Line> lines = new ArrayList<>();
+        lines.add(line);
+
+        LineChartData data = new LineChartData();
+        data.setLines(lines);
+
+//        LineChartView chartData = new LineChartView(requireContext());
+        chart.setLineChartData(data);
+
+
+        //bar chart
         barChart.setBarMaxValue(100);
         List<BarChartModel> barChartModelList = new ArrayList<>();
         BarChartModel barChartModel = new BarChartModel();

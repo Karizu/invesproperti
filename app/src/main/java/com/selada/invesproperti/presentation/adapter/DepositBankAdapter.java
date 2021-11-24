@@ -15,17 +15,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.response.Bank;
 import com.selada.invesproperti.presentation.portofolio.deposit.DetailDepositActivity;
 import com.selada.invesproperti.presentation.profile.bank.DetailBankActivity;
 
 import java.util.List;
 
 public class DepositBankAdapter extends RecyclerView.Adapter<DepositBankAdapter.ViewHolder> {
-    private List<String> transactionModels;
+    private List<Bank> transactionModels;
     private Context context;
     private Activity activity;
 
-    public DepositBankAdapter(List<String> transactionModels, Context context, Activity activity) {
+    public DepositBankAdapter(List<Bank> transactionModels, Context context, Activity activity) {
         this.transactionModels = transactionModels;
         this.context = context;
         this.activity = activity;
@@ -42,9 +43,19 @@ public class DepositBankAdapter extends RecyclerView.Adapter<DepositBankAdapter.
     @SuppressLint({"SetTextI18n", "ResourceAsColor", "CheckResult"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Bank bank = transactionModels.get(position);
+        holder.tv_bank_name.setText(bank.getName() + " - ATM");
 //        holder.progressBar.setProgressInTime(20,2500);
+        if(bank.getName().toLowerCase().contains("bca")){
+            holder.img_logo_bank.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_bca));
+        } else if (bank.getName().toLowerCase().contains("mandiri")){
+            holder.img_logo_bank.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_mandiri));
+        } else if (bank.getName().toLowerCase().contains("permata")){
+            holder.img_logo_bank.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_permata));
+        }
         holder.cvItem.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DetailDepositActivity.class);
+            intent.putExtra("bank_name", holder.tv_bank_name.getText().toString());
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         });

@@ -72,6 +72,8 @@ public class VerificationData3Activity extends AppCompatActivity {
     private Context appActivity;
     private List<String> fundSourceIdList, investmentGoalIdList;
     private UserVerification userVerification;
+    private String fundSourcesNameSaved;
+    private String investmentNameSaved;
 
     @OnClick(R.id.rb_yes)
     void onClickYes(){
@@ -151,17 +153,24 @@ public class VerificationData3Activity extends AppCompatActivity {
     private void initComponent() {
         userVerification = new UserVerification();
         setCurrency(et_pendapatan_tahunan);
+
         if (PreferenceManager.getIsSaveVerificationData()){
             userVerification = PreferenceManager.getUserVerification();
-            et_pendapatan_tahunan.setText(userVerification.getYearlyIncome()!=null?userVerification.getYearlyIncome():"");
             et_ktp.setText(userVerification.getIdCardNumber()!=null?userVerification.getIdCardNumber():"");
+            et_pendapatan_tahunan.setText(userVerification.getYearlyIncome()!=null?userVerification.getYearlyIncome():"");
             et_ibu_kandung.setText(userVerification.getMotherName()!=null?userVerification.getMotherName():"");
             et_ahli.setText(userVerification.getHeirName()!=null?userVerification.getHeirName():"");
             if (userVerification.getHasSecuritiesAccount()) {
                 rb_yes.setChecked(true);
+                hasSecuritiesAccount = true;
             } else {
-                rb_no.setChecked(false);
+                rb_no.setChecked(true);
+                hasSecuritiesAccount = false;
             }
+            spinner_fund_source.setSelection(MethodUtil.getIndex(spinner_fund_source, fundSourcesNameSaved));
+            spinner_hubungan_ahli.setSelection(MethodUtil.getIndex(spinner_hubungan_ahli, userVerification.getRelation()));
+            spinner_investment_goal.setSelection(MethodUtil.getIndex(spinner_investment_goal, investmentNameSaved));
+            etKataSandi.setText(userVerification.getPassword());
         }
 
         getListSpouseRelation();
@@ -247,6 +256,13 @@ public class VerificationData3Activity extends AppCompatActivity {
                             FundSources fundSources = response.body().get(i);
                             fundSourceList.add(fundSources.getName());
                             fundSourceIdList.add(fundSources.getId());
+
+                            if (PreferenceManager.getIsSaveVerificationData()) {
+                                UserVerification userVerification = PreferenceManager.getUserVerification();
+                                if (fundSources.getId().equals(userVerification.getFundSourceId())){
+                                    fundSourcesNameSaved = fundSources.getName();
+                                }
+                            }
                         }
 
                         ArrayAdapter aa = new ArrayAdapter(appActivity, R.layout.custom_simple_spinner_item, fundSourceList);
@@ -304,6 +320,13 @@ public class VerificationData3Activity extends AppCompatActivity {
                             InvestmentGoal investmentGoal = response.body().get(i);
                             investmentGoalList.add(investmentGoal.getName());
                             investmentGoalIdList.add(investmentGoal.getId());
+
+                            if (PreferenceManager.getIsSaveVerificationData()) {
+                                UserVerification userVerification = PreferenceManager.getUserVerification();
+                                if (investmentGoal.getId().equals(userVerification.getInvestmentGoalId())){
+                                    investmentNameSaved = investmentGoal.getName();
+                                }
+                            }
                         }
 
                         ArrayAdapter aa = new ArrayAdapter(appActivity, R.layout.custom_simple_spinner_item, investmentGoalList);

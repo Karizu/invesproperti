@@ -14,16 +14,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.response.ResponseProjects;
 import com.selada.invesproperti.presentation.portofolio.DetailProductDidanaiActivity;
+import com.selada.invesproperti.util.MethodUtil;
 
 import java.util.List;
 
 public class PortofolioFeedPOAdapter extends RecyclerView.Adapter<PortofolioFeedPOAdapter.ViewHolder> {
-    private List<String> transactionModels;
+    private List<ResponseProjects> transactionModels;
     private Context context;
     private Activity activity;
 
-    public PortofolioFeedPOAdapter(List<String> transactionModels, Context context, Activity activity) {
+    public PortofolioFeedPOAdapter(List<ResponseProjects> transactionModels, Context context, Activity activity) {
         this.transactionModels = transactionModels;
         this.context = context;
         this.activity = activity;
@@ -40,9 +42,17 @@ public class PortofolioFeedPOAdapter extends RecyclerView.Adapter<PortofolioFeed
     @SuppressLint({"SetTextI18n", "ResourceAsColor", "CheckResult"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ResponseProjects responseProjects = transactionModels.get(position);
 
+        holder.tv_asset_name.setText(responseProjects.getName());
+        holder.tv_terdanai.setText("Rp " + MethodUtil.toCurrencyFormat(String.valueOf(responseProjects.getFundingAmount())));
+        holder.tv_target.setText("Rp " + MethodUtil.toCurrencyFormat(String.valueOf(responseProjects.getRequestedAmount())));
+        holder.tv_lot_terjual.setText(responseProjects.getTotalLot() + " Lot");
+//        holder.tv_didanai_oleh.setText("");
         holder.cvItem.setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailProductDidanaiActivity.class);
+            intent.putExtra("id", responseProjects.getId());
+            intent.putExtra("name", responseProjects.getName());
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         });

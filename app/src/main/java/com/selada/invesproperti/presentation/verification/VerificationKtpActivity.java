@@ -18,7 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.UserVerification;
 import com.selada.invesproperti.util.MethodUtil;
+import com.selada.invesproperti.util.PreferenceManager;
 import com.white.progressview.HorizontalProgressView;
 
 import butterknife.BindView;
@@ -49,6 +51,20 @@ public class VerificationKtpActivity extends AppCompatActivity {
     private boolean isProjectOwner;
     private Bitmap photoKtp;
     private Bitmap photoSelfie;
+
+    @OnClick(R.id.tv_lihat_panduan_kyc_1)
+    void onClickKyc1(){
+        Intent intent = new Intent(this, GuideKycActivity.class);
+        intent.putExtra("is_kyc_1", true);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.tv_lihat_panduan_kyc_2)
+    void onClickKyc2(){
+        Intent intent = new Intent(this, GuideKycActivity.class);
+        intent.putExtra("is_kyc_1", false);
+        startActivity(intent);
+    }
 
     @OnClick(R.id.btn_back)
     void onClickBtnBack() {
@@ -95,6 +111,16 @@ public class VerificationKtpActivity extends AppCompatActivity {
         if (getIntent() != null){
             isInvestor = getIntent().getBooleanExtra("is_investor", false);
             isProjectOwner = getIntent().getBooleanExtra("is_project_owner", false);
+        }
+
+        if(PreferenceManager.getIsSaveVerificationData()) {
+            UserVerification userVerification = PreferenceManager.getUserVerification();
+            img_ktp.setImageBitmap(MethodUtil.byteArrayToBitmap(userVerification.getPhotoKtp()));
+            img_selfie.setImageBitmap(MethodUtil.byteArrayToBitmap(userVerification.getPhotoSelfie()));
+            photoKtp = MethodUtil.byteArrayToBitmap(userVerification.getPhotoSelfie());
+            photoSelfie = MethodUtil.byteArrayToBitmap(userVerification.getPhotoSelfie());
+            btn_lanjut.setEnabled(true);
+            btn_lanjut.setBackground(getResources().getDrawable(R.drawable.bg_round_green));
         }
     }
 

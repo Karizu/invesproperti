@@ -143,16 +143,16 @@ public class InquiryPaymentActivity extends AppCompatActivity {
 
         //call balance inq here
 
-        if (balanceInquiry >= Integer.parseInt(inqTotalAmount)){
-            String styledText = "Saldo anda akan berkurang Rp. <font color='#000000;'><b>"+ inqTotalAmount +"</b></font> untuk pembelian ini.";
-            text1.setTextColor(getResources().getColor(R.color.black_primary));
-            text1.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
-            cbSyarat.setEnabled(true);
-        } else {
-            text1.setText("Saldo anda tidak cukup. Silahkan lakukan pengisian.");
-            text1.setTextColor(getResources().getColor(R.color.red_alert_text));
-            cbSyarat.setEnabled(false);
-        }
+//        if (balanceInquiry >= Integer.parseInt(inqTotalAmount)){
+//            String styledText = "Saldo anda akan berkurang Rp. <font color='#000000;'><b>"+ inqTotalAmount +"</b></font> untuk pembelian ini.";
+//            text1.setTextColor(getResources().getColor(R.color.black_primary));
+//            text1.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
+//            cbSyarat.setEnabled(true);
+//        } else {
+//            text1.setText("Saldo anda tidak cukup. Silahkan lakukan pengisian.");
+//            text1.setTextColor(getResources().getColor(R.color.red_alert_text));
+//            cbSyarat.setEnabled(false);
+//        }
 
         cbSyarat.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b){

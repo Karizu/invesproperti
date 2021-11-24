@@ -45,8 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="82.25dp"
         android:layout_marginEnd="81.25dp"
-        android:layout_marginTop="-30dp"
-        android:src="@drawable/bg_ilustration"/>
+        android:layout_marginTop="-30dp"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_below="@id/layoutContent"

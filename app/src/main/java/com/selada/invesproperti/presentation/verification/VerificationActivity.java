@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import com.selada.invesproperti.IntroSliderActivity;
 import com.selada.invesproperti.R;
+import com.selada.invesproperti.model.UserVerification;
+import com.selada.invesproperti.util.PreferenceManager;
 import com.white.progressview.HorizontalProgressView;
 
 import butterknife.BindView;
@@ -74,6 +76,27 @@ public class VerificationActivity extends AppCompatActivity {
 
     private void initComponent() {
         progressBarItem.setProgress(15);
+
+        if(PreferenceManager.getIsSaveVerificationData()) {
+            UserVerification userVerification = PreferenceManager.getUserVerification();
+            if (userVerification.isInvestor()) {
+                img_checked_1.setBackground(getResources().getDrawable(R.drawable.bg_circle_cheked));
+                img_checked_2.setBackground(getResources().getDrawable(R.drawable.bg_circle_unchecked));
+                btn_lanjut.setEnabled(true);
+                btn_lanjut.setBackground(getResources().getDrawable(R.drawable.bg_round_green));
+                IsInvestor = true;
+                IsProjectOwner = false;
+            }
+
+            if (userVerification.isProjectOwner()) {
+                img_checked_1.setBackground(getResources().getDrawable(R.drawable.bg_circle_unchecked));
+                img_checked_2.setBackground(getResources().getDrawable(R.drawable.bg_circle_cheked));
+                btn_lanjut.setEnabled(true);
+                btn_lanjut.setBackground(getResources().getDrawable(R.drawable.bg_round_green));
+                IsInvestor = false;
+                IsProjectOwner = true;
+            }
+        }
     }
 
     @Override

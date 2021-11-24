@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.orhanobut.hawk.Hawk;
 import com.selada.invesproperti.model.QuesionerData;
 import com.selada.invesproperti.model.UserVerification;
+import com.selada.invesproperti.model.request.SubmitProductRequest;
 import com.selada.invesproperti.model.response.ResponseLogin;
 import com.selada.invesproperti.model.response.ResponseUserProfile;
 
@@ -38,7 +39,9 @@ public class PreferenceManager {
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String LOGIN_RESPONSE = "loginResponse";
     private static final String USER_VERIFICATION = "userVerfication";
+    private static final String SUBMIT_PROJECT = "submitProject";
     private static final String IS_SAVE_VERIFICATION_DATA = "isSaveVerficationData";
+    private static final String IS_SAVE_PRODUCT_DATA = "isSaveProductData";
     private static final String IS_UNAUTHORIZED = "isUnauthorized";
     private static final String USER_PROFILE = "userProfile";
     private static final String QUESIONER_DATA = "quesionerData";
@@ -78,6 +81,7 @@ public class PreferenceManager {
         Hawk.delete(USER_STATUS);
         Hawk.delete(IS_UNAUTHORIZED);
         Hawk.delete(IS_SAVE_VERIFICATION_DATA);
+        Hawk.delete(IS_SAVE_PRODUCT_DATA);
         Hawk.delete(IS_FINGER_ACTIVE);
         Hawk.delete(SESSION_TOKEN);
         Hawk.delete(IS_ALREADY_QUESIONER);
@@ -87,6 +91,7 @@ public class PreferenceManager {
         Hawk.delete(LOGIN_RESPONSE);
         Hawk.delete(LOGIN_FROM);
         Hawk.delete(USER_PROFILE);
+        Hawk.delete(SUBMIT_PROJECT);
     }
 
     public static void setIsAlreadyQuesioner(boolean isAlreadyQuesioner){
@@ -177,6 +182,13 @@ public class PreferenceManager {
         return Hawk.get(USER_VERIFICATION, new UserVerification());
     }
 
+    public static void setSubmitProject(SubmitProductRequest submitProductRequest){
+        Hawk.put(SUBMIT_PROJECT, submitProductRequest);
+    }
+
+    public static SubmitProductRequest getSubmitProject(){
+        return Hawk.get(SUBMIT_PROJECT, new SubmitProductRequest());
+    }
 
     public static void setIsSaveVerificationData(boolean isSave){
         Hawk.put(IS_SAVE_VERIFICATION_DATA, isSave);
@@ -186,6 +198,13 @@ public class PreferenceManager {
         return Hawk.get(IS_SAVE_VERIFICATION_DATA, false);
     }
 
+    public static void setIsSaveProductData(boolean isSave){
+        Hawk.put(IS_SAVE_PRODUCT_DATA, isSave);
+    }
+
+    public static boolean getIsSaveProductData(){
+        return Hawk.get(IS_SAVE_PRODUCT_DATA, false);
+    }
 
     public static void setIsUnauthorized(boolean isUnauthorized){
         Hawk.put(IS_UNAUTHORIZED, isUnauthorized);

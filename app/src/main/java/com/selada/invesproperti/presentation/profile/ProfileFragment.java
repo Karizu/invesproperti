@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -21,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -165,6 +167,14 @@ public class ProfileFragment extends Fragment {
 
     @OnClick(R.id.frame_profile_pic)
     void onClickFramePic(){
+        if (Build.VERSION.SDK_INT >= 23) {
+            int permissionCheck = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return;
+            }
+        }
+
         displayChoiceDialog();
     }
 
@@ -185,7 +195,18 @@ public class ProfileFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void setContentHome() {
-        getUserProfile();
+        if(PreferenceManager.getUserProfile()!=null){
+            ResponseUserProfile userProfile = PreferenceManager.getUserProfile();
+            if (userProfile.getProfilePicture()!=null) {
+                try {
+                    byte[] decodedString = Base64.decode(Objects.requireNonNull(userProfile).getProfilePicture(), Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    img_profile.setImageBitmap(decodedByte);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
 
         tv_profile_name.setText(PreferenceManager.getFullname());
         tv_profile_email.setText(PreferenceManager.getEmail());
@@ -337,7 +358,8 @@ public class ProfileFragment extends Fragment {
             } else {
                 Log.d("==>","Operation canceled!");
             }
-        } else if (requestCode==0){
+        }
+        else if (requestCode==0){
             if(resultCode == RESULT_OK){
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(
@@ -354,6 +376,7 @@ public class ProfileFragment extends Fragment {
                 Loading.hide(requireActivity());
                 try {
                     if (response.isSuccessful()){
+                        Toast.makeText(requireActivity(), "Berhasil mengganti avatar", Toast.LENGTH_SHORT).show();
                         img_profile.setImageBitmap(bitmap);
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), requireActivity());
@@ -366,51 +389,6 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Loading.hide(requireActivity());
-                Loading.hide(requireActivity());
-            }
-        });
-    }
-
-    private void getUserProfile(){
-        Loading.show(requireActivity());
-        ApiCore.apiInterface().getUserProfile(PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseUserProfile>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(Call<ResponseUserProfile> call, Response<ResponseUserProfile> response) {
-                Loading.hide(requireActivity());
-                try {
-                    if (response.isSuccessful()){
-                        ResponseUserProfile userProfile = response.body();
-                        byte[] decodedString = Base64.decode(Objects.requireNonNull(userProfile).getProfilePicture(), Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        img_profile.setImageBitmap(decodedByte);
-
-                        PreferenceManager.setResponseUserProfile(userProfile);
-
-                        switch (Objects.requireNonNull(response.body()).getStatus()){
-                            case Constant.GUEST:
-                                PreferenceManager.setUserStatus(Constant.GUEST);
-                                break;
-                            case Constant.ON_VERIFICATION:
-                                PreferenceManager.setUserStatus(Constant.ON_VERIFICATION);
-                                break;
-                            case Constant.VERIFIED:
-                                if (response.body().isInvestor()){
-                                    PreferenceManager.setUserStatus(Constant.INVESTOR);
-                                } else {
-                                    PreferenceManager.setUserStatus(Constant.PRODUCT_OWNER);
-                                }
-                                break;
-                        }
-                    }
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseUserProfile> call, Throwable t) {
                 Loading.hide(requireActivity());
                 t.printStackTrace();
             }

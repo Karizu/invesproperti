@@ -58,6 +58,7 @@ public class VerificationBankActivity extends AppCompatActivity {
     private List<String> bankIdList;
     private Activity appActivity;
     private UserVerification userVerification;
+    private String bankNameSaved;
 
     @OnClick(R.id.frame_save)
     void onClickSave(){
@@ -109,6 +110,7 @@ public class VerificationBankActivity extends AppCompatActivity {
         userVerification = new UserVerification();
         if (PreferenceManager.getIsSaveVerificationData()){
             userVerification = PreferenceManager.getUserVerification();
+            spinner_bank.setSelection(MethodUtil.getIndex(spinner_bank, bankNameSaved));
             et_no_rekening.setText(userVerification.getAccountNumber()!=null?userVerification.getAccountNumber():"");
             et_pemilik_rekening.setText(userVerification.getAccountName()!=null?userVerification.getAccountName():"");
         }
@@ -218,6 +220,13 @@ public class VerificationBankActivity extends AppCompatActivity {
                             Bank bank = response.body().get(i);
                             bankList.add(bank.getName());
                             bankIdList.add(bank.getId());
+
+                            if (PreferenceManager.getIsSaveVerificationData()) {
+                                UserVerification userVerification = PreferenceManager.getUserVerification();
+                                if (bank.getId().equals(userVerification.getBankId())){
+                                    bankNameSaved = bank.getName();
+                                }
+                            }
                         }
 
                         ArrayAdapter aa = new ArrayAdapter(appActivity, R.layout.custom_simple_spinner_item, bankList);

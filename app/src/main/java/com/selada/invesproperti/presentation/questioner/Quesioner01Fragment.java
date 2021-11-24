@@ -16,6 +16,7 @@ import com.selada.invesproperti.util.PreferenceManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Quesioner01Fragment extends Fragment {
 

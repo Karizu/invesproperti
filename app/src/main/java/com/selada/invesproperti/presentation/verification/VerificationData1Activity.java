@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,9 +21,11 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
 import com.selada.invesproperti.model.UserVerification;
+import com.selada.invesproperti.model.request.SubmitProductRequest;
 import com.selada.invesproperti.model.response.Education;
 import com.selada.invesproperti.model.response.Occupation;
 import com.selada.invesproperti.util.Loading;
@@ -81,6 +84,11 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
     private DatePickerDialog datePickerDialog;
     private Activity appActivity;
     private boolean isUnauthorized = false;
+    private int minYear = 2004;
+    private String educationNameSaved;
+    private String occupationNameSaved;
+    private String[] statusId = {" ", "MARRIED", "SINGLE", "DIVORCE", "WIDOW"};
+    String[] status = {"Pilih status pernikahan", "Menikah", "Lajang", "Cerai", "Janda"};
 
     @OnClick(R.id.rb_laki)
     void onClickRbLaki(){
@@ -194,6 +202,8 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
         newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(
                 this, VerificationData1Activity.this, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        int mYear = newCalendar.get(Calendar.YEAR);
+        minYear = mYear - 17;
 
         if (getIntent() != null){
             isInvestor = getIntent().getBooleanExtra("is_investor", false);
@@ -202,13 +212,9 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
             photoSelfie = getIntent().getByteArrayExtra("photo_selfie");
         }
 
-        if (PreferenceManager.getIsSaveVerificationData()){
-            UserVerification userVerification = PreferenceManager.getUserVerification();
-            et_nama_pasangan.setText(userVerification.getSpouseName());
-            et_tempat_lahir.setText(userVerification.getBirthplace());
-            et_nama_lengkap.setText(userVerification.getName());
-        }
-
+        et_nama_lengkap.setText(PreferenceManager.getFullname());
+        getListEducation();
+        getListOccupation();
         setSpinnerData();
         checkVerificationDataIsAvailable();
         if (PreferenceManager.getIsUnauthorized()){
@@ -224,34 +230,63 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
             et_tempat_lahir.setText(userVerification.getBirthplace());
             tv_tgl_lahir.setText(userVerification.getBirthDate());
             et_nama_pasangan.setText(userVerification.getSpouseName());
-            if (userVerification.getGender().equals("MALE")) rb_laki.setChecked(true);
-            if (userVerification.getGender().equals("FEMALE")) rb_perempuan.setChecked(true);
+            if (userVerification.getGender().equals("MALE")) {
+                rb_laki.setChecked(true);
+                gender = "MALE";
+            }
+            if (userVerification.getGender().equals("FEMALE")) {
+                rb_perempuan.setChecked(true);
+                gender = "FEMALE";
+            }
+
+            int i = 0;
+            for (String s : statusId) {
+                if (s.equals(userVerification.getMaritalStatus())) {
+                    spinner_status.setSelection(MethodUtil.getIndex(spinner_status, status[i]));
+                }
+                i++;
+            }
         }
     }
 
     private void setUserVerificationModel() {
-        UserVerification userVerification = new UserVerification();
-        userVerification.setInvestor(isInvestor);
-        userVerification.setProjectOwner(isProjectOwner);
-        userVerification.setPhotoKtp(photoKtp);
-        userVerification.setPhotoSelfie(photoSelfie);
-        userVerification.setName(et_nama_lengkap.getText().toString());
-        userVerification.setGender(gender);
-        userVerification.setBirthplace(et_tempat_lahir.getText().toString());
-        userVerification.setBirthDate(tv_tgl_lahir.getText().toString());
-        userVerification.setEducationId(educationSelectedItemId);
-        userVerification.setOccupationId(occupationSelectedItemId);
-        userVerification.setMaritalStatus(statusSelectedItem);
-        userVerification.setSpouseName(et_nama_pasangan.getText().toString().equals("")?"-":et_nama_pasangan.getText().toString());
-        PreferenceManager.setUserVerification(userVerification);
+        if (PreferenceManager.getIsSaveVerificationData()) {
+            UserVerification userVerification = PreferenceManager.getUserVerification();
+            userVerification.setInvestor(isInvestor);
+            userVerification.setProjectOwner(isProjectOwner);
+            userVerification.setPhotoKtp(photoKtp);
+            userVerification.setPhotoSelfie(photoSelfie);
+            userVerification.setName(et_nama_lengkap.getText().toString());
+            userVerification.setGender(gender);
+            userVerification.setBirthplace(et_tempat_lahir.getText().toString());
+            userVerification.setBirthDate(tv_tgl_lahir.getText().toString());
+            userVerification.setEducationId(educationSelectedItemId);
+            userVerification.setOccupationId(occupationSelectedItemId);
+            userVerification.setMaritalStatus(statusSelectedItem);
+            userVerification.setSpouseName(et_nama_pasangan.getText().toString().equals("")?"-":et_nama_pasangan.getText().toString());
+            PreferenceManager.setUserVerification(userVerification);
+            System.out.println("UserVerification : " + new Gson().toJson(PreferenceManager.getUserVerification()));
+        } else {
+            UserVerification userVerification = new UserVerification();
+            userVerification.setInvestor(isInvestor);
+            userVerification.setProjectOwner(isProjectOwner);
+            userVerification.setPhotoKtp(photoKtp);
+            userVerification.setPhotoSelfie(photoSelfie);
+            userVerification.setName(et_nama_lengkap.getText().toString());
+            userVerification.setGender(gender);
+            userVerification.setBirthplace(et_tempat_lahir.getText().toString());
+            userVerification.setBirthDate(tv_tgl_lahir.getText().toString());
+            userVerification.setEducationId(educationSelectedItemId);
+            userVerification.setOccupationId(occupationSelectedItemId);
+            userVerification.setMaritalStatus(statusSelectedItem);
+            userVerification.setSpouseName(et_nama_pasangan.getText().toString().equals("")?"-":et_nama_pasangan.getText().toString());
+            PreferenceManager.setUserVerification(userVerification);
+            System.out.println("UserVerification : " + new Gson().toJson(PreferenceManager.getUserVerification()));
+        }
+
     }
 
     private void setSpinnerData() {
-        getListEducation();
-        getListOccupation();
-
-        String[] status = {"Pilih status pernikahan", "Menikah", "Lajang", "Cerai", "Janda"};
-        String[] statusId = {" ", "MARRIED", "SINGLE", "DIVORCE", "WIDOW"};
         ArrayAdapter aa_3 = new ArrayAdapter(this, R.layout.custom_simple_spinner_item, status){
             @Override
             public boolean isEnabled(int position) {
@@ -274,6 +309,7 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
                 return view;
             }
         };
+
         aa_3.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         spinner_status.setAdapter(aa_3);
         spinner_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -313,6 +349,14 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
                             Education education = response.body().get(i);
                             educationList.add(education.getName());
                             educationIdList.add(education.getId());
+
+                            if (PreferenceManager.getIsSaveVerificationData()) {
+                                UserVerification userVerification = PreferenceManager.getUserVerification();
+                                if (education.getId().equals(userVerification.getEducationId())){
+                                    educationNameSaved = education.getName();
+                                    Log.d("educationNameSaved", educationNameSaved);
+                                }
+                            }
                         }
 
                         ArrayAdapter aa = new ArrayAdapter(appActivity, R.layout.custom_simple_spinner_item, educationList);
@@ -322,6 +366,7 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                 educationSelectedItemId = educationIdList.get(i);
+                                Log.d("educationSelectedItemId", educationSelectedItemId + " | " + adapterView.getSelectedItem());
                             }
 
                             @Override
@@ -329,6 +374,11 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
 
                             }
                         });
+
+                        if (PreferenceManager.getIsSaveVerificationData()) {
+                            spinner_pendidikan.setSelection(MethodUtil.getIndex(spinner_pendidikan, educationNameSaved));
+                        }
+
                     } else {
                         if (response.message().toLowerCase().contains("unauthorized")){
                             PreferenceManager.setIsUnauthorized(true);
@@ -362,6 +412,14 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
                             Occupation occupation = response.body().get(i);
                             occupationList.add(occupation.getName());
                             occupationIdList.add(occupation.getId());
+
+                            if (PreferenceManager.getIsSaveVerificationData()) {
+                                UserVerification userVerification = PreferenceManager.getUserVerification();
+                                if (occupation.getId().equals(userVerification.getOccupationId())){
+                                    occupationNameSaved = occupation.getName();
+                                    Log.d("occupationNameSaved", occupationNameSaved);
+                                }
+                            }
                         }
 
                         ArrayAdapter aa = new ArrayAdapter(appActivity, R.layout.custom_simple_spinner_item, occupationList);
@@ -371,6 +429,7 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                 occupationSelectedItemId = occupationIdList.get(i);
+                                Log.d("occupationItemId", occupationSelectedItemId + " | " + adapterView.getSelectedItem());
                             }
 
                             @Override
@@ -378,6 +437,11 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
 
                             }
                         });
+
+                        if (PreferenceManager.getIsSaveVerificationData()) {
+                            spinner_pekerjaan.setSelection(MethodUtil.getIndex(spinner_pekerjaan, occupationNameSaved));
+                        }
+
                     } else {
                         if (response.message().toLowerCase().contains("unauthorized")){
                             PreferenceManager.setIsUnauthorized(true);
@@ -408,6 +472,12 @@ public class VerificationData1Activity extends AppCompatActivity implements Date
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         Calendar newDate = Calendar.getInstance();
         newDate.set(i, i1, i2);
-        tv_tgl_lahir.setText(dateFormatter.format(newDate.getTime()));
+
+        int mYear = newDate.get(Calendar.YEAR);
+        if (mYear <= minYear) {
+            tv_tgl_lahir.setText(dateFormatter.format(newDate.getTime()));
+        } else {
+            MethodUtil.showSnackBar(VerificationData1Activity.this, "Usia minimal adalah 17 tahun");
+        }
     }
 }

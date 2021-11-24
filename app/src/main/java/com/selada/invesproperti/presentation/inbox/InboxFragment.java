@@ -58,23 +58,7 @@ public class InboxFragment extends Fragment {
     }
 
     private void setContentHome() {
-        switch (PreferenceManager.getUserStatus()){
-            case Constant.GUEST:
-                layoutGuest.setVisibility(View.VISIBLE);
-                layoutInvestor.setVisibility(View.GONE);
-                break;
-            case Constant.ON_VERIFICATION:
-                layoutInvestor.setVisibility(View.GONE);
-                layoutGuest.setVisibility(View.VISIBLE);
-                break;
-            case Constant.INVESTOR:
-                layoutGuest.setVisibility(View.GONE);
-                layoutInvestor.setVisibility(View.VISIBLE);
-                break;
-            case Constant.PRODUCT_OWNER:
-                layoutInvestor.setVisibility(View.VISIBLE);
-                layoutGuest.setVisibility(View.GONE);
-                break;
-        }
+        layoutInvestor.setVisibility(View.VISIBLE);
+        layoutGuest.setVisibility(View.GONE);
     }
 }

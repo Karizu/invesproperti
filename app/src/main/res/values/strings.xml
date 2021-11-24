@@ -105,9 +105,13 @@
     <string name="hubungan_dengan_ahli_waris">Hubungan Dengan Ahli Waris</string>
     <string name="profil_resiko">Profil Resiko</string>
     <string name="perhatian">Perhatian!</string>
-    <string name="perhatian_content"> Peraturan OJK 37 Tahun 2018 Pasal 42 ayat 2 &amp; 3 (2) Kriteria Pemodal sebagaimana dimaksud pada ayat (1) meliputi: a. Setiap Pemodal dengan penghasilan sampai dengan Rp. 500.000.000,00 (lima ratus juta rupiah) per tahun, dapat membeli saham melalui Layanan Urun Dana paling banyak sebesar 5% (lima persen) dari penghasilan per tahun; dan b. Setiap Pemodal dengan penghasilan lebih dari
-Rp. 500.000.000,00 (lima ratus juta rupiah) per tahun, dapat membeli saham melalui Layanan Urun Dana paling banyak sebesar 10% (sepuluh persen) dari penghasilan per tahun
-c. Kriteria Pemodal dan batasan pembelian saham oleh Pemodal sebagaimana dimaksud pada ayat (2) tidak berlaku dalam hal Pemodal merupakan: a. Badan hukum; dan b. Pihak yang mempunyai pengalaman berinvestasi di Pasar Modal yang dibuktikan dengan kepemilikan rekening Efek paling sedikit 2 (dua) tahun sebelum penawaran saham</string>
+    <string name="perhatian_content"> Peraturan OJK 37 Tahun 2018 Pasal 42 ayat 2 &amp; 3 (2)
+        \nKriteria Pemodal sebagaimana dimaksud pada ayat (1) meliputi: 
+        \n\na. Setiap Pemodal dengan penghasilan sampai dengan Rp. 500.000.000,00 (lima ratus juta rupiah) per tahun, dapat membeli saham melalui Layanan Urun Dana paling banyak sebesar 5% (lima persen) dari penghasilan per tahun dan 
+        \n\nb. Setiap Pemodal dengan penghasilan lebih dari Rp. 500.000.000,00 (lima ratus juta rupiah) per tahun, dapat membeli saham melalui Layanan Urun Dana paling banyak sebesar 10% (sepuluh persen) dari penghasilan per tahun
+        \n\nc. Kriteria Pemodal dan batasan pembelian saham oleh Pemodal sebagaimana dimaksud pada ayat (2) tidak berlaku dalam hal Pemodal merupakan: 
+        \n      a. Badan hukum; dan 
+        \n      b. Pihak yang mempunyai pengalaman berinvestasi di Pasar Modal yang dibuktikan dengan kepemilikan rekening Efek paling sedikit 2 (dua) tahun sebelum penawaran saham</string>
     <string name="_8123456789">8123456789</string>
     <string name="pendapatan_tahunan">Pendapatan Tahunan</string>
     <string name="rp">Rp.</string>
@@ -143,7 +147,7 @@ c. Kriteria Pemodal dan batasan pembelian saham oleh Pemodal sebagaimana dimaksu
     <string name="last_price">Last Price</string>
     <string name="rp_1_350_000">Rp. 1.350.000</string>
     <string name="me">Me</string>
-    <string name="lupa_password"><u>Lupa password</u></string>
+    <string name="lupa_password"><u>Lupa password?</u></string>
     <string name="pindai_sidik_jari">Pindai Sidik Jari</string>
     <string name="batal">Batal</string>
     <string name="login_lebih_cepat_dan_aman_dengan_sidik_jari">Login lebih cepat\ndan aman dengan Sidik Jari</string>
@@ -185,4 +189,6 @@ Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
     <string name="total_pendanaan">Total Pendanaan</string>
     <string name="total_hasil_deviden">Total Hasil Deviden</string>
     <string name="text_title_isi_saldo">Silahkan pilih cara mengisi saldo dengan metode pengisian di bawah ini:</string>
+    <string name="custom_title">Pilih gambar</string>
+    <string name="lihat_panduan"><u>Lihat Panduan</u></string>
 </resources>

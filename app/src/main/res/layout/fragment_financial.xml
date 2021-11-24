@@ -4,20 +4,28 @@
     android:layout_height="match_parent"
     xmlns:barchart="http://schemas.android.com/apk/res-auto">
 
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/bar_chart_vertical"/>
+
     <me.ithebk.barchart.BarChart
         android:layout_alignParentBottom="true"
         android:id="@+id/bar_chart_vertical"
         barchart:bar_type="vertical"
-        barchart:bar_width="15dp"
+        barchart:bar_width="40dp"
         barchart:bar_color="@color/green_primary"
-        barchart:bar_text_color="#808080"
-        barchart:bar_text_size="10sp"
+        barchart:bar_text_color="@color/black_primary"
+        barchart:bar_text_size="11sp"
         barchart:bar_show_auto_color="false"
         barchart:bar_max_value="100"
-        barchart:bar_spaces = "0dp"
+        barchart:bar_spaces= "10dp"
         barchart:bar_show_value="true"
         barchart:bar_show_animation="true"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
 
 </RelativeLayout>

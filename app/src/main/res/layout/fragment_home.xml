@@ -46,7 +46,7 @@
                         android:layout_alignParentTop="true"
                         android:gravity="top"
                         android:lineSpacingExtra="6sp"
-                        android:text="@string/name"
+                        android:text="-"
                         android:layout_marginTop="39dp"
                         android:layout_marginStart="21dp"
                         android:textColor="#FAFAFA"
@@ -64,7 +64,7 @@
                         android:layout_marginStart="21dp"
                         android:gravity="top"
                         android:lineSpacingExtra="0sp"
-                        android:text="@string/guest"
+                        android:text="-"
                         android:textColor="@color/Black"
                         android:textSize="14sp"
                         android:fontFamily="@font/titilliumweb_regular"/>
@@ -312,7 +312,26 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/titilliumweb_regular"/>
 
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerLayoutArticle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shimmer_repeat_mode="restart"
+                    app:shimmer_shape="radial">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/shimmer_home_article_layout"></include>
+
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
                 <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    android:id="@+id/cv_slider"
                     android:layout_width="match_parent"
                     android:layout_height="85dp"
                     android:layout_marginStart="16dp"
@@ -409,6 +428,27 @@
 
                 </LinearLayout>
 
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:shimmer_repeat_mode="restart"
+                    app:shimmer_shape="radial">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/shimmer_home_projects_layout"></include>
+
+                        <include layout="@layout/shimmer_home_projects_layout"></include>
+
+                        <include layout="@layout/shimmer_home_projects_layout"></include>
+
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvHome"
                     android:layout_width="match_parent"
@@ -416,17 +456,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="6dp"/>
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:visibility="gone"
-                    android:id="@+id/lottie_anim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center"
-                    app:lottie_rawRes="@raw/loading_recycler"
-                    app:lottie_loop="true"
-                    app:lottie_autoPlay="true" />
 
             </LinearLayout>
 

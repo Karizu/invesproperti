@@ -180,8 +180,8 @@ public class NetworkManager {
 
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(1, TimeUnit.MINUTES)
+                .writeTimeout(1, TimeUnit.MINUTES)
                 .build();
     }
 }

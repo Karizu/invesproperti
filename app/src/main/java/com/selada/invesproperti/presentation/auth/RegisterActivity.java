@@ -64,6 +64,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.selada.invesproperti.util.MethodUtil.isValidPassword;
+import static com.selada.invesproperti.util.MethodUtil.validate;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @BindView(R.id.etNamaLengkap)
@@ -86,35 +89,62 @@ public class RegisterActivity extends AppCompatActivity {
     private LoginButton loginButton;
 
     @OnClick(R.id.btn_google)
-    void onClickBtnGoogle(){
+    void onClickBtnGoogle() {
         signIn();
     }
 
     @OnClick(R.id.btn_login)
-    void onClickBtnLogin(){
+    void onClickBtnLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @OnClick(R.id.btn_facebook)
-    void onClickBtnFacebook(){
+    void onClickBtnFacebook() {
         loginButton.performClick();
     }
 
     @OnClick(R.id.btn_register)
-    void onClickRegister(){
-        if (etNamaLengkap.getText().toString().equals("") || etEmail.getText().toString().equals("") || etKataSandi.getText().toString().equals("")){
-            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Silahkan lengkapi data");
-        } else {
-            String email = etEmail.getText().toString().trim();
-            if (email.matches(MethodUtil.emailPattern())){
-                doRegister();
-            } else {
-                etEmail.setError("Format email salah");
-                MethodUtil.showSnackBar(findViewById(android.R.id.content), "Format email salah");
-            }
+    void onClickRegister() {
+        if (etNamaLengkap.getText().toString().equals("")) {
+            etNamaLengkap.setError("Nama Lengkap tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Nama Lengkap tidak boleh kosong");
+            return;
         }
+
+        if (etEmail.getText().toString().equals("")) {
+            etEmail.setError("Email tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Email tidak boleh kosong");
+            return;
+        }
+
+        String email = etEmail.getText().toString().trim();
+        if (!email.matches(MethodUtil.emailPattern())) {
+            etEmail.setError("Format email salah");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Format email salah");
+            return;
+        }
+
+        if (etKataSandi.getText().toString().equals("")) {
+            etKataSandi.setError("Kata sandi tidak boleh kosong");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Kata sandi tidak boleh kosong");
+            return;
+        }
+
+        if(etKataSandi.getText().toString().length()<8 ){
+            etKataSandi.setError("Kata sandi minimal 8 karakter dengan huruf besar dan angka");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Kata sandi minimal 8 karakter dengan huruf besar dan angka");
+            return;
+        }
+
+        if (!isValidPassword(etKataSandi.getText().toString())) {
+            etKataSandi.setError("Kata sandi minimal 8 karakter dengan huruf besar dan angka");
+            MethodUtil.showSnackBar(findViewById(android.R.id.content), "Kata sandi minimal 8 karakter dengan huruf besar dan angka");
+            return;
+        }
+
+        doRegister();
     }
 
     @Override
@@ -135,7 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account!=null){
+        if (account != null) {
             directToMainActivity();
         }
         mAuth.addAuthStateListener(authStateListener);
@@ -145,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (authStateListener!=null){
+        if (authStateListener != null) {
             mAuth.removeAuthStateListener(authStateListener);
         }
     }
@@ -191,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), RegisterActivity.this);
                     }
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     View parentLayout = findViewById(android.R.id.content);
                     MethodUtil.showOnCatch(parentLayout);
@@ -206,7 +236,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void doLogin(String email, String pass){
+    private void doLogin(String email, String pass) {
         RequestLogin requestLogin = new RequestLogin();
         requestLogin.setEmail(email);
         requestLogin.setPassword(pass);
@@ -217,7 +247,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 LoadingPost.hide(RegisterActivity.this);
                 try {
-                    if (response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         PreferenceManager.setIsUnauthorized(false);
                         PreferenceManager.setLoginResponse(response.body(), Constant.LOGIN_FROM_EMAIL);
                         PreferenceManager.setLoginData(Objects.requireNonNull(response.body()).getFullName(), response.body().getEmail());
@@ -229,7 +259,7 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         MethodUtil.getErrorMessage(response.errorBody(), RegisterActivity.this);
                     }
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     View view = findViewById(android.R.id.content);
                     MethodUtil.showOnCatch(view);
@@ -313,15 +343,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 md.digest(),
                                 Base64.DEFAULT));
             }
-        }
-
-        catch (PackageManager.NameNotFoundException e) {
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NoSuchAlgorithmException e) {
         }
     }
 
-    private void initFacebookLogin(){
+    private void initFacebookLogin() {
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
         loginButton = findViewById(R.id.button_sign_in_fb);
@@ -346,7 +373,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         authStateListener = firebaseAuth -> {
             FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user!=null){
+            if (user != null) {
 
             } else {
 
@@ -356,7 +383,7 @@ public class RegisterActivity extends AppCompatActivity {
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if (currentAccessToken == null){
+                if (currentAccessToken == null) {
                     FirebaseAuth.getInstance().signOut();
                 }
             }

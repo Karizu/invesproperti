@@ -4,6 +4,8 @@ package com.selada.invesproperti.model.response.detailproject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class ResponseDetailProject {
 
     @SerializedName("companyName")
@@ -45,7 +47,7 @@ public class ResponseDetailProject {
     @SerializedName("dividenPeriod")
     @Expose
     private String dividenPeriod;
-    @SerializedName("interestRate")
+    @SerializedName("dividenEstimation")
     @Expose
     private String interestRate;
     @SerializedName("createdDate")
@@ -54,6 +56,9 @@ public class ResponseDetailProject {
     @SerializedName("deadlineDate")
     @Expose
     private String deadlineDate;
+    @SerializedName("picture")
+    @Expose
+    private List<String> picture;
 
     public String getCompanyName() {
         return companyName;
@@ -183,5 +188,11 @@ public class ResponseDetailProject {
         this.deadlineDate = deadlineDate;
     }
 
+    public List<String> getPicture() {
+        return picture;
+    }
 
+    public void setPicture(List<String> picture) {
+        this.picture = picture;
+    }
 }

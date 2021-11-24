@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.madapps.liquid.LiquidRefreshLayout;
 import com.selada.invesproperti.R;
 import com.selada.invesproperti.api.ApiCore;
@@ -31,7 +33,6 @@ import com.selada.invesproperti.presentation.profile.cs.CallCenterActivity;
 import com.selada.invesproperti.presentation.questioner.QuestionerActivity;
 import com.selada.invesproperti.presentation.verification.VerificationActivity;
 import com.selada.invesproperti.util.Constant;
-import com.selada.invesproperti.util.Loading;
 import com.selada.invesproperti.util.MethodUtil;
 import com.selada.invesproperti.util.PreferenceManager;
 import com.selada.invesproperti.util.ShareBottomDialog;
@@ -74,8 +75,12 @@ public class HomeFragment extends Fragment {
     FrameLayout btn_tarik_saldo;
     @BindView(R.id.btn_isi_saldo)
     FrameLayout btn_isi_saldo;
-    @BindView(R.id.lottie_anim)
-    LottieAnimationView loading;
+    @BindView(R.id.shimmerLayout)
+    ShimmerFrameLayout shimmerLayout;
+    @BindView(R.id.shimmerLayoutArticle)
+    ShimmerFrameLayout shimmerLayoutArticle;
+    @BindView(R.id.cv_slider)
+    CardView cv_slider;
 
     private List<SliderItem> mSliderItems;
     private ViewGroup viewGroup;
@@ -120,13 +125,12 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         new PreferenceManager(requireActivity());
-        setContentHome();
+        getListProjects(false);
         getUserProfile(false);
     }
 
     @SuppressLint("SetTextI18n")
     private void setContentHome() {
-        getListProjects(false);
         tv_fullname.setText(PreferenceManager.getFullname());
         refreshLayout.setOnRefreshListener(new LiquidRefreshLayout.OnRefreshListener() {
             @Override
@@ -191,7 +195,9 @@ public class HomeFragment extends Fragment {
                 btn_tarik_saldo.setVisibility(View.VISIBLE);
                 break;
         }
+    }
 
+    private void setSliderArticle() {
         mSliderItems = new ArrayList<>();
         for (int i = 0; i < 5; i++){
             SliderItem sliderItem = new SliderItem();
@@ -237,19 +243,26 @@ public class HomeFragment extends Fragment {
                 dots[currentPage].setBackground(getResources().getDrawable(R.drawable.rectangle_4));
             }
         } catch (Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
     private void getListProjects(boolean isRefresh){
-        loading.setVisibility(View.VISIBLE);
+        shimmerLayout.startShimmer();
+        shimmerLayoutArticle.startShimmer();
         ApiCore.apiInterface().getListProjects(PreferenceManager.getSessionToken()).enqueue(new Callback<List<ResponseProjects>>() {
             @Override
             public void onResponse(Call<List<ResponseProjects>> call, Response<List<ResponseProjects>> response) {
-                loading.setVisibility(View.GONE);
+                shimmerLayout.stopShimmer();
+                shimmerLayoutArticle.stopShimmer();
+                shimmerLayout.setVisibility(View.GONE);
+                shimmerLayoutArticle.setVisibility(View.GONE);
+                cv_slider.setVisibility(View.VISIBLE);
                 if (isRefresh) refreshLayout.finishRefreshing();
                 try {
                     if (response.isSuccessful()){
+                        setSliderArticle();
+
                         rvHome.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                         HomeFeedAdapter adapter = new HomeFeedAdapter(response.body(), getContext(), getActivity());
                         rvHome.setAdapter(adapter);
@@ -264,7 +277,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<List<ResponseProjects>> call, Throwable t) {
                 if (isRefresh) refreshLayout.finishRefreshing();
-                loading.setVisibility(View.GONE);
+                shimmerLayout.setVisibility(View.GONE);
+                shimmerLayout.stopShimmer();
+                shimmerLayoutArticle.setVisibility(View.GONE);
+                shimmerLayoutArticle.stopShimmer();
+                cv_slider.setVisibility(View.VISIBLE);
                 t.printStackTrace();
             }
         });
@@ -272,14 +289,13 @@ public class HomeFragment extends Fragment {
 
 
     private void getUserProfile(boolean isRefresh){
-        Loading.show(requireActivity());
         ApiCore.apiInterface().getUserProfile(PreferenceManager.getSessionToken()).enqueue(new Callback<ResponseUserProfile>() {
             @Override
             public void onResponse(Call<ResponseUserProfile> call, Response<ResponseUserProfile> response) {
                 if (isRefresh) refreshLayout.finishRefreshing();
-                Loading.hide(requireActivity());
                 try {
                     if (response.isSuccessful()){
+                        PreferenceManager.setResponseUserProfile(response.body());
                         switch (Objects.requireNonNull(response.body()).getStatus()){
                             case Constant.GUEST:
                                 PreferenceManager.setUserStatus(Constant.GUEST);
@@ -306,7 +322,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<ResponseUserProfile> call, Throwable t) {
                 if (isRefresh) refreshLayout.finishRefreshing();
-                Loading.hide(requireActivity());
                 t.printStackTrace();
             }
         });
