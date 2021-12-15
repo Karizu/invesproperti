@@ -127,6 +127,7 @@ public class HomeFragment extends Fragment {
         new PreferenceManager(requireActivity());
         getListProjects(false);
         getUserProfile(false);
+        //check git
     }
 
     @SuppressLint("SetTextI18n")
